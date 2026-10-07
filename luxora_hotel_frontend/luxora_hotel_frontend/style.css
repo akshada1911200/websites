@@ -1,0 +1,1497 @@
+/* =========================================================
+   VELORA — LUXURY HOTEL
+   PREMIUM RESPONSIVE CSS
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --cream: #f6f2ea;
+    --cream-dark: #ebe4d8;
+    --white: #ffffff;
+    --ink: #171714;
+    --ink-soft: #292923;
+    --gold: #b8945d;
+    --gold-light: #d7bd91;
+    --muted: #77736b;
+    --line: #ddd4c5;
+    --dark: #151613;
+    --shadow: 0 20px 60px rgba(20, 20, 15, 0.12);
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.topbar {
+    height: 38px;
+    background: var(--ink);
+    color: #eee9df;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    font-size: 10px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+
+.topbar span:nth-child(2) {
+    color: var(--gold);
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+    position: absolute;
+    top: 38px;
+    left: 0;
+    width: 100%;
+    z-index: 20;
+    color: white;
+    border-bottom: 1px solid rgba(255,255,255,0.18);
+}
+
+.nav-container {
+    width: min(1240px, 92%);
+    margin: auto;
+    min-height: 92px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-family: "Playfair Display", serif;
+    font-size: 27px;
+    letter-spacing: 5px;
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.logo small {
+    font-family: "DM Sans", sans-serif;
+    font-size: 7px;
+    letter-spacing: 3px;
+    margin-top: 7px;
+    color: rgba(255,255,255,0.7);
+}
+
+nav {
+    display: flex;
+    gap: 34px;
+    align-items: center;
+}
+
+nav a {
+    position: relative;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.85);
+    transition: 0.3s ease;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 0;
+    height: 1px;
+    background: var(--gold-light);
+    transition: 0.3s ease;
+}
+
+nav a:hover {
+    color: white;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+.book-btn {
+    border: 1px solid rgba(255,255,255,0.55);
+    padding: 14px 23px;
+    font-size: 10px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    transition: 0.3s ease;
+}
+
+.book-btn:hover {
+    background: white;
+    color: var(--ink);
+    border-color: white;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 790px;
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(12,14,11,0.75),
+            rgba(12,14,11,0.38),
+            rgba(12,14,11,0.15)
+        ),
+        url("https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=2200&q=90")
+        center/cover;
+    
+    display: flex;
+    align-items: center;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 70% 30%,
+            rgba(255,255,255,0.12),
+            transparent 30%
+        );
+
+    pointer-events: none;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(0,0,0,0.2),
+        transparent 50%,
+        rgba(0,0,0,0.55)
+    );
+}
+
+.hero-content {
+    width: min(1240px, 92%);
+    margin: 80px auto 0;
+    position: relative;
+    z-index: 2;
+    color: white;
+    animation: heroUp 1.1s ease forwards;
+}
+
+@keyframes heroUp {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.eyebrow,
+.section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+
+.eyebrow {
+    color: var(--gold-light);
+}
+
+.hero h1 {
+    max-width: 760px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(55px, 7vw, 100px);
+    font-weight: 500;
+    line-height: 0.98;
+    margin: 25px 0;
+}
+
+.hero h1 i {
+    font-weight: 500;
+    color: #e4d4b9;
+}
+
+.hero p {
+    max-width: 510px;
+    color: rgba(255,255,255,0.78);
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-top: 38px;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 25px;
+    padding: 17px 25px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    transition: 0.3s ease;
+}
+
+.button.gold {
+    background: var(--gold);
+    color: white;
+}
+
+.button.gold:hover {
+    background: #d0ad78;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.discover {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: white;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.discover span {
+    transition: 0.3s ease;
+}
+
+.discover:hover span {
+    transform: translateY(5px);
+}
+
+.hero-location {
+    position: absolute;
+    bottom: 34px;
+    right: 4%;
+    color: rgba(255,255,255,0.75);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    z-index: 3;
+}
+
+.hero-location span {
+    color: var(--gold-light);
+    margin-right: 7px;
+}
+
+/* =========================================================
+   BOOKING BAR
+========================================================= */
+
+.booking-bar {
+    position: relative;
+    z-index: 10;
+    margin-top: -50px;
+}
+
+.booking-container {
+    width: min(1120px, 90%);
+    min-height: 105px;
+    margin: auto;
+
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(15px);
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) 1.5fr;
+
+    box-shadow: 0 25px 60px rgba(0,0,0,0.16);
+}
+
+.booking-field {
+    padding: 27px 24px;
+    border-right: 1px solid var(--line);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.booking-field span {
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 1.7px;
+    margin-bottom: 8px;
+}
+
+.booking-field strong {
+    font-family: "Playfair Display", serif;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.search-btn {
+    border: none;
+    background: var(--ink);
+    color: white;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    transition: 0.3s ease;
+}
+
+.search-btn:hover {
+    background: var(--gold);
+}
+
+/* =========================================================
+   COMMON SECTION
+========================================================= */
+
+.section {
+    width: min(1240px, 92%);
+    margin: auto;
+    padding: 125px 0;
+}
+
+.section-label {
+    color: var(--gold);
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 55px;
+}
+
+.section-heading.center {
+    display: block;
+    text-align: center;
+}
+
+h2 {
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+    font-size: clamp(40px, 5vw, 62px);
+    line-height: 1;
+    margin-top: 18px;
+}
+
+h2 i {
+    color: var(--gold);
+    font-weight: 500;
+}
+
+.line-link {
+    display: inline-block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 8px;
+    transition: 0.3s ease;
+}
+
+.line-link:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+}
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+}
+
+.intro-text p {
+    max-width: 500px;
+    color: var(--muted);
+    line-height: 1.9;
+    font-size: 14px;
+    margin-top: 25px;
+}
+
+.intro-text .line-link {
+    margin-top: 25px;
+}
+
+.intro-visual {
+    height: 560px;
+    position: relative;
+}
+
+.visual-card {
+    height: 100%;
+    width: 83%;
+    margin-left: auto;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,0.08),
+            rgba(0,0,0,0.45)
+        ),
+        url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=90")
+        center/cover;
+
+    display: flex;
+    align-items: end;
+    justify-content: center;
+
+    overflow: hidden;
+    transition: 0.6s ease;
+}
+
+.visual-card:hover {
+    transform: scale(1.015);
+}
+
+.visual-card span {
+    color: white;
+    font-family: "Playfair Display", serif;
+    letter-spacing: 9px;
+    font-size: 27px;
+    margin-bottom: 45px;
+}
+
+.experience-badge {
+    position: absolute;
+    bottom: 35px;
+    left: 0;
+
+    width: 155px;
+    height: 155px;
+
+    background: var(--gold);
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+}
+
+.experience-badge strong {
+    font-family: "Playfair Display", serif;
+    font-size: 45px;
+    font-weight: 500;
+}
+
+.experience-badge span {
+    text-align: center;
+    font-size: 10px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* =========================================================
+   ROOMS
+========================================================= */
+
+.rooms {
+    padding-top: 30px;
+}
+
+.room-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.room-card {
+    background: white;
+    overflow: hidden;
+    transition: 0.45s ease;
+}
+
+.room-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow);
+}
+
+.room-image {
+    height: 420px;
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+.room-one {
+    background:
+        linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.35)),
+        url("https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1000&q=85")
+        center/cover;
+}
+
+.room-two {
+    background:
+        linear-gradient(rgba(0,0,0,0.03), rgba(0,0,0,0.35)),
+        url("https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1000&q=85")
+        center/cover;
+}
+
+.room-three {
+    background:
+        linear-gradient(rgba(0,0,0,0.03), rgba(0,0,0,0.35)),
+        url("https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=85")
+        center/cover;
+}
+
+.room-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        transparent 55%,
+        rgba(0,0,0,0.35)
+    );
+    pointer-events: none;
+}
+
+.room-tag {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 3;
+
+    background: rgba(255,255,255,0.9);
+    padding: 8px 12px;
+
+    font-size: 8px;
+    letter-spacing: 1.5px;
+}
+
+.favorite {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 4;
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.92);
+
+    font-size: 19px;
+    transition: 0.3s ease;
+}
+
+.favorite:hover {
+    background: var(--gold);
+    color: white;
+    transform: rotate(8deg) scale(1.1);
+}
+
+/* Hide old CSS artwork */
+.room-art {
+    display: none;
+}
+
+.room-details {
+    min-height: 155px;
+    padding: 25px;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.room-details span {
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 1.4px;
+}
+
+.room-details h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 25px;
+    font-weight: 500;
+    margin: 9px 0;
+}
+
+.room-details p {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.room-details > strong {
+    font-family: "Playfair Display", serif;
+    font-size: 18px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.room-details small {
+    font-family: "DM Sans", sans-serif;
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 400;
+}
+
+/* =========================================================
+   EXPERIENCE
+========================================================= */
+
+.experience {
+    min-height: 680px;
+    background: var(--dark);
+    color: white;
+
+    display: grid;
+    grid-template-columns: 48% 52%;
+}
+
+.experience-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 90px max(7vw, 50px);
+}
+
+.experience-content .section-label {
+    color: var(--gold-light);
+}
+
+.experience-content h2 {
+    max-width: 520px;
+}
+
+.experience-content p {
+    max-width: 480px;
+    color: rgba(255,255,255,0.58);
+    line-height: 1.9;
+    font-size: 14px;
+    margin: 28px 0;
+}
+
+.button.outline {
+    width: fit-content;
+    border: 1px solid rgba(255,255,255,0.4);
+    color: white;
+}
+
+.button.outline:hover {
+    background: white;
+    color: var(--ink);
+}
+
+.experience-art {
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            rgba(30,32,25,0.2),
+            rgba(30,32,25,0.4)
+        ),
+        url("https://images.unsplash.com/photo-1470214304380-aadaedcfff1b?auto=format&fit=crop&w=1500&q=90")
+        center/cover;
+}
+
+/* =========================================================
+   AMENITIES
+========================================================= */
+
+.amenities {
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+
+.amenity-grid {
+    margin-top: 65px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.amenity {
+    text-align: center;
+    padding: 50px 30px;
+
+    border-right: 1px solid var(--line);
+    transition: 0.4s ease;
+}
+
+.amenity:last-child {
+    border-right: none;
+}
+
+.amenity:hover {
+    background: white;
+    transform: translateY(-4px);
+}
+
+.amenity-icon {
+    font-size: 25px;
+    color: var(--gold);
+    margin-bottom: 20px;
+}
+
+.amenity h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 23px;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.amenity p {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   DINING
+========================================================= */
+
+.dining {
+    min-height: 650px;
+    background: #ded5c6;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.dining-image {
+    min-height: 650px;
+
+    background:
+        linear-gradient(
+            rgba(20,20,15,0.05),
+            rgba(20,20,15,0.3)
+        ),
+        url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1500&q=90")
+        center/cover;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dining-plate {
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #f7f3ea 0 35%,
+            #d7cfc0 36% 39%,
+            #f7f3ea 40% 100%
+        );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow:
+        0 25px 50px rgba(0,0,0,0.25);
+
+    opacity: 0.92;
+}
+
+.dining-plate span {
+    font-family: "Playfair Display", serif;
+    font-size: 65px;
+    color: var(--gold);
+}
+
+.dining-content {
+    padding: 100px 9%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.dining-content p {
+    max-width: 480px;
+    color: #666057;
+    line-height: 1.9;
+    font-size: 14px;
+    margin: 28px 0;
+}
+
+.dining-info {
+    display: flex;
+    gap: 70px;
+    margin-bottom: 30px;
+}
+
+.dining-info div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dining-info strong {
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+}
+
+.dining-info span {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    color: var(--muted);
+}
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+.gallery {
+    padding-bottom: 120px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 0.8fr;
+    grid-template-rows: 250px 250px;
+    gap: 12px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+
+    background-size: cover;
+    background-position: center;
+
+    transition: 0.5s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(0.985);
+}
+
+.gallery-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0);
+    transition: 0.4s ease;
+}
+
+.gallery-item:hover::before {
+    background: rgba(0,0,0,0.18);
+}
+
+.gallery-item span {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+
+    background: rgba(255,255,255,0.9);
+    padding: 7px 10px;
+
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.gallery-one {
+    grid-row: span 2;
+
+    background-image:
+        url("https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=90");
+}
+
+.gallery-two {
+    background-image:
+        url("https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=90");
+}
+
+.gallery-three {
+    background-image:
+        url("https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=90");
+}
+
+.gallery-four {
+    background-image:
+        url("https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=90");
+}
+
+.gallery-five {
+    background-image:
+        url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=90");
+}
+
+/* =========================================================
+   TESTIMONIAL
+========================================================= */
+
+.testimonial {
+    padding: 130px 20px;
+    background: white;
+
+    text-align: center;
+}
+
+.quote-mark {
+    font-family: "Playfair Display", serif;
+    font-size: 75px;
+    line-height: 0;
+    color: var(--gold);
+}
+
+blockquote {
+    max-width: 900px;
+    margin: 35px auto;
+
+    font-family: "Playfair Display", serif;
+    font-size: clamp(30px, 4vw, 50px);
+    line-height: 1.25;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.guest {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.guest strong {
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.guest span {
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 1px;
+}
+
+/* =========================================================
+   NEWSLETTER
+========================================================= */
+
+.newsletter {
+    padding: 100px max(6vw, 30px);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+
+    background: var(--gold);
+    color: white;
+}
+
+.newsletter .section-label {
+    color: rgba(255,255,255,0.75);
+}
+
+.newsletter h2 {
+    max-width: 600px;
+}
+
+.newsletter h2 i {
+    color: white;
+}
+
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.newsletter-form p {
+    max-width: 440px;
+    line-height: 1.7;
+    font-size: 13px;
+    color: rgba(255,255,255,0.78);
+    margin-bottom: 25px;
+}
+
+.newsletter form {
+    max-width: 500px;
+
+    display: flex;
+    border-bottom: 1px solid rgba(255,255,255,0.65);
+}
+
+.newsletter input {
+    flex: 1;
+
+    background: transparent;
+    border: none;
+    outline: none;
+
+    color: white;
+    padding: 15px 0;
+
+    font-size: 12px;
+}
+
+.newsletter input::placeholder {
+    color: rgba(255,255,255,0.65);
+}
+
+.newsletter button {
+    background: transparent;
+    border: none;
+    color: white;
+
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    background: var(--dark);
+    color: white;
+    padding: 90px max(6vw, 30px) 30px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr repeat(4, 1fr);
+    gap: 50px;
+
+    padding-bottom: 70px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.footer-logo {
+    font-family: "Playfair Display", serif;
+    font-size: 28px;
+    letter-spacing: 6px;
+}
+
+.footer-brand p {
+    color: rgba(255,255,255,0.45);
+    font-size: 11px;
+    line-height: 1.8;
+    margin-top: 20px;
+}
+
+footer h4 {
+    color: var(--gold-light);
+    font-size: 9px;
+    letter-spacing: 2px;
+    margin-bottom: 22px;
+}
+
+.footer-grid > div:not(.footer-brand) a {
+    display: block;
+    color: rgba(255,255,255,0.55);
+    font-size: 11px;
+    margin-bottom: 13px;
+    transition: 0.3s ease;
+}
+
+.footer-grid > div:not(.footer-brand) a:hover {
+    color: white;
+    transform: translateX(4px);
+}
+
+.socials {
+    display: flex;
+    gap: 9px;
+}
+
+.socials a {
+    width: 35px;
+    height: 35px;
+
+    border: 1px solid rgba(255,255,255,0.25);
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 !important;
+
+    font-size: 9px !important;
+}
+
+.socials a:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    transform: none !important;
+}
+
+.footer-bottom {
+    padding-top: 25px;
+
+    display: flex;
+    justify-content: space-between;
+
+    color: rgba(255,255,255,0.35);
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+/* =========================================================
+   SCROLL ANIMATION
+========================================================= */
+
+.room-card,
+.amenity,
+.gallery-item {
+    will-change: transform;
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    nav {
+        gap: 15px;
+    }
+
+    .book-btn {
+        display: none;
+    }
+
+    .hero {
+        min-height: 700px;
+    }
+
+    .booking-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .search-btn {
+        min-height: 70px;
+    }
+
+    .intro {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .room-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .room-card:last-child {
+        grid-column: span 2;
+    }
+
+    .experience {
+        grid-template-columns: 1fr;
+    }
+
+    .experience-art {
+        min-height: 450px;
+    }
+
+    .amenity-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .amenity:nth-child(2) {
+        border-right: none;
+    }
+
+    .amenity:nth-child(-n+2) {
+        border-bottom: 1px solid var(--line);
+    }
+
+    .dining {
+        grid-template-columns: 1fr;
+    }
+
+    .dining-image {
+        min-height: 500px;
+    }
+
+    .newsletter {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .footer-brand {
+        grid-column: span 3;
+    }
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .topbar {
+        font-size: 8px;
+        gap: 7px;
+        letter-spacing: 1px;
+        padding: 0 10px;
+    }
+
+    .navbar {
+        top: 38px;
+    }
+
+    .nav-container {
+        min-height: 75px;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .hero {
+        min-height: 670px;
+    }
+
+    .hero-content {
+        margin-top: 100px;
+    }
+
+    .hero h1 {
+        font-size: 53px;
+    }
+
+    .hero p {
+        font-size: 12px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 22px;
+    }
+
+    .hero-location {
+        bottom: 20px;
+        left: 5%;
+        right: auto;
+        font-size: 8px;
+    }
+
+    .booking-bar {
+        margin-top: -25px;
+    }
+
+    .booking-container {
+        grid-template-columns: 1fr 1fr;
+        width: 90%;
+    }
+
+    .booking-field {
+        padding: 20px 15px;
+    }
+
+    .booking-field strong {
+        font-size: 14px;
+    }
+
+    .search-btn {
+        grid-column: span 2;
+        height: 65px;
+    }
+
+    .section {
+        padding: 85px 0;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    h2 {
+        font-size: 43px;
+    }
+
+    .intro-visual {
+        height: 430px;
+    }
+
+    .visual-card {
+        width: 88%;
+    }
+
+    .experience-badge {
+        width: 125px;
+        height: 125px;
+    }
+
+    .experience-badge strong {
+        font-size: 35px;
+    }
+
+    .room-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .room-card:last-child {
+        grid-column: auto;
+    }
+
+    .room-image {
+        height: 380px;
+    }
+
+    .room-details {
+        min-height: auto;
+        padding: 22px;
+    }
+
+    .room-details h3 {
+        font-size: 22px;
+    }
+
+    .experience-content {
+        padding: 80px 8%;
+    }
+
+    .experience-art {
+        min-height: 350px;
+    }
+
+    .amenity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .amenity {
+        border-right: none !important;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .amenity:last-child {
+        border-bottom: none;
+    }
+
+    .dining-image {
+        min-height: 390px;
+    }
+
+    .dining-content {
+        padding: 75px 8%;
+    }
+
+    .dining-info {
+        gap: 35px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, 180px);
+    }
+
+    .gallery-one {
+        grid-row: span 2;
+    }
+
+    .gallery-five {
+        grid-column: span 2;
+    }
+
+    blockquote {
+        font-size: 30px;
+    }
+
+    .newsletter {
+        padding: 80px 8%;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 35px;
+    }
+
+    .footer-brand {
+        grid-column: span 2;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* =========================================================
+   EXTRA LUXURY DETAILS
+========================================================= */
+
+::selection {
+    background: var(--gold);
+    color: white;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--cream);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gold);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--ink);
+}

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Flavour Hub — fresh food, warm hospitality, unforgettable moments." />
+  <title>Flavour Hub | Restaurant & Cafe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <nav class="nav container">
+      <a class="brand" href="#home" aria-label="Flavour Hub home">
+        <span class="brand-icon"><i data-lucide="chef-hat"></i></span>
+        <span><strong>Flavour <em>Hub</em></strong><small>GOOD FOOD · GOOD MOOD</small></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false"><i data-lucide="menu"></i></button>
+      <div class="nav-links" id="navLinks">
+        <a class="active" href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="btn btn-gold nav-cta" href="#reservation"><i data-lucide="calendar-days"></i> Book a Table</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-bg"></div>
+      <div class="hero-shade"></div>
+      <div class="container hero-content">
+        <p class="eyebrow"><span></span> WELCOME TO FLAVOUR HUB</p>
+        <h1>Good Food<br>Brings People <em>Together</em></h1>
+        <p class="hero-copy">Enjoy the perfect blend of taste, ambience and hospitality.<br class="desktop-only"> We serve fresh, flavourful meals, made with love.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="#menu">View Our Menu <i data-lucide="arrow-right"></i></a>
+          <a class="btn btn-outline" href="#reservation"><i data-lucide="calendar-days"></i> Book a Table</a>
+        </div>
+        <div class="hero-note"><span class="note-line"></span> Fresh ingredients. Memorable moments.</div>
+      </div>
+      <a class="hero-scroll" href="#specialties" aria-label="Scroll to specialties"><i data-lucide="arrow-down"></i></a>
+    </section>
+
+    <section class="specialties section" id="specialties">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow eyebrow-dark"><span></span> OUR SPECIALTIES <span></span></p>
+          <h2>Freshly Made, Just for You</h2>
+          <p>From classic favourites to unique creations, discover dishes<br class="desktop-only"> that make every visit special.</p>
+        </div>
+        <div class="specialty-grid">
+          <a class="specialty-card" href="#menu">
+            <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=700&q=85" alt="" onerror="this.src='https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=700&q=85'">
+            <div class="card-info"><div><h3>Pizzas</h3><p>Crispy, cheesy, delicious</p></div><span class="round-arrow"><i data-lucide="arrow-up-right"></i></span></div>
+          </a>
+          <a class="specialty-card" href="#menu">
+            <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=700&q=85" alt="Fresh pasta dish">
+            <div class="card-info"><div><h3>Pasta</h3><p>Rich flavours, authentic taste</p></div><span class="round-arrow"><i data-lucide="arrow-up-right"></i></span></div>
+          </a>
+          <a class="specialty-card" href="#menu">
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=85" alt="Gourmet burger">
+            <div class="card-info"><div><h3>Burgers</h3><p>Juicy and satisfying</p></div><span class="round-arrow"><i data-lucide="arrow-up-right"></i></span></div>
+          </a>
+          <a class="specialty-card" href="#menu">
+            <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=700&q=85" alt="Indian curry">
+            <div class="card-info"><div><h3>Indian</h3><p>Traditional flavours, modern touch</p></div><span class="round-arrow"><i data-lucide="arrow-up-right"></i></span></div>
+          </a>
+          <a class="specialty-card" href="#menu">
+            <img src="https://images.unsplash.com/photo-1624353365286-3f8d62cado9c?auto=format&fit=crop&w=700&q=85" alt="Chocolate dessert">
+            <div class="card-info"><div><h3>Desserts</h3><p>Sweet endings, happy moments</p></div><span class="round-arrow"><i data-lucide="arrow-up-right"></i></span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="about section" id="about">
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=90" alt="Warm and inviting restaurant interior">
+        <div class="image-stamp"><span>EST.</span><strong>2020</strong><small>MADE WITH LOVE</small></div>
+      </div>
+      <div class="about-copy">
+        <p class="eyebrow eyebrow-dark"><span></span> ABOUT US</p>
+        <h2>A Place for Food Lovers</h2>
+        <p>At Flavour Hub, we believe that great food creates great memories. Our chefs use fresh ingredients to bring you authentic flavours in a warm and welcoming atmosphere.</p>
+        <div class="values">
+          <div class="value"><span><i data-lucide="leaf"></i></span><div><strong>Fresh Ingredients</strong><small>Only the best for you</small></div></div>
+          <div class="value"><span><i data-lucide="heart"></i></span><div><strong>Great Ambience</strong><small>Dine, relax, enjoy</small></div></div>
+          <div class="value"><span><i data-lucide="star"></i></span><div><strong>Excellent Service</strong><small>Your happiness matters</small></div></div>
+        </div>
+        <a class="btn btn-gold" href="#contact">Discover Our Story <i data-lucide="arrow-right"></i></a>
+      </div>
+    </section>
+
+    <section class="menu-section section" id="menu">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow eyebrow-dark"><span></span> FROM OUR KITCHEN <span></span></p>
+          <h2>Our Popular Menu</h2>
+          <p>Made fresh, served with love.</p>
+        </div>
+        <div class="menu-filters" role="group" aria-label="Filter menu">
+          <button class="filter-btn selected" data-filter="all">All Dishes</button>
+          <button class="filter-btn" data-filter="main">Main Course</button>
+          <button class="filter-btn" data-filter="pizza">Pizza</button>
+          <button class="filter-btn" data-filter="dessert">Desserts</button>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card" data-category="pizza"><img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=700&q=85" alt="Margherita pizza"><div class="menu-card-body"><div class="menu-title"><h3>Classic Margherita</h3><strong>₹299</strong></div><p>Fresh basil, mozzarella, tomato sauce</p><div class="menu-meta"><span>★ 4.8 <small>(120+)</small></span><span><i data-lucide="clock-3"></i> 20 min</span></div></div></article>
+          <article class="menu-card" data-category="main"><img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=700&q=85" alt="Creamy pasta"><div class="menu-card-body"><div class="menu-title"><h3>Creamy Herb Pasta</h3><strong>₹279</strong></div><p>Silky cream sauce, herbs, parmesan</p><div class="menu-meta"><span>★ 4.7 <small>(98+)</small></span><span><i data-lucide="clock-3"></i> 18 min</span></div></div></article>
+          <article class="menu-card" data-category="main"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=85" alt="Classic burger"><div class="menu-card-body"><div class="menu-title"><h3>Hub House Burger</h3><strong>₹249</strong></div><p>Grilled patty, fresh greens, house sauce</p><div class="menu-meta"><span>★ 4.9 <small>(150+)</small></span><span><i data-lucide="clock-3"></i> 15 min</span></div></div></article>
+          <article class="menu-card" data-category="main"><img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=700&q=85" alt="Indian curry"><div class="menu-card-body"><div class="menu-title"><h3>Paneer Tikka Masala</h3><strong>₹319</strong></div><p>Smoky paneer in a rich tomato gravy</p><div class="menu-meta"><span>★ 4.8 <small>(110+)</small></span><span><i data-lucide="clock-3"></i> 25 min</span></div></div></article>
+          <article class="menu-card" data-category="dessert"><img src="https://images.unsplash.com/photo-1624353365286-3f8d62cado9c?auto=format&fit=crop&w=700&q=85" alt="Chocolate cake"><div class="menu-card-body"><div class="menu-title"><h3>Chocolate Lava Cake</h3><strong>₹179</strong></div><p>Warm chocolate centre, vanilla ice cream</p><div class="menu-meta"><span>★ 4.9 <small>(85+)</small></span><span><i data-lucide="clock-3"></i> 12 min</span></div></div></article>
+          <article class="menu-card" data-category="pizza"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=700&q=85" alt="Loaded veggie pizza"><div class="menu-card-body"><div class="menu-title"><h3>Garden Fresh Pizza</h3><strong>₹349</strong></div><p>Seasonal vegetables, olives, mozzarella</p><div class="menu-meta"><span>★ 4.7 <small>(92+)</small></span><span><i data-lucide="clock-3"></i> 22 min</span></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="promo">
+      <div class="promo-bg"></div><div class="promo-overlay"></div>
+      <div class="container promo-content">
+        <p class="eyebrow"><span></span> A LITTLE SOMETHING SPECIAL</p>
+        <h2>Good food. Great company.<br><em>Unforgettable moments.</em></h2>
+        <p>Make your next get-together a delicious one.</p>
+        <a class="btn btn-gold" href="#reservation">Reserve Your Table <i data-lucide="arrow-right"></i></a>
+      </div>
+    </section>
+
+    <section class="gallery section" id="gallery">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow eyebrow-dark"><span></span> A TASTE OF THE HUB <span></span></p>
+          <h2>Made to Be Shared</h2>
+          <p>Good food looks even better when shared.</p>
+        </div>
+        <div class="gallery-grid">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=85" alt="Restaurant dining room">
+          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=700&q=85" alt="Fresh salad bowl">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=700&q=85" alt="Restaurant table setting">
+          <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=700&q=85" alt="Freshly grilled food">
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews section" id="reviews">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow"><span></span> KIND WORDS <span></span></p>
+          <h2>Our Guests, Our Happiness</h2>
+          <p>Every visit means the world to us.</p>
+        </div>
+        <div class="review-grid">
+          <article class="review-card"><div class="stars">★★★★★</div><p>“Lovely ambience, friendly staff, and the pasta was absolutely delicious. A perfect place for a relaxed dinner!”</p><div class="review-person"><span>AS</span><div><strong>Ananya S.</strong><small>Food lover</small></div></div></article>
+          <article class="review-card featured-review"><div class="stars">★★★★★</div><p>“Everything was fresh and full of flavour. The team made us feel welcome from the moment we walked in.”</p><div class="review-person"><span>RK</span><div><strong>Rohan K.</strong><small>Regular guest</small></div></div></article>
+          <article class="review-card"><div class="stars">★★★★★</div><p>“The perfect spot for catching up with friends. Great food, beautiful interiors, and wonderful service.”</p><div class="review-person"><span>PM</span><div><strong>Priya M.</strong><small>Happy guest</small></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="reservation section" id="reservation">
+      <div class="container reservation-wrap">
+        <div class="reservation-copy">
+          <p class="eyebrow eyebrow-dark"><span></span> YOUR TABLE IS WAITING</p>
+          <h2>Let's Make It<br><em>A Memorable Meal</em></h2>
+          <p>Planning a date night, family dinner or a catch-up with friends? Send us your preferred details and we’ll be happy to help.</p>
+          <div class="contact-line"><i data-lucide="clock"></i><span><strong>Opening Hours</strong><small>Mon–Sun · 11:00 AM – 11:00 PM</small></span></div>
+          <div class="contact-line"><i data-lucide="phone"></i><span><strong>Call Us</strong><small>+91 98765 43210</small></span></div>
+        </div>
+        <form class="booking-form" id="bookingForm">
+          <h3>Book a Table</h3><p>Fill in your details to request a reservation.</p>
+          <div class="form-row"><label>Your Name<input type="text" name="name" placeholder="Full name" required></label><label>Phone Number<input type="tel" name="phone" placeholder="+91 98765 43210" required></label></div>
+          <div class="form-row"><label>Date<input type="date" name="date" id="bookingDate" required></label><label>Time<select name="time" required><option value="">Choose time</option><option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option><option>6:00 PM</option><option>7:00 PM</option><option>8:00 PM</option><option>9:00 PM</option></select></label></div>
+          <label>Number of Guests<select name="guests" required><option value="">Select guests</option><option>1 Guest</option><option>2 Guests</option><option>3 Guests</option><option>4 Guests</option><option>5 Guests</option><option>6+ Guests</option></select></label>
+          <label>Special Request <textarea name="message" rows="3" placeholder="Anything we should know? (optional)"></textarea></label>
+          <button class="btn btn-gold form-submit" type="submit">Request a Reservation <i data-lucide="arrow-right"></i></button>
+          <p class="form-note" id="formMessage">Demo form — frontend only. No booking is sent to a server.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="contact">
+    <div class="container footer-grid">
+      <div class="footer-brand"><a class="brand" href="#home"><span class="brand-icon"><i data-lucide="chef-hat"></i></span><span><strong>Flavour <em>Hub</em></strong><small>GOOD FOOD · GOOD MOOD</small></span></a><p>Good food brings people together. Come hungry, leave happy.</p><div class="socials"><a href="#contact" aria-label="Instagram"><i data-lucide="instagram"></i></a><a href="#contact" aria-label="Facebook"><i data-lucide="facebook"></i></a><a href="#contact" aria-label="Mail"><i data-lucide="mail"></i></a></div></div>
+      <div><h4>Explore</h4><a href="#about">Our Story</a><a href="#menu">Our Menu</a><a href="#gallery">Gallery</a><a href="#reviews">Guest Reviews</a></div>
+      <div><h4>Get in Touch</h4><p><i data-lucide="map-pin"></i> 21 Food Street, Pune, Maharashtra</p><p><i data-lucide="phone"></i> +91 98765 43210</p><p><i data-lucide="mail"></i> hello@flavourhub.example</p></div>
+      <div><h4>Opening Hours</h4><p>Monday – Sunday</p><strong>11:00 AM – 11:00 PM</strong><a class="footer-book" href="#reservation">Book your table <i data-lucide="arrow-up-right"></i></a></div>
+    </div>
+    <div class="footer-bottom container"><span>© <span id="year"></span> Flavour Hub. All rights reserved.</span><span>Designed with <i data-lucide="heart"></i> for food lovers.</span></div>
+  </footer>
+  <button class="back-top" id="backTop" aria-label="Back to top"><i data-lucide="arrow-up"></i></button>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="MediLab - modern diagnostic laboratory frontend">
+<title>MediLab | Diagnostic Laboratory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="container top-inner"><span>✓ NABL-inspired quality standards</span><span>Mon–Sun · 7:00 AM – 9:00 PM</span><a href="tel:+919876543210">Emergency: +91 98765 43210</a></div></div>
+
+<header class="header" id="header">
+<div class="container nav">
+<a class="logo" href="#home"><span class="logo-icon">✚</span><span>Medi<span>Lab</span></span></a>
+<button class="menu-btn" id="menuBtn">☰</button>
+<nav id="nav">
+<a href="#home" class="active">Home</a><a href="#tests">Tests</a><a href="#packages">Packages</a><a href="#about">About</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+<a href="#appointment" class="nav-btn">Book Test <span>→</span></a>
+</nav>
+</div>
+</header>
+
+<main>
+<section class="hero" id="home">
+<div class="hero-shade"></div>
+<div class="container hero-grid">
+<div class="hero-copy">
+<span class="eyebrow"><i></i> TRUSTED DIAGNOSTICS, BETTER HEALTH</span>
+<h1>Clarity in every<br><span>test result.</span></h1>
+<p>Accurate diagnostics, caring professionals and convenient home sample collection — because your health deserves confidence.</p>
+<div class="hero-actions"><a class="btn primary" href="#appointment">Book a Test <b>→</b></a><a class="btn outline" href="#tests">Explore Tests</a></div>
+<div class="hero-trust"><div><strong>15+</strong><small>Years of Trust</small></div><div><strong>500K+</strong><small>Tests Completed</small></div><div><strong>99.2%</strong><small>Accuracy Focus</small></div></div>
+</div>
+<div class="hero-panel">
+<div class="panel-top"><span>QUICK TEST SEARCH</span><b>⌕</b></div>
+<div class="search-input"><span>⌕</span><input id="testSearch" placeholder="Search blood test, thyroid, vitamin..."></div>
+<div class="popular"><small>POPULAR TESTS</small><div><button data-search="CBC">CBC</button><button data-search="Thyroid">Thyroid Profile</button><button data-search="Vitamin D">Vitamin D</button><button data-search="HbA1c">HbA1c</button></div></div>
+<div class="home-collection"><span class="round-icon">⌂</span><div><strong>Home sample collection</strong><small>Available from ₹99</small></div><span class="arrow">→</span></div>
+</div>
+</div>
+</section>
+
+<section class="quick-strip"><div class="container quick-grid"><div><span>01</span><div><b>Accurate Reports</b><small>Modern diagnostic technology</small></div></div><div><span>02</span><div><b>Home Collection</b><small>Sample collected at your doorstep</small></div></div><div><span>03</span><div><b>Digital Reports</b><small>Access reports anytime, anywhere</small></div></div><div><span>04</span><div><b>Expert Support</b><small>Help when you need it</small></div></div></div></section>
+
+<section class="section" id="tests">
+<div class="container">
+<div class="section-head"><div><span class="label">OUR DIAGNOSTICS</span><h2>Tests for every<br><em>health need.</em></h2></div><p>From routine checkups to specialized diagnostics, our test menu is designed to give you meaningful health insights.</p></div>
+<div class="test-grid">
+<article class="test-card"><div class="test-icon blood">♥</div><div><h3>Blood Tests</h3><p>CBC, blood sugar, lipid profile, liver & kidney tests.</p><a href="#appointment">View tests →</a></div></article>
+<article class="test-card"><div class="test-icon thyroid">⌁</div><div><h3>Thyroid</h3><p>TSH, T3, T4 and comprehensive thyroid profiles.</p><a href="#appointment">View tests →</a></div></article>
+<article class="test-card"><div class="test-icon vitamin">☀</div><div><h3>Vitamins</h3><p>Vitamin D, B12, iron studies and nutritional markers.</p><a href="#appointment">View tests →</a></div></article>
+<article class="test-card"><div class="test-icon diabetes">◉</div><div><h3>Diabetes</h3><p>Fasting sugar, PPBS, HbA1c and diabetic health checks.</p><a href="#appointment">View tests →</a></div></article>
+<article class="test-card"><div class="test-icon liver">◇</div><div><h3>Liver & Kidney</h3><p>Comprehensive panels to monitor vital organ health.</p><a href="#appointment">View tests →</a></div></article>
+<article class="test-card"><div class="test-icon full">✚</div><div><h3>Full Body Checkup</h3><p>Curated preventive packages for complete health screening.</p><a href="#packages">Explore packages →</a></div></article>
+</div>
+</div>
+</section>
+
+<section class="package-section" id="packages">
+<div class="container">
+<div class="center-head"><span class="label">HEALTH PACKAGES</span><h2>Take care of your<br><em>whole self.</em></h2><p>Simple, affordable packages designed for different stages of your health journey.</p></div>
+<div class="package-grid">
+<article class="package"><div class="package-top"><span class="pkg-icon">♡</span><span class="recommended">POPULAR</span></div><h3>Essential Health</h3><p>For everyday preventive screening.</p><div class="includes"><span>✓ CBC</span><span>✓ Blood Sugar</span><span>✓ Lipid Profile</span><span>✓ Liver Function</span></div><div class="pkg-price"><strong>₹999</strong><del>₹1,499</del><a href="#appointment">Book now →</a></div></article>
+<article class="package featured"><div class="package-top"><span class="pkg-icon">✦</span><span class="recommended">RECOMMENDED</span></div><h3>Complete Wellness</h3><p>A comprehensive annual health check.</p><div class="includes"><span>✓ 60+ Tests</span><span>✓ Thyroid Profile</span><span>✓ Vitamin D & B12</span><span>✓ Kidney Function</span></div><div class="pkg-price"><strong>₹2,499</strong><del>₹3,999</del><a href="#appointment">Book now →</a></div></article>
+<article class="package"><div class="package-top"><span class="pkg-icon">♧</span><span class="recommended">FAMILY</span></div><h3>Family Care</h3><p>Convenient screening for your family.</p><div class="includes"><span>✓ 80+ Tests</span><span>✓ Diabetes Screen</span><span>✓ Heart Risk Markers</span><span>✓ Vitamin Panel</span></div><div class="pkg-price"><strong>₹3,999</strong><del>₹5,999</del><a href="#appointment">Book now →</a></div></article>
+</div>
+</div>
+</section>
+
+<section class="appointment-section" id="appointment">
+<div class="container appointment-grid">
+<div class="appointment-copy"><span class="label">CONVENIENT & SIMPLE</span><h2>Book your test<br><em>in minutes.</em></h2><p>Choose your test, select a preferred date and we'll take care of the rest. Home collection is available across the city.</p><div class="steps"><div><b>01</b><span>Select test</span></div><div><b>02</b><span>Choose time</span></div><div><b>03</b><span>Get tested</span></div><div><b>04</b><span>Receive report</span></div></div></div>
+<form class="appointment-form" id="appointmentForm"><div class="form-heading"><div><span>APPOINTMENT</span><h3>Book a diagnostic test</h3></div><b>01 / 01</b></div>
+<div class="form-row"><label>Full name<input required name="name" placeholder="Your name"></label><label>Mobile number<input required name="phone" placeholder="+91 98765 43210"></label></div>
+<div class="form-row"><label>Test / Package<select required><option value="">Select a test</option><option>Complete Blood Count (CBC)</option><option>Thyroid Profile</option><option>Vitamin D</option><option>HbA1c</option><option>Essential Health Package</option><option>Complete Wellness Package</option></select></label><label>Collection type<select required><option>Home Collection</option><option>Visit Laboratory</option></select></label></div>
+<div class="form-row"><label>Preferred date<input required type="date" id="date"></label><label>Preferred time<select required><option value="">Select time</option><option>7:00 AM – 9:00 AM</option><option>9:00 AM – 11:00 AM</option><option>11:00 AM – 1:00 PM</option><option>4:00 PM – 6:00 PM</option><option>6:00 PM – 8:00 PM</option></select></label></div>
+<label>Message / special instructions<textarea rows="3" placeholder="Anything our collection team should know?"></textarea></label>
+<button class="btn primary full" type="submit">Confirm Appointment <b>→</b></button><small class="note">You will receive confirmation on your registered mobile number.</small>
+</form>
+</div>
+</section>
+
+<section class="about-section" id="about">
+<div class="container about-grid">
+<div class="about-image"><img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1100&q=85" alt="Laboratory professional"><div class="quality-badge"><strong>15+</strong><span>Years of<br>excellence</span></div></div>
+<div class="about-copy"><span class="label">WHY MEDILAB</span><h2>Science you can<br><em>trust.</em></h2><p>Behind every report is a team committed to accuracy, quality and a better patient experience. We combine modern technology with human care.</p>
+<div class="why-list"><div><i>✓</i><div><h3>Advanced Technology</h3><p>Modern analyzers and strict quality processes support reliable results.</p></div></div><div><i>✓</i><div><h3>Qualified Professionals</h3><p>Skilled laboratory staff follow standardized sample handling procedures.</p></div></div><div><i>✓</i><div><h3>Patient-first Experience</h3><p>Easy bookings, home collection and digital reports keep diagnostics simple.</p></div></div></div>
+<a href="#contact" class="dark-btn">Learn about MediLab →</a></div>
+</div>
+</section>
+
+<section class="report-section">
+<div class="container report-grid"><div><span class="label">DIGITAL REPORTS</span><h2>Your reports,<br><em>wherever you are.</em></h2><p>Access your diagnostic reports online without waiting at the laboratory. Enter your report details to continue.</p></div>
+<div class="report-box"><span class="report-icon">▤</span><h3>Download your report</h3><label>Patient ID<input id="patientId" placeholder="e.g. ML202600123"></label><label>Mobile number<input placeholder="+91 98765 43210"></label><button class="dark-btn" id="reportBtn">View Report →</button><small>For demo purposes, this button displays a notification.</small></div></div>
+</section>
+
+<section class="testimonial-section"><div class="container"><div class="center-head"><span class="label">PATIENT EXPERIENCES</span><h2>Care that feels<br><em>human.</em></h2></div><div class="review-grid"><article><div class="stars">★★★★★</div><p>“The home collection was punctual and the staff was very polite. Getting the report online was extremely convenient.”</p><div><b>Neha P.</b><small>Patient · Pune</small></div></article><article><div class="stars">★★★★★</div><p>“Very smooth experience. The booking process was easy and I received my health report on time.”</p><div><b>Rahul M.</b><small>Patient · Ahmednagar</small></div></article><article><div class="stars">★★★★★</div><p>“I booked a full body package for my parents. The collection team handled everything professionally.”</p><div><b>Priya S.</b><small>Patient · Nashik</small></div></article></div></div></section>
+
+<section class="faq-section" id="faq"><div class="container faq-grid"><div><span class="label">FAQ</span><h2>Questions about<br><em>your tests?</em></h2><p>Here are some common questions about sample collection, reports and appointments.</p></div><div class="faqs">
+<div class="faq active"><button>Do I need to fast before a blood test?<span>−</span></button><p>It depends on the specific test. Some tests may require fasting, while many do not. Please follow the preparation instructions provided for your selected test.</p></div>
+<div class="faq"><button>Can I book a home sample collection?<span>+</span></button><p>Yes. Home sample collection is available in supported service areas. Select Home Collection while booking and choose your preferred time.</p></div>
+<div class="faq"><button>When will I receive my report?<span>+</span></button><p>Report timelines vary by test. The expected reporting time will be communicated when your appointment is confirmed.</p></div>
+<div class="faq"><button>Can I access my reports online?<span>+</span></button><p>Yes. Our digital report interface is designed to let patients access their reports conveniently.</p></div>
+</div></div></section>
+
+<section class="contact-section" id="contact"><div class="container contact-grid"><div><span class="label">GET IN TOUCH</span><h2>We're here to<br><em>help.</em></h2><p>Have a question about a test, report or appointment? Our support team is happy to help.</p><div class="contact-details"><div><span>CALL US</span><strong>+91 98765 43210</strong></div><div><span>EMAIL</span><strong>care@medilab.in</strong></div><div><span>LABORATORY</span><strong>MG Road, Ahmednagar, Maharashtra</strong></div><div><span>OPENING HOURS</span><strong>Every day · 7 AM – 9 PM</strong></div></div></div>
+<form class="contact-form" id="contactForm"><h3>Send us a message</h3><label>Name<input required placeholder="Your name"></label><label>Email<input required type="email" placeholder="you@example.com"></label><label>Subject<select><option>Test enquiry</option><option>Report enquiry</option><option>Home collection</option><option>General question</option></select></label><label>Message<textarea rows="4" placeholder="How can we help?"></textarea></label><button class="btn primary full" type="submit">Send Message <b>→</b></button></form></div></section>
+</main>
+
+<footer><div class="container footer-grid"><div class="brand"><a class="logo" href="#home"><span class="logo-icon">✚</span><span>Medi<span>Lab</span></span></a><p>Making diagnostic healthcare simpler, more accessible and more human.</p><div class="socials"><a>in</a><a>f</a><a>◎</a><a>▶</a></div></div><div><h4>Diagnostics</h4><a href="#tests">Blood Tests</a><a href="#tests">Thyroid Tests</a><a href="#tests">Vitamin Tests</a><a href="#packages">Health Packages</a></div><div><h4>Patient Care</h4><a href="#appointment">Book a Test</a><a href="#appointment">Home Collection</a><a href="#faq">FAQs</a><a href="#contact">Support</a></div><div><h4>Contact</h4><p>MG Road, Ahmednagar<br>Maharashtra, India</p><p>+91 98765 43210<br>care@medilab.in</p></div></div><div class="container copyright"><span>© 2026 MediLab Diagnostics. All rights reserved.</span><span>Privacy · Terms</span></div></footer>
+<div class="toast" id="toast"><b>✓</b><div><strong>Request received!</strong><small>Our team will contact you shortly.</small></div></div><button class="top-btn" id="topBtn">↑</button>
+<script src="js/script.js"></script>
+</body>
+</html>

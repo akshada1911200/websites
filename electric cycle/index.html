@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth"><head><script data-bard-client-injected="true">(function(firebaseConfig, initialAuthToken, appId) {
+        window.__firebase_config = firebaseConfig;
+        window.__initial_auth_token = initialAuthToken;
+        window.__app_id = appId;
+            })("\n{\n  \"apiKey\": \"AIzaSyCqyCcs2R2e7AegGjvFAwG98wlamtbHvZY\",\n  \"authDomain\": \"bard-frontend.firebaseapp.com\",\n  \"projectId\": \"bard-frontend\",\n  \"storageBucket\": \"bard-frontend.firebasestorage.app\",\n  \"messagingSenderId\": \"175205271074\",\n  \"appId\": \"1:175205271074:web:2b7bd4d34d33bf38e6ec7b\"\n}\n","eyJhbGciOiJSUzI1NiIsImtpZCI6IjExNjRiNzdiNDMzZDdhMDAyMWI4NjE4YjhjYTU3ZTMyZGI5MWUxMTMiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiJmaXJlYmFzZS1hZG1pbnNkay1mYnN2Y0BiYXJkLWZyb250ZW5kLmlhbS5nc2VydmljZWFjY291bnQuY29tIiwiYXVkIjoiaHR0cHM6Ly9pZGVudGl0eXRvb2xraXQuZ29vZ2xlYXBpcy5jb20vZ29vZ2xlLmlkZW50aXR5LmlkZW50aXR5dG9vbGtpdC52MS5JZGVudGl0eVRvb2xraXQiLCJ1aWQiOiIxMDI5NzI0NjQwMzI0Njc4Nzg4OSIsImlzcyI6ImZpcmViYXNlLWFkbWluc2RrLWZic3ZjQGJhcmQtZnJvbnRlbmQuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJjbGFpbXMiOnsiYXBwSWQiOiJjXzEzZjFmMTc4NzNmYmM0NDdfaW5kZXguaHRtbC0xNDIifSwiZXhwIjoxNzkxMDIwOTMxLCJpYXQiOjE3OTEwMTczMzEsImFsZyI6IlJTMjU2In0.ZxMs8O_3AOFLhmJP8lPn68vlkXgUmxC7l230XcypYiz_eVTokFNdrt6RsXyeGh71jpMXAsqjrbyf-tGX8qqULtDSH32RtbqUpG1zW_PI7PsZDLKyc3lCyOTeSaGcfT8Z0HwIPbv2iRnmV-dw7_57RqXqH9a9WhlFxoMXZb-qSpcu5G0LOvwQYqFTebwf59xzDc1LXlPM3xHbaOOwguWYRXTM-SBaxK0C2e00xq-ObKich_prUvfcUc8v5ePjcz9RbXc6RofX2JBw9jvs4RzeSEASk0fYRGoyT7UgJIpKZP2MENXW8aOxgWQn9KVwf4kgkBtOcroirBHKiqw2hUd6Uw","c_13f1f17873fbc447_index.html-142")</script><script data-bard-client-injected="true">
+  document.addEventListener('input', (event) => {
+    if (event.target && (event.target.isContentEditable || event.target.hasAttribute('contenteditable'))) {
+      const clonedDoc = document.cloneNode(true);
+      const injectedScripts = clonedDoc.querySelectorAll('[data-bard-client-injected="true"]');
+      injectedScripts.forEach(el => el.remove());
+      window.parent.postMessage({
+        type: 'inlineEdit',
+        html: '<!DOCTYPE html>\n' + clonedDoc.documentElement.outerHTML
+      }, '*');
+    }
+  });
+</script><script data-bard-client-injected="true">(function(){'use strict';window.addEventListener("message",a=>{a.data&&a.data.type==="SUPPLEMENTAL_DATA_UPDATE"&&window.dispatchEvent(new CustomEvent("supplementaldataupdate",{detail:a.data.data}))});}).call(this);
+</script><script data-bard-client-injected="true">(function() {
+  const SCROLL_KEYS = new Set([
+    'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
+    ' ', 'Spacebar', 'PageUp', 'PageDown', 'Home', 'End',
+  ]);
+  const HORIZONTAL_KEYS = new Set(['ArrowLeft', 'ArrowRight']);
+
+  function isTextEntryTarget(target) {
+    if (!target) return false;
+    const tagName = target.tagName;
+    return tagName === 'INPUT' || tagName === 'TEXTAREA' ||
+        tagName === 'SELECT' || target.isContentEditable === true;
+  }
+
+  // An element absorbs the key only if it both overflows on the axis being
+  // scrolled and is configured to scroll on that axis. The cheap dimension
+  // test runs first because getComputedStyle forces a style recalc, and this
+  // runs on every keypress. Each axis is read from its own longhand: the
+  // 'overflow' shorthand serializes as two values when the axes differ, which
+  // is the common 'overflow-x: hidden; overflow-y: auto' pane.
+  function canScroll(node, horizontal) {
+    const overflows = horizontal ? node.scrollWidth > node.clientWidth
+                                 : node.scrollHeight > node.clientHeight;
+    if (!overflows) return false;
+    const style = window.getComputedStyle(node);
+    const overflow = horizontal ? style.overflowX : style.overflowY;
+    return overflow === 'auto' || overflow === 'scroll';
+  }
+
+  // Walks up from the event target so nested scrollers keep their behavior.
+  // <body> is included because pages that pin the root height make it the
+  // scroll container.
+  function hasScrollableAncestor(target, horizontal) {
+    let node = target;
+    while (node && node !== document.documentElement) {
+      if (canScroll(node, horizontal)) return true;
+      node = node.parentElement;
+    }
+    return false;
+  }
+
+  function rootCanScroll(horizontal) {
+    const scroller = document.scrollingElement || document.documentElement;
+    if (!scroller) return false;
+    // Tolerate a pixel of rounding so subpixel layouts do not look scrollable.
+    return horizontal ? scroller.scrollWidth > window.innerWidth + 1
+                      : scroller.scrollHeight > window.innerHeight + 1;
+  }
+
+  window.addEventListener('keydown', function(event) {
+    if (!SCROLL_KEYS.has(event.key)) return;
+    if (event.defaultPrevented) return;
+    // Alt and Meta turn arrows into browser history navigation, and Ctrl is
+    // reserved for shortcuts, so none of them are scroll intent.
+    if (event.altKey || event.metaKey || event.ctrlKey) return;
+
+    const target = event.target;
+    if (isTextEntryTarget(target)) return;
+
+    // Anything that can still absorb the scroll gets to keep it.
+    const horizontal = HORIZONTAL_KEYS.has(event.key);
+    if (rootCanScroll(horizontal)) return;
+    if (hasScrollableAncestor(target, horizontal)) return;
+
+    event.preventDefault();
+  }, {capture: true, passive: false});
+})();</script><script data-bard-client-injected="true">(function() {
+  // Ensure this script is executed only once
+  if (window.firebaseAuthBridgeScriptLoaded) {
+    return;
+  }
+  window.firebaseAuthBridgeScriptLoaded = true;
+
+  let nextTokenPromiseId = 0;
+
+  // Stores { resolve, reject } for ongoing token requests
+  const pendingTokenPromises = {};
+
+  // Listen for messages from the Host Application
+  window.addEventListener('message', function(event) {
+
+    const messageData = event.data;
+
+  if (messageData && messageData.type === 'RESOLVE_NEW_FIREBASE_TOKEN') {
+      const { success, token, error, promiseId } = messageData ?? {};
+      if (pendingTokenPromises[promiseId]) {
+        if (success) {
+          pendingTokenPromises[promiseId].resolve(token);
+        } else {
+          pendingTokenPromises[promiseId].reject(new Error(error || 'Token refresh failed from host.'));
+        }
+        delete pendingTokenPromises[promiseId];
+      }
+    }
+  });
+
+  // Expose a function for the Generated App to request a new Firebase token
+  window.requestNewFirebaseToken = function() {
+    const currentPromiseId = nextTokenPromiseId++;
+    const promise = new Promise((resolve, reject) => {
+      pendingTokenPromises[currentPromiseId] = { resolve, reject };
+    });
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({
+        type: 'REQUEST_NEW_FIREBASE_TOKEN',
+        promiseId: currentPromiseId
+      }, '*');
+    } else {
+      pendingTokenPromises[currentPromiseId].reject(new Error('No parent window to request token from.'));
+      delete pendingTokenPromises[currentPromiseId];
+    }
+    return promise;
+  };
+})();</script><script data-bard-client-injected="true">
+let realOriginalGetUserMedia = null;
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  realOriginalGetUserMedia = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+}
+
+(function() {
+  if (navigator.mediaDevices && navigator.mediaDevices.__proto__) {
+    try {
+      Object.defineProperty(navigator.mediaDevices.__proto__, 'getUserMedia', {
+        get: function() {
+          return undefined; // Or throw an error
+        },
+        configurable: false
+      });
+    } catch (error) {
+      console.error("Error defining prototype getter:", error);
+    }
+  }
+})();
+
+(function() {
+  const pendingMediaResolvers = {};
+  let nextMediaPromiseId = 0;
+
+  function requestMediaPermissions(constraints) {
+    const mediaPromiseId = nextMediaPromiseId++;
+    const promise = new Promise((resolve, reject) => {
+      pendingMediaResolvers[mediaPromiseId] = (granted) => {
+        delete pendingMediaResolvers[mediaPromiseId];
+        resolve(granted);
+      };
+    });
+
+    window.parent.postMessage({
+      type: 'requestMediaPermission',
+      constraints: constraints,
+      promiseId: mediaPromiseId,
+    }, '*');
+
+    return promise;
+  }
+
+  let originalGetUserMedia = realOriginalGetUserMedia;
+
+  function interceptGetUserMedia() {
+    if (navigator.mediaDevices) {
+      Object.defineProperty(navigator.mediaDevices, 'getUserMedia', {
+        value: function(constraints) {
+          return requestMediaPermissions(constraints).then((granted) => {
+            if (granted) {
+              if (originalGetUserMedia) {
+                return originalGetUserMedia(constraints);
+              } else {
+                throw new Error("Original getUserMedia not available.");
+              }
+            } else {
+              throw new DOMException('Permission denied', 'NotAllowedError');
+            }
+          });
+        },
+        writable: false,
+        configurable: false
+      });
+    }
+  }
+
+  interceptGetUserMedia();
+
+  const observer = new MutationObserver(function(mutationsList, observer) {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'reconfigured' && mutation.name === 'getUserMedia' && mutation.object === navigator.mediaDevices) {
+        interceptGetUserMedia();
+      } else if (mutation.type === 'attributes' && mutation.attributeName === 'getUserMedia' && mutation.target === navigator.mediaDevices) {
+        interceptGetUserMedia();
+      } else if (mutation.type === 'childList' && mutation.addedNodes) {
+        mutation.addedNodes.forEach(node => {
+          if (node === navigator.mediaDevices) {
+            interceptGetUserMedia();
+          }
+        });
+      }
+    }
+  });
+
+  function interceptSpeechRecognition() {
+    if (!window.SpeechRecognition && !window.webkitSpeechRecognition) {
+      return;
+    }
+
+    const OriginalSpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    const SpeechRecognitionWrapper = function(...args) {
+      const recognizer = new OriginalSpeechRecognition(...args);
+      const originalStart = recognizer.start.bind(recognizer);
+
+      recognizer.start = function() {
+        requestMediaPermissions({ audio: true }).then(granted => {
+          if (granted) {
+            originalStart();
+          } else {
+            const errorEvent = new SpeechRecognitionErrorEvent('error');
+            errorEvent.error = 'not-allowed'; // This is the standard error for permission denial.
+            recognizer.dispatchEvent(errorEvent);
+          }
+        });
+      };
+
+      return recognizer;
+    };
+
+    SpeechRecognitionWrapper.prototype = OriginalSpeechRecognition.prototype;
+    SpeechRecognitionWrapper.prototype.constructor = SpeechRecognitionWrapper;
+
+    if (window.SpeechRecognition) {
+      window.SpeechRecognition = SpeechRecognitionWrapper;
+    }
+    if (window.webkitSpeechRecognition) {
+      window.webkitSpeechRecognition = SpeechRecognitionWrapper;
+    }
+  }
+
+  interceptSpeechRecognition();
+
+  window.addEventListener('message', function(event) {
+    if (event.data) {
+      if (event.data.type === 'resolveMediaPermission') {
+        const { promiseId, granted } = event.data;
+        if (pendingMediaResolvers[promiseId]) {
+          pendingMediaResolvers[promiseId](granted);
+        }
+      }
+    }
+  });
+
+})();</script><script ws-interception-config="{&quot;parentOrigin&quot;:&quot;https://gemini.google.com&quot;,&quot;proxiedDomains&quot;:[]}" data-bard-client-injected="true">(function(){'use strict';var u=typeof Object.defineProperties=="function"?Object.defineProperty:function(b,d,e){if(b==Array.prototype||b==Object.prototype)return b;b[d]=e.value;return b};function v(b){b=["object"==typeof globalThis&&globalThis,b,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var d=0;d<b.length;++d){var e=b[d];if(e&&e.Math==Math)return e}throw Error("Cannot find global object");}var w=v(this);
+function y(b,d){if(d)a:{var e=w;b=b.split(".");for(var h=0;h<b.length-1;h++){var k=b[h];if(!(k in e))break a;e=e[k]}b=b[b.length-1];h=e[b];d=d(h);d!=h&&d!=null&&u(e,b,{configurable:!0,writable:!0,value:d})}}function z(b){function d(h){return b.next(h)}function e(h){return b.throw(h)}return new Promise(function(h,k){function m(n){n.done?h(n.value):Promise.resolve(n.value).then(d,e).then(m,k)}m(b.next())})}y("globalThis",function(b){return b||w});/*
+
+ Copyright The Closure Library Authors.
+ SPDX-License-Identifier: Apache-2.0
+*/
+function A(b,d){function e(){}e.prototype=d.prototype;b.j=d.prototype;b.prototype=new e;b.prototype.constructor=b;b.h=function(h,k,m){for(var n=Array(arguments.length-2),p=2;p<arguments.length;p++)n[p-2]=arguments[p];return d.prototype[k].apply(h,n)}};function B(b,d,e="*"){function h(a){if(typeof a==="string")return F.encode(a).buffer;if(a instanceof ArrayBuffer)return a.slice(0);if(ArrayBuffer.isView(a))return a.buffer.slice(a.byteOffset,a.byteOffset+a.byteLength);throw Error("Invalid data type");}function k(a){a=h(a);var f={type:"send",data:new Uint8Array(a)},g;(g=r)==null||g.postMessage(f,[a])}function m(){if(!r)throw Error("Data port not captured yet.");r.onmessage=a=>{if(a.data.type==="message"){a=new MessageEvent("message",{data:G.decode(a.data.data)});
+let f;(f=c.onmessage)==null||f.call(c,a);c.dispatchEvent(a)}}}function n(){if(!t)throw Error("Control port not captured yet.");t.onmessage=a=>{switch(a.data.type){case "open":l=1;var f=new Event("open"),g;(g=c.onopen)==null||g.call(c,f);c.dispatchEvent(f);q.forEach(H=>{k(H)});q=[];break;case "close":g=a.data;l=3;g=new CloseEvent("close",{code:g.code,reason:g.reason,wasClean:g.wasClean});(f=c.onclose)==null||f.call(c,g);c.dispatchEvent(g);break;case "error":l=3;f=new Event("error");let x;(x=c.onerror)==
+null||x.call(c,f);c.dispatchEvent(f)}}}function p(a){return z(function*(){var f=new MessageChannel;t=f.port1;var g=new MessageChannel;r=g.port1;n();m();window.parent.postMessage({type:"websocket_open",portOrdering:["control","data"],url:b,protocols:a||[],connectionId:I},e,[f.port2,g.port2])}())}var c=Reflect.construct(EventTarget,[],new.target);c.CONNECTING=0;c.OPEN=1;c.CLOSING=2;c.CLOSED=3;c.url=b;c.binaryType="arraybuffer";c.protocol="";c.i="";var l=0,t=null,r=null,q=[],F=new TextEncoder,G=new TextDecoder;
+c.onopen=null;c.onmessage=null;c.onclose=null;c.onerror=null;Object.defineProperty(c,"readyState",{get:()=>l,enumerable:!0,configurable:!0});Object.defineProperty(c,"bufferedAmount",{get:()=>{var a=0;q.forEach(f=>{a+=typeof f==="string"?f.length:f.byteLength});return a},enumerable:!0,configurable:!0});var I=function(){var a;return((a=globalThis.crypto)==null?0:a.randomUUID)?globalThis.crypto.randomUUID():"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,f=>{var g=Math.random()*16|0;return(f===
+"x"?g:g&3|8).toString(16)})}();c.send=a=>{if(l===1)a instanceof Blob?a.arrayBuffer().then(f=>{k(f)}):k(a);else if(l===0)if(typeof a==="string")q.push(a);else if(a instanceof ArrayBuffer||ArrayBuffer.isView(a))q.push(h(a));else throw Error("Sending Blob is not supported before the connection is open.");else console.debug("WebSocket send called in CLOSING or CLOSED state; ignored.")};c.close=(a=1E3,f="")=>{if(l!==2&&l!==3){l=2;a={type:"close",code:a,reason:f,wasClean:a===1E3};var g;(g=t)==null||g.postMessage(a)}};
+Promise.resolve().then(()=>p(d));return c}A(B,EventTarget);var C=document.currentScript,D=C==null?void 0:C.getAttribute("ws-interception-config");if(!D)throw Error("WebSocket Interceptor: Missing ws-interception-config attribute in the script tag.");var E=JSON.parse(D);if(!E.parentOrigin||typeof E.parentOrigin!=="string")throw Error("WebSocket Interceptor: Invalid parentOrigin in ws-interception-config");
+(function(b){var d=Object.getOwnPropertyDescriptor(window,"WebSocket");if(!d||d.writable||d.configurable)d=Object.assign(function(e,h){try{let k=(new URL(e)).hostname;if(b.proxiedDomains.some(m=>k===m||k.endsWith(`.${m}`)))return new B(e,h,b.parentOrigin)}catch(k){throw window.parent.postMessage({type:"websocket_blocked",url:e,reason:"blocked_invalid_url"},b.parentOrigin),new DOMException(`WebSocket connection to '${e}' is not allowed in Canvas.`,"SecurityError");}window.parent.postMessage({type:"websocket_blocked",
+url:e,reason:"blocked_domain_not_allowlisted"},b.parentOrigin);throw new DOMException(`WebSocket connection to '${e}' is not allowed in Canvas.`,"SecurityError");},{CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3}),Object.defineProperty(window,"WebSocket",{value:d,writable:!1,configurable:!1})})({proxiedDomains:E.proxiedDomains||[],parentOrigin:E.parentOrigin});}).call(this);
+</script><script data-bard-client-injected="true">((function(modelInformation) {
+  const originalFetch = window.fetch;
+  // TODO: b/421908508 - Move these out of the script and match all generative AI model calls.
+  let googleLlmBaseApiUrls = [
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.textModelName + ':streamGenerateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.textModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageModelName + ':predict',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageModelName + ':predictLongRunning',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageEditModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageTransformModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.videoModelName + ':predict',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.videoModelName + ':predictLongRunning',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.ttsModelName + ':generateContent',
+  ];
+  modelInformation.deprecatedTextModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+    );
+  });
+  modelInformation.deprecatedImageModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':predict',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':predictLongRunning',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+    );
+  });
+  modelInformation.deprecatedGenerateImageModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+    );
+  });
+  modelInformation.deprecatedImageTransformModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+    );
+  });
+
+  const pendingFetchResolvers = {};
+  let nextPromiseId = 0;
+
+  function handleStringInput(input, optionsArgument) {
+    const actualUrl = input;
+    const fetchCallArgs = [actualUrl, optionsArgument];
+    const effectiveOptions = optionsArgument || {};
+    const bodyForApiKeyCheck = effectiveOptions.body;
+    const bodyForPostMessage = effectiveOptions.body;
+    return { actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage };
+  }
+
+  function handleRequestInput(input, optionsArgument) {
+    const actualUrl = input.url;
+    const fetchCallArgs = [input, optionsArgument];
+    const effectiveOptions = { method: input.method, headers: new Headers(input.headers) };
+    let bodyForApiKeyCheck;
+    let bodyForPostMessage;
+
+    if (optionsArgument) {
+      if (optionsArgument.method) effectiveOptions.method = optionsArgument.method;
+      if (optionsArgument.headers) effectiveOptions.headers = new Headers(optionsArgument.headers);
+      if ('body' in optionsArgument) {
+        bodyForApiKeyCheck = optionsArgument.body;
+        bodyForPostMessage = optionsArgument.body;
+      } else {
+        bodyForApiKeyCheck = undefined;
+        bodyForPostMessage = input.body;
+      }
+    } else {
+      bodyForApiKeyCheck = undefined;
+      bodyForPostMessage = input.body;
+    }
+    return { actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage };
+  }
+
+  window.fetch = function(input, optionsArgument) {
+    let actualUrl;
+    let fetchCallArgs;
+    let effectiveOptions = {};
+    let bodyForApiKeyCheck;
+    let bodyForPostMessage;
+
+    if (typeof input === 'string') {
+      ({actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage} = handleStringInput(input, optionsArgument));
+    } else if (input instanceof Request) {
+      ({actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage} = handleRequestInput(input, optionsArgument));
+    } else {
+      return originalFetch.apply(window, [input, optionsArgument]);
+    }
+
+    effectiveOptions.method = effectiveOptions.method || 'GET';
+    if (!effectiveOptions.headers) {
+      effectiveOptions.headers = new Headers();
+    }
+
+
+    if (typeof actualUrl === 'string' && googleLlmBaseApiUrls.some((url) => actualUrl.startsWith(url))) {
+      let apiKeyIsNull = true;
+
+      const regex = new RegExp("models/([^:]+)");
+      const modelNameMatch = actualUrl.match(regex);
+      const modelName = modelNameMatch ? modelNameMatch[1] : 'unspecified';
+
+
+      try {
+        const urlObject = new URL(actualUrl);  // Use URL object for robust parsing
+        const apiKeyParam = urlObject.searchParams.get('key');
+        if (apiKeyParam) {
+          apiKeyIsNull = false;
+        }
+      } catch (e) {
+        // Continue checks even if URL parsing fails
+      }
+
+      if (apiKeyIsNull && effectiveOptions.headers) {
+        const h = new Headers(effectiveOptions.headers);
+        const apiKeyHeaderValue = h.get('X-API-Key') || h.get('x-api-key');
+        if (apiKeyHeaderValue) {
+          apiKeyIsNull = false;
+          return originalFetch.apply(window, fetchCallArgs);
+        }
+      }
+
+      if (apiKeyIsNull && effectiveOptions.method && ['POST', 'PUT', 'PATCH'].includes(effectiveOptions.method.toUpperCase()) && typeof bodyForApiKeyCheck === 'string') {
+        try {
+          const bodyData = JSON.parse(bodyForApiKeyCheck);
+          if (bodyData && bodyData.apiKey) {
+            apiKeyIsNull = false;
+            return originalFetch.apply(window, fetchCallArgs);
+          }
+        } catch (e) {
+          // Ignore JSON parsing errors
+        }
+      }
+
+      if(apiKeyIsNull) {
+        const promiseId = nextPromiseId++;
+        const promise = new Promise((resolve) => {
+          pendingFetchResolvers[promiseId] = (resolvedResponse) => {
+            delete pendingFetchResolvers[promiseId];
+            resolve(resolvedResponse);
+          };
+        });
+
+        let serializedBodyForPostMessage;
+        if (typeof bodyForPostMessage === 'string' || bodyForPostMessage == null) {
+            serializedBodyForPostMessage = bodyForPostMessage;
+        } else if (bodyForPostMessage instanceof ReadableStream) {
+            serializedBodyForPostMessage = null;
+        } else {
+            try {
+                serializedBodyForPostMessage = JSON.stringify(bodyForPostMessage);
+            } catch (e) {
+                serializedBodyForPostMessage = null;
+            }
+        }
+
+        const messageOptions = {
+            method: effectiveOptions.method,
+            headers: Object.fromEntries(new Headers(effectiveOptions.headers).entries()),
+            body: serializedBodyForPostMessage
+        };
+
+        window.parent.postMessage({
+          type: 'requestFetch',
+          url: actualUrl,
+          modelName: modelName,
+          options: messageOptions,
+          promiseId: promiseId,
+        }, '*');
+
+        return promise;
+      }
+      return originalFetch.apply(window, fetchCallArgs);
+    }
+    return originalFetch.apply(window, fetchCallArgs);
+  };
+
+  window.addEventListener('message', function(event) {
+    if (event.data && event.data.type === 'resolveFetch') {
+      const { promiseId, response } = event.data;
+      if (pendingFetchResolvers[promiseId]) {
+        try {
+          const reconstructedResponse = new Response(response.body, {
+            status: response.status,
+            statusText: response.statusText,
+            headers: new Headers(response.headers),
+          });
+          pendingFetchResolvers[promiseId](reconstructedResponse);
+        } catch (error) {
+          pendingFetchResolvers[promiseId](new Response(null, { status: 500, statusText: "Interceptor Response Reconstruction Error" }));
+        }
+      }
+    }
+  });
+
+}))({"textModelName":"gemini-3-flash-preview","imageModelName":"imagen-4.0-generate-001","imageEditModelName":"gemini-3.1-flash-image","imageTransformModelName":"gemini-3-pro-image","videoModelName":"veo-2.0-generate-001","ttsModelName":"gemini-2.5-flash-preview-tts","deprecatedTextModelNames":["gemini-2.0-flash","gemini-2.5-flash","gemini-2.5-flash-preview-04-17","gemini-2.5-flash-preview-05-20","gemini-2.5-flash-preview-09-2025"],"deprecatedImageModelNames":["imagen-3.0-generate-001","imagen-3.0-generate-002"],"deprecatedGenerateImageModelNames":["gemini-2.5-flash-image-preview","gemini-2.5-flash-image","gemini-3.1-flash-image-preview"],"deprecatedImageTransformModelNames":["gemini-3-pro-image-preview-11-2025"]})</script><script data-bard-client-injected="true">(function(){'use strict';function a(){window.parent.postMessage({type:"interaction"},"*")}window.addEventListener("click",a,{capture:!0,passive:!0});window.addEventListener("touchstart",a,{capture:!0,passive:!0});window.addEventListener("keydown",a,{capture:!0,passive:!0});}).call(this);
+</script><script data-bard-client-injected="true">(function() {
+  const originalConsoleLog = console.log;
+  const originalConsoleError = console.error;
+
+    /**
+   * Normalizes an error event or a promise rejection reason into a structured error object.
+   * @param {*} errorEventOrReason The error object or reason.
+   * @return {object} Structured error data { message, name, stack }.
+   */
+  function getErrorObject(errorEventOrReason) {
+    if (errorEventOrReason instanceof Error) {
+      return {
+        message: errorEventOrReason.message,
+        name: errorEventOrReason.name,
+        stack: errorEventOrReason.stack,
+      };
+    }
+    // Fallback for non-Error objects.
+    try {
+      return {
+        message: JSON.stringify(errorEventOrReason),
+        name: 'UnknownErrorType',
+        stack: null,
+      };
+    } catch (e) {
+      return {
+        message: String(errorEventOrReason),
+        name: 'UnknownErrorTypeNonStringifiable',
+        stack: null,
+      };
+    }
+  }
+
+  /**
+   * Converts an array of arguments (from log/error) into a single string.
+   * Handles Error objects specially to include their message and stack.
+   * @param {Array<*>} args - Arguments passed to console methods.
+   * @return {string} A string representation of the arguments.
+   */
+  function stringifyArgs(args) {
+    return args
+      .map((arg) => {
+        if (arg instanceof Error) {
+          const {message, stack} = arg;
+          return `Error: ${message}${stack ? ('\nStack: ' + stack) : ''}`;
+        }
+        if (typeof arg === 'object' && arg !== null) {
+          try {
+            return JSON.stringify(arg);
+          } catch (error) {
+            return '[Circular Object]';
+          }
+        } else {
+          return String(arg);
+        }
+      })
+      .join(' ');
+  }
+
+  console.log = function(...args) {
+    const logString = stringifyArgs(args);
+    window.parent.postMessage({ type: 'log', message: logString }, '*');
+    originalConsoleLog.apply(console, args);
+  };
+
+  console.error = function(...args) {
+    let errorData;
+    if (args.length > 0 && args[0] instanceof Error) {
+      const err = args[0];
+      // If the first arg is an Error, capture its details.
+      errorData = {
+        type: 'error',
+        source: 'CONSOLE_ERROR',
+        ...getErrorObject(err),
+        rawArgsString: stringifyArgs(args.slice(1)),
+        timestamp: new Date().toISOString(),
+      };
+    } else {
+      // If not an Error object, treat all args as a general error message.
+      errorData = {
+        type: 'error',
+        source: 'CONSOLE_ERROR',
+        message: stringifyArgs(args),
+        name: 'ConsoleLoggedError',
+        stack: null,
+        timestamp: new Date().toISOString(),
+      };
+    }
+    window.parent.postMessage(errorData, '*');
+    originalConsoleError.apply(console, args);
+  };
+
+  // Listen for global unhandled synchronous errors.
+  window.addEventListener('error', function(event) {
+    const errorDetails = event.error ? getErrorObject(event.error) : {
+      message: event.message,
+      name: 'GlobalError',
+      stack: null,
+      filename: event.filename,
+      lineno: event.lineno,
+      colno: event.colno,
+    };
+
+    window.parent.postMessage({
+      type: 'error',
+      source: 'global',
+      ...errorDetails,
+      message: errorDetails.message || event.message,
+      timestamp: new Date().toISOString(),
+    }, '*');
+  });
+
+  // Listen for unhandled promise rejections (asynchronous errors).
+  window.addEventListener('unhandledrejection', function(event) {
+    const errorDetails = getErrorObject(event.reason);
+
+    window.parent.postMessage({
+      type: 'error',
+      source: 'unhandledrejection',
+      ...errorDetails,
+      message: errorDetails.message || 'Unhandled Promise Rejection',
+      timestamp: new Date().toISOString(),
+    }, '*');
+  });
+
+})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenRide EV | Next-Gen Electric Cycles &amp; E-Bikes</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Outfit & Plus Jakarta Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <!-- JSZip for dynamic client-side zip creation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" crossorigin="anonymous"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        greenride: {
+                            neon: '#00ff88',
+                            emerald: '#10b981',
+                            deep: '#042f2e',
+                            dark: '#030712',
+                            accent: '#06b6d4',
+                            gold: '#f59e0b',
+                            card: 'rgba(15, 23, 42, 0.65)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'neon-green': '0 0 25px -5px rgba(0, 255, 136, 0.4)',
+                        'neon-emerald': '0 0 25px -5px rgba(16, 185, 129, 0.4)',
+                        'neon-teal': '0 0 25px -5px rgba(6, 182, 212, 0.4)',
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 4s infinite alternate',
+                        'float': 'float 5s ease-in-out infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%': { opacity: '0.3', filter: 'blur(30px)' },
+                            '100%': { opacity: '0.7', filter: 'blur(50px)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-14px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Base Themes */
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+        }
+
+        /* Dynamic Background Color Themes */
+        body.theme-emerald {
+            background-color: #042f2e;
+            color: #f0fdf4;
+        }
+        body.theme-obsidian {
+            background-color: #030712;
+            color: #f9fafb;
+        }
+        body.theme-light {
+            background-color: #f0fdf4;
+            color: #0f172a;
+        }
+        body.theme-gold {
+            background-color: #1a1500;
+            color: #fffbeb;
+        }
+        body.theme-teal {
+            background-color: #041c24;
+            color: #ecfeff;
+        }
+
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Glassmorphism Panels adapt to theme */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        body.theme-light .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: #0f172a;
+        }
+
+        .glass-nav {
+            background: rgba(4, 47, 46, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        body.theme-obsidian .glass-nav {
+            background: rgba(3, 7, 18, 0.85);
+        }
+        body.theme-light .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        body.theme-gold .glass-nav {
+            background: rgba(26, 21, 0, 0.85);
+        }
+        body.theme-teal .glass-nav {
+            background: rgba(4, 28, 36, 0.85);
+        }
+
+        .text-gradient-neon {
+            background: linear-gradient(135deg, #00ff88 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #10b981;
+            border-radius: 4px;
+        }
+
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #00ff88;
+            cursor: pointer;
+            box-shadow: 0 0 12px #00ff88;
+        }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Plus Jakarta Sans, sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.left-0{left:0px}.left-\[-100px\]{left:-100px}.right-0{right:0px}.right-\[-150px\]{right:-150px}.top-0{top:0px}.top-\[-100px\]{top:-100px}.top-\[40\%\]{top:40%}.bottom-6{bottom:1.5rem}.right-6{right:1.5rem}.top-6{top:1.5rem}.z-0{z-index:0}.z-10{z-index:10}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.mb-12{margin-bottom:3rem}.mb-2{margin-bottom:0.5rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mt-0\.5{margin-top:0.125rem}.mt-2{margin-top:0.5rem}.mt-6{margin-top:1.5rem}.mb-1{margin-bottom:0.25rem}.mb-3{margin-bottom:0.75rem}.mt-1{margin-top:0.25rem}.mt-4{margin-top:1rem}.mt-8{margin-top:2rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.aspect-\[16\/10\]{aspect-ratio:16/10}.h-10{height:2.5rem}.h-20{height:5rem}.h-3\.5{height:0.875rem}.h-\[500px\]{height:500px}.h-\[600px\]{height:600px}.h-full{height:100%}.h-2{height:0.5rem}.h-4{height:1rem}.h-8{height:2rem}.h-52{height:13rem}.min-h-\[90vh\]{min-height:90vh}.min-h-screen{min-height:100vh}.w-10{width:2.5rem}.w-3\.5{width:0.875rem}.w-48{width:12rem}.w-\[500px\]{width:500px}.w-\[600px\]{width:600px}.w-full{width:100%}.w-4{width:1rem}.w-8{width:2rem}.max-w-2xl{max-width:42rem}.max-w-3xl{max-width:48rem}.max-w-7xl{max-width:80rem}.max-w-lg{max-width:32rem}.max-w-md{max-width:28rem}.flex-grow{flex-grow:1}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes bounce{0%, 100%{transform:translateY(-25%);animation-timing-function:cubic-bezier(0.8,0,1,1)}50%{transform:none;animation-timing-function:cubic-bezier(0,0,0.2,1)}}.animate-bounce{animation:bounce 1s infinite}@keyframes float{0%, 100%{transform:translateY(0px)}50%{transform:translateY(-14px)}}.animate-float{animation:float 5s ease-in-out infinite}@keyframes pulseGlow{0%{opacity:0.3;filter:blur(30px)}100%{opacity:0.7;filter:blur(50px)}}.animate-pulse-glow{animation:pulseGlow 4s infinite alternate}@keyframes spin{to{transform:rotate(360deg)}}.animate-spin-slow{animation:spin 12s linear infinite}.cursor-pointer{cursor:pointer}.appearance-none{-webkit-appearance:none;appearance:none}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2{gap:0.5rem}.gap-4{gap:1rem}.gap-8{gap:2rem}.gap-12{gap:3rem}.gap-3{gap:0.75rem}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-3 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.75rem * var(--tw-space-x-reverse));margin-left:calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-4 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem * var(--tw-space-x-reverse));margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-8 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(2rem * var(--tw-space-x-reverse));margin-left:calc(2rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.scroll-smooth{scroll-behavior:smooth}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-2{border-width:2px}.border-y{border-top-width:1px;border-bottom-width:1px}.border-t{border-top-width:1px}.border-amber-400{--tw-border-opacity:1;border-color:rgb(251 191 36 / var(--tw-border-opacity, 1))}.border-emerald-400{--tw-border-opacity:1;border-color:rgb(52 211 153 / var(--tw-border-opacity, 1))}.border-emerald-500{--tw-border-opacity:1;border-color:rgb(16 185 129 / var(--tw-border-opacity, 1))}.border-emerald-500\/30{border-color:rgb(16 185 129 / 0.3)}.border-gray-600{--tw-border-opacity:1;border-color:rgb(75 85 99 / var(--tw-border-opacity, 1))}.border-greenride-neon\/40{border-color:rgb(0 255 136 / 0.4)}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.border-slate-700\/50{border-color:rgb(51 65 85 / 0.5)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.border-teal-400{--tw-border-opacity:1;border-color:rgb(45 212 191 / var(--tw-border-opacity, 1))}.border-greenride-neon{--tw-border-opacity:1;border-color:rgb(0 255 136 / var(--tw-border-opacity, 1))}.border-greenride-neon\/30{border-color:rgb(0 255 136 / 0.3)}.border-slate-800\/80{border-color:rgb(30 41 59 / 0.8)}.border-transparent{border-color:transparent}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.bg-amber-950{--tw-bg-opacity:1;background-color:rgb(69 26 3 / var(--tw-bg-opacity, 1))}.bg-emerald-100{--tw-bg-opacity:1;background-color:rgb(209 250 229 / var(--tw-bg-opacity, 1))}.bg-emerald-50{--tw-bg-opacity:1;background-color:rgb(236 253 245 / var(--tw-bg-opacity, 1))}.bg-emerald-500\/10{background-color:rgb(16 185 129 / 0.1)}.bg-emerald-500\/20{background-color:rgb(16 185 129 / 0.2)}.bg-emerald-800{--tw-bg-opacity:1;background-color:rgb(6 95 70 / var(--tw-bg-opacity, 1))}.bg-emerald-900{--tw-bg-opacity:1;background-color:rgb(6 78 59 / var(--tw-bg-opacity, 1))}.bg-gray-950{--tw-bg-opacity:1;background-color:rgb(3 7 18 / var(--tw-bg-opacity, 1))}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-slate-900\/60{background-color:rgb(15 23 42 / 0.6)}.bg-teal-500\/10{background-color:rgb(20 184 166 / 0.1)}.bg-teal-900{--tw-bg-opacity:1;background-color:rgb(19 78 74 / var(--tw-bg-opacity, 1))}.bg-black\/80{background-color:rgb(0 0 0 / 0.8)}.bg-cyan-500{--tw-bg-opacity:1;background-color:rgb(6 182 212 / var(--tw-bg-opacity, 1))}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.bg-greenride-neon{--tw-bg-opacity:1;background-color:rgb(0 255 136 / var(--tw-bg-opacity, 1))}.bg-greenride-neon\/10{background-color:rgb(0 255 136 / 0.1)}.bg-greenride-neon\/20{background-color:rgb(0 255 136 / 0.2)}.bg-purple-500{--tw-bg-opacity:1;background-color:rgb(168 85 247 / var(--tw-bg-opacity, 1))}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-slate-900\/80{background-color:rgb(15 23 42 / 0.8)}.bg-slate-950\/50{background-color:rgb(2 6 23 / 0.5)}.bg-slate-950\/90{background-color:rgb(2 6 23 / 0.9)}.bg-yellow-500{--tw-bg-opacity:1;background-color:rgb(234 179 8 / var(--tw-bg-opacity, 1))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.bg-gradient-to-tr{background-image:linear-gradient(to top right, var(--tw-gradient-stops))}.from-greenride-neon{--tw-gradient-from:#00ff88 var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 255 136 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-emerald-500{--tw-gradient-to:rgb(16 185 129 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #10b981 var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-emerald-500{--tw-gradient-to:#10b981 var(--tw-gradient-to-position)}.to-teal-400{--tw-gradient-to:#2dd4bf var(--tw-gradient-to-position)}.object-cover{object-fit:cover}.p-2{padding:0.5rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.p-1\.5{padding:0.375rem}.p-3{padding:0.75rem}.p-5{padding:1.25rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-3\.5{padding-left:0.875rem;padding-right:0.875rem}.px-4{padding-left:1rem;padding-right:1rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-3\.5{padding-top:0.875rem;padding-bottom:0.875rem}.py-4{padding-top:1rem;padding-bottom:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.pb-16{padding-bottom:4rem}.pb-6{padding-bottom:1.5rem}.pt-10{padding-top:2.5rem}.pt-20{padding-top:5rem}.pt-3{padding-top:0.75rem}.pt-4{padding-top:1rem}.pt-6{padding-top:1.5rem}.text-left{text-align:left}.text-center{text-align:center}.font-display{font-family:Outfit, sans-serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-\[10px\]{font-size:10px}.text-base{font-size:1rem;line-height:1.5rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-tight{line-height:1.25}.leading-relaxed{line-height:1.625}.tracking-tight{letter-spacing:-0.025em}.tracking-wider{letter-spacing:0.05em}.tracking-widest{letter-spacing:0.1em}.text-greenride-neon{--tw-text-opacity:1;color:rgb(0 255 136 / var(--tw-text-opacity, 1))}.text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-900{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.text-slate-950{--tw-text-opacity:1;color:rgb(2 6 23 / var(--tw-text-opacity, 1))}.text-teal-400{--tw-text-opacity:1;color:rgb(45 212 191 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-emerald-500{--tw-text-opacity:1;color:rgb(16 185 129 / var(--tw-text-opacity, 1))}.text-greenride-neon\/40{color:rgb(0 255 136 / 0.4)}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.opacity-70{opacity:0.7}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-neon-green{--tw-shadow:0 0 25px -5px rgba(0, 255, 136, 0.4);--tw-shadow-colored:0 0 25px -5px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.drop-shadow-\[0_20px_30px_rgba\(0\2c 255\2c 136\2c 0\.3\)\]{--tw-drop-shadow:drop-shadow(0 20px 30px rgba(0,255,136,0.3));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.duration-500{transition-duration:500ms}.selection\:bg-greenride-neon *::selection{--tw-bg-opacity:1;background-color:rgb(0 255 136 / var(--tw-bg-opacity, 1))}.selection\:text-black *::selection{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.selection\:bg-greenride-neon::selection{--tw-bg-opacity:1;background-color:rgb(0 255 136 / var(--tw-bg-opacity, 1))}.selection\:text-black::selection{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.hover\:-translate-y-0\.5:hover{--tw-translate-y:-0.125rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:-translate-y-1:hover{--tw-translate-y:-0.25rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-110:hover{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:border-greenride-neon:hover{--tw-border-opacity:1;border-color:rgb(0 255 136 / var(--tw-border-opacity, 1))}.hover\:border-emerald-500\/50:hover{border-color:rgb(16 185 129 / 0.5)}.hover\:border-slate-700:hover{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.hover\:bg-emerald-500\/20:hover{background-color:rgb(16 185 129 / 0.2)}.hover\:bg-greenride-neon:hover{--tw-bg-opacity:1;background-color:rgb(0 255 136 / var(--tw-bg-opacity, 1))}.hover\:text-greenride-neon:hover{--tw-text-opacity:1;color:rgb(0 255 136 / var(--tw-text-opacity, 1))}.hover\:text-slate-950:hover{--tw-text-opacity:1;color:rgb(2 6 23 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:text-black:hover{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.hover\:opacity-90:hover{opacity:0.9}.hover\:shadow-neon-green:hover{--tw-shadow:0 0 25px -5px rgba(0, 255, 136, 0.4);--tw-shadow-colored:0 0 25px -5px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.focus\:border-greenride-neon:focus{--tw-border-opacity:1;border-color:rgb(0 255 136 / var(--tw-border-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-0:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-cyan-400:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(34 211 238 / var(--tw-ring-opacity, 1))}.focus\:ring-greenride-neon:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(0 255 136 / var(--tw-ring-opacity, 1))}.focus\:ring-purple-400:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(192 132 252 / var(--tw-ring-opacity, 1))}.focus\:ring-slate-300:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(203 213 225 / var(--tw-ring-opacity, 1))}.focus\:ring-yellow-400:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(250 204 21 / var(--tw-ring-opacity, 1))}@media (min-width: 640px){.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:p-10{padding:2.5rem}.sm\:p-8{padding:2rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}.sm\:text-6xl{font-size:3.75rem;line-height:1}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}}@media (min-width: 768px){.md\:flex{display:flex}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}}@media (min-width: 1024px){.lg\:col-span-3{grid-column:span 3 / span 3}.lg\:col-span-6{grid-column:span 6 / span 6}.lg\:col-span-5{grid-column:span 5 / span 5}.lg\:col-span-7{grid-column:span 7 / span 7}.lg\:flex{display:flex}.lg\:hidden{display:none}.lg\:grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.lg\:grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}.lg\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:p-8{padding:2rem}.lg\:px-8{padding-left:2rem;padding-right:2rem}.lg\:text-7xl{font-size:4.5rem;line-height:1}}</style></head>
+<body class="theme-emerald min-h-screen flex flex-col justify-between selection:bg-greenride-neon selection:text-black">
+
+    <!-- Glowing Background Lights -->
+    <div class="fixed top-[-100px] left-[-100px] w-[500px] h-[500px] bg-emerald-500/10 rounded-full animate-pulse-glow pointer-events-none z-0"></div>
+    <div class="fixed top-[40%] right-[-150px] w-[600px] h-[600px] bg-teal-500/10 rounded-full animate-pulse-glow pointer-events-none z-0"></div>
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-greenride-neon via-emerald-500 to-teal-400 flex items-center justify-center shadow-neon-green">
+                        <i class="fa-solid fa-bicycle text-slate-950 text-xl font-bold"></i>
+                    </div>
+                    <span class="text-2xl font-black font-display tracking-wider">GREENRIDE<span class="text-greenride-neon">.EV</span></span>
+                </div>
+
+                <!-- Nav Links -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold">
+                    <a href="#customizer" class="hover:text-greenride-neon transition-colors">Customizer Studio</a>
+                    <a href="#calculators" class="hover:text-greenride-neon transition-colors">Eco Calculators</a>
+                    <a href="#fleet" class="hover:text-greenride-neon transition-colors">E-Bikes Fleet</a>
+                    <a href="#tech" class="hover:text-greenride-neon transition-colors">Smart Battery</a>
+                </nav>
+
+                <!-- Actions: Dynamic Theme Selector & Zip Export Button -->
+                <div class="hidden lg:flex items-center space-x-4">
+                    <!-- Theme Selector Dropdown -->
+                    <div class="relative inline-block text-left">
+                        <button onclick="toggleThemeMenu()" class="px-3.5 py-2 rounded-xl border border-emerald-500/30 bg-slate-900/60 text-xs font-semibold flex items-center space-x-2 hover:border-greenride-neon transition-all">
+                            <i class="fa-solid fa-palette text-greenride-neon"></i>
+                            <span>Theme Colors</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] opacity-70"></i>
+                        </button>
+                        <div id="theme-dropdown" class="hidden absolute right-0 mt-2 w-48 rounded-2xl glass-panel border border-slate-700 shadow-2xl py-2 z-50">
+                            <div class="px-3 py-1.5 text-[10px] uppercase tracking-widest text-slate-400 font-bold">Background Theme</div>
+                            <button onclick="setBgTheme('emerald')" class="w-full px-4 py-2 text-left text-xs flex items-center space-x-2 hover:bg-emerald-500/20">
+                                <span class="w-3.5 h-3.5 rounded-full bg-emerald-800 border border-emerald-400"></span>
+                                <span>Emerald Eco (Dark)</span>
+                            </button>
+                            <button onclick="setBgTheme('obsidian')" class="w-full px-4 py-2 text-left text-xs flex items-center space-x-2 hover:bg-emerald-500/20">
+                                <span class="w-3.5 h-3.5 rounded-full bg-gray-950 border border-gray-600"></span>
+                                <span>Cyber Obsidian</span>
+                            </button>
+                            <button onclick="setBgTheme('teal')" class="w-full px-4 py-2 text-left text-xs flex items-center space-x-2 hover:bg-emerald-500/20">
+                                <span class="w-3.5 h-3.5 rounded-full bg-teal-900 border border-teal-400"></span>
+                                <span>Ocean Teal</span>
+                            </button>
+                            <button onclick="setBgTheme('gold')" class="w-full px-4 py-2 text-left text-xs flex items-center space-x-2 hover:bg-emerald-500/20">
+                                <span class="w-3.5 h-3.5 rounded-full bg-amber-950 border border-amber-400"></span>
+                                <span>Sunset Gold</span>
+                            </button>
+                            <button onclick="setBgTheme('light')" class="w-full px-4 py-2 text-left text-xs flex items-center space-x-2 hover:bg-emerald-500/20">
+                                <span class="w-3.5 h-3.5 rounded-full bg-emerald-50 border border-emerald-500"></span>
+                                <span class="text-slate-900">Fresh Eco Light</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Zip Downloader Button -->
+                    <button onclick="downloadWebsiteZip()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-greenride-neon to-emerald-500 text-slate-950 font-extrabold text-xs uppercase tracking-wider hover:shadow-neon-green transition-all flex items-center space-x-2">
+                        <i class="fa-solid fa-file-zipper text-sm"></i>
+                        <span>Download ZIP</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Hamburger Toggle -->
+                <div class="lg:hidden flex items-center space-x-3">
+                    <button onclick="downloadWebsiteZip()" class="p-2 rounded-lg bg-emerald-500/20 text-greenride-neon text-sm">
+                        <i class="fa-solid fa-file-zipper"></i>
+                    </button>
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden glass-panel border-t border-slate-800 px-4 pt-4 pb-6 space-y-3">
+            <a href="#customizer" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg hover:bg-emerald-500/20">Customizer Studio</a>
+            <a href="#calculators" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg hover:bg-emerald-500/20">Eco Calculators</a>
+            <a href="#fleet" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg hover:bg-emerald-500/20">E-Bikes Fleet</a>
+            
+            <div class="pt-3 border-t border-slate-700/50">
+                <span class="text-[10px] uppercase font-bold text-slate-400 block mb-2">Switch Theme</span>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="setBgTheme('emerald')" class="py-1.5 text-xs rounded bg-emerald-900 text-white">Emerald</button>
+                    <button onclick="setBgTheme('obsidian')" class="py-1.5 text-xs rounded bg-slate-900 text-white">Obsidian</button>
+                    <button onclick="setBgTheme('teal')" class="py-1.5 text-xs rounded bg-teal-900 text-white">Teal</button>
+                    <button onclick="setBgTheme('light')" class="py-1.5 text-xs rounded bg-emerald-100 text-slate-900">Light Eco</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-20">
+        <!-- Hero Section -->
+        <section class="relative min-h-[90vh] flex items-center justify-center pt-10 pb-16 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                <div class="text-center max-w-3xl mx-auto mb-8">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full glass-panel border border-greenride-neon/40 text-greenride-neon text-xs font-bold uppercase tracking-widest mb-6">
+                        <i class="fa-solid fa-leaf text-xs animate-bounce"></i>
+                        <span>Zero Emissions • 100% Electric Mobility</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-tight">
+                        RIDE THE FUTURE. <br>
+                        <span class="text-gradient-neon">CLEAN. EFFORTLESS. GREEN.</span>
+                    </h1>
+                    <p class="mt-6 text-slate-300 text-base sm:text-lg max-w-2xl mx-auto font-normal">
+                        Empowering urban commuters and trail explorers with ultra-light carbon frames, 85km battery range, and intelligent pedal assistance.
+                    </p>
+                </div>
+
+                <!-- Hero E-Bike Presentation Card -->
+                <div class="glass-panel rounded-3xl p-6 lg:p-8 border border-emerald-500/30 shadow-2xl relative overflow-hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        
+                        <!-- Left Key Specs -->
+                        <div class="lg:col-span-3 grid grid-cols-2 lg:grid-cols-1 gap-4">
+                            <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                                <span class="text-[10px] text-slate-400 uppercase font-semibold">Max Battery Range</span>
+                                <p class="text-2xl font-extrabold text-greenride-neon mt-0.5">85 <span class="text-xs font-normal text-slate-300">KM</span></p>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                                <span class="text-[10px] text-slate-400 uppercase font-semibold">Top Assisted Speed</span>
+                                <p class="text-2xl font-extrabold text-white mt-0.5">45 <span class="text-xs font-normal text-slate-300">KM/H</span></p>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                                <span class="text-[10px] text-slate-400 uppercase font-semibold">Removable Battery</span>
+                                <p class="text-2xl font-extrabold text-teal-400 mt-0.5">48V <span class="text-xs font-normal text-slate-300">17.5Ah</span></p>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                                <span class="text-[10px] text-slate-400 uppercase font-semibold">Fast Charge Time</span>
+                                <p class="text-2xl font-extrabold text-greenride-neon mt-0.5">2.5 <span class="text-xs font-normal text-slate-300">HRS</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Central Dynamic E-Bike Graphic -->
+                        <div class="lg:col-span-6 relative flex flex-col items-center justify-center py-4">
+                            <div class="relative w-full max-w-lg aspect-[16/10] flex items-center justify-center animate-float">
+                                <svg id="hero-bike-svg" class="w-full h-full drop-shadow-[0_20px_30px_rgba(0,255,136,0.3)] transition-all duration-500" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Wheels Background -->
+                                    <circle cx="200" cy="350" r="100" stroke="#334155" stroke-width="14" fill="none"></circle>
+                                    <circle cx="200" cy="350" r="100" stroke="#00ff88" stroke-width="3" stroke-dasharray="10 15" class="animate-spin-slow"></circle>
+                                    <circle cx="200" cy="350" r="15" fill="#00ff88"></circle>
+
+                                    <circle cx="600" cy="350" r="100" stroke="#334155" stroke-width="14" fill="none"></circle>
+                                    <circle cx="600" cy="350" r="100" stroke="#00ff88" stroke-width="3" stroke-dasharray="10 15" class="animate-spin-slow"></circle>
+                                    <circle cx="600" cy="350" r="15" fill="#00ff88"></circle>
+
+                                    <!-- Main Frame Chassis (Dynamic Fill Color) -->
+                                    <path id="hero-frame-path" d="M200 350 L340 350 L440 220 L270 220 Z M340 350 L520 220 L600 350 M440 220 L580 150 M520 220 L520 150" stroke="#10b981" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"></path>
+
+                                    <!-- Handlebars & Seat -->
+                                    <path d="M550 140 L600 140 M580 150 L580 200" stroke="#f8fafc" stroke-width="12" stroke-linecap="round"></path>
+                                    <path d="M500 140 L540 140" stroke="#f8fafc" stroke-width="16" stroke-linecap="round"></path>
+
+                                    <!-- Battery Pack on Down Tube -->
+                                    <rect x="310" y="250" width="110" height="35" rx="8" fill="#0f172a" stroke="#00ff88" stroke-width="4" transform="rotate(-38 310 250)"></rect>
+                                    <path d="M335 250 L355 235" stroke="#00ff88" stroke-width="4"></path>
+
+                                    <!-- Chain & Pedal -->
+                                    <circle cx="340" cy="350" r="28" fill="#1e293b" stroke="#00ff88" stroke-width="4"></circle>
+                                    <line x1="340" y1="350" x2="600" y2="350" stroke="#64748b" stroke-width="6" stroke-dasharray="6 6"></line>
+
+                                    <!-- Front Headlight LED -->
+                                    <circle cx="605" cy="170" r="12" fill="#00ff88"></circle>
+                                    <polygon points="615,160 740,130 740,210" fill="url(#headlightGlow)" opacity="0.6"></polygon>
+
+                                    <defs>
+                                        <linearGradient id="headlightGlow" x1="0" y1="0" x2="1" y2="0">
+                                            <stop offset="0%" stop-color="#00ff88" stop-opacity="0.8"></stop>
+                                            <stop offset="100%" stop-color="#00ff88" stop-opacity="0"></stop>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <span id="hero-color-label" class="mt-2 text-xs font-bold uppercase tracking-widest text-greenride-neon">Emerald Eco Edition</span>
+                        </div>
+
+                        <!-- Right CTA & Action Controls -->
+                        <div class="lg:col-span-3 space-y-4 flex flex-col justify-center">
+                            <button onclick="openBookingModal('GreenRide Pro Commuter')" class="w-full py-4 rounded-2xl bg-gradient-to-r from-greenride-neon via-emerald-500 to-teal-400 text-slate-950 font-black text-xs uppercase tracking-wider hover:shadow-neon-green transition-all transform hover:-translate-y-0.5">
+                                Book Test Drive
+                            </button>
+                            <button onclick="downloadWebsiteZip()" class="w-full py-3.5 rounded-2xl border border-slate-700 bg-slate-900/60 text-slate-200 font-bold text-xs hover:border-greenride-neon transition-all flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-download text-greenride-neon"></i>
+                                <span>Get Code ZIP Bundle</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customizer Studio Section -->
+        <section id="customizer" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <div class="inline-flex items-center space-x-2 text-greenride-neon text-xs font-bold uppercase tracking-widest mb-2">
+                        <i class="fa-solid fa-sliders"></i>
+                        <span>Custom Build Studio</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold">BUILD YOUR GREENRIDE</h2>
+                    <p class="text-slate-400 mt-2 text-sm">Select frame paint, add utility modules, and configure your dream ride.</p>
+                </div>
+
+                <div class="glass-panel p-6 sm:p-10 rounded-3xl border border-slate-800 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Bike Canvas Visualizer -->
+                    <div class="lg:col-span-7 flex flex-col items-center justify-center p-6 bg-slate-950/50 rounded-2xl border border-slate-800/80 relative">
+                        <div class="w-full max-w-md aspect-[16/10]">
+                            <svg id="studio-bike-svg" class="w-full h-full transition-all duration-300" viewBox="0 0 800 500" fill="none">
+                                <!-- Wheels -->
+                                <circle cx="200" cy="350" r="100" stroke="#334155" stroke-width="16" fill="none"></circle>
+                                <circle cx="200" cy="350" r="15" fill="#00ff88"></circle>
+                                <circle cx="600" cy="350" r="100" stroke="#334155" stroke-width="16" fill="none"></circle>
+                                <circle cx="600" cy="350" r="15" fill="#00ff88"></circle>
+
+                                <!-- Offroad Knobby Tires Overlay -->
+                                <circle id="opt-tires" cx="200" cy="350" r="105" stroke="#00ff88" stroke-width="4" stroke-dasharray="8 8" opacity="0"></circle>
+                                <circle id="opt-tires-r" cx="600" cy="350" r="105" stroke="#00ff88" stroke-width="4" stroke-dasharray="8 8" opacity="0"></circle>
+
+                                <!-- Main Chassis Frame -->
+                                <path id="studio-frame-path" d="M200 350 L340 350 L440 220 L270 220 Z M340 350 L520 220 L600 350 M440 220 L580 150 M520 220 L520 150" stroke="#10b981" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"></path>
+
+                                <!-- Handlebars & Saddle -->
+                                <path d="M550 140 L600 140 M580 150 L580 200" stroke="#ffffff" stroke-width="12" stroke-linecap="round"></path>
+                                <path d="M500 140 L540 140" stroke="#ffffff" stroke-width="16" stroke-linecap="round"></path>
+
+                                <!-- Accessories Overlays -->
+                                <!-- Basket -->
+                                <rect id="opt-basket" x="600" y="110" width="70" height="50" rx="6" fill="#1e293b" stroke="#00ff88" stroke-width="3" opacity="0"></rect>
+                                <!-- Solar Panniers -->
+                                <rect id="opt-pannier" x="140" y="260" width="80" height="60" rx="8" fill="#0f172a" stroke="#06b6d4" stroke-width="4" opacity="0"></rect>
+                                <!-- LED Light Bar -->
+                                <line id="opt-ledbar" x1="580" y1="130" x2="630" y2="130" stroke="#00ff88" stroke-width="10" opacity="0"></line>
+
+                                <!-- Battery Pack -->
+                                <rect x="310" y="250" width="110" height="35" rx="8" fill="#0f172a" stroke="#00ff88" stroke-width="4" transform="rotate(-38 310 250)"></rect>
+                            </svg>
+                        </div>
+
+                        <!-- Live Calculated Price Tag -->
+                        <div class="mt-4 flex items-center justify-between w-full px-4 py-3 bg-slate-900 rounded-xl border border-slate-800">
+                            <span class="text-xs uppercase font-bold text-slate-400">Total Custom Configuration:</span>
+                            <span id="custom-price" class="text-2xl font-black text-greenride-neon">$1,499</span>
+                        </div>
+                    </div>
+
+                    <!-- Customizer Options Controls -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <!-- Frame Color Swatches -->
+                        <div>
+                            <label class="block text-xs uppercase font-bold text-slate-300 mb-3">1. Select Frame Color</label>
+                            <div class="flex items-center space-x-3">
+                                <button onclick="setStudioColor('#10b981', 'Emerald Green')" class="w-10 h-10 rounded-full bg-emerald-500 border-2 border-white focus:ring-2 focus:ring-greenride-neon transition-transform hover:scale-110 shadow-lg"></button>
+                                <button onclick="setStudioColor('#eab308', 'Cyber Yellow')" class="w-10 h-10 rounded-full bg-yellow-500 border-2 border-transparent focus:ring-2 focus:ring-yellow-400 transition-transform hover:scale-110 shadow-lg"></button>
+                                <button onclick="setStudioColor('#06b6d4', 'Ocean Teal')" class="w-10 h-10 rounded-full bg-cyan-500 border-2 border-transparent focus:ring-2 focus:ring-cyan-400 transition-transform hover:scale-110 shadow-lg"></button>
+                                <button onclick="setStudioColor('#a855f7', 'Electric Violet')" class="w-10 h-10 rounded-full bg-purple-500 border-2 border-transparent focus:ring-2 focus:ring-purple-400 transition-transform hover:scale-110 shadow-lg"></button>
+                                <button onclick="setStudioColor('#334155', 'Matte Stealth Black')" class="w-10 h-10 rounded-full bg-slate-700 border-2 border-transparent focus:ring-2 focus:ring-slate-300 transition-transform hover:scale-110 shadow-lg"></button>
+                            </div>
+                        </div>
+
+                        <!-- Accessories Toggle Controls -->
+                        <div>
+                            <label class="block text-xs uppercase font-bold text-slate-300 mb-3">2. Add Modular Upgrades</label>
+                            <div class="space-y-3">
+                                <label class="flex items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-slate-800 cursor-pointer hover:border-emerald-500/50">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="chk-tires" onchange="toggleAccessory('tires')" class="w-4 h-4 text-emerald-500 rounded focus:ring-0">
+                                        <span class="text-xs font-semibold text-slate-200">Off-Road Knobby Tires</span>
+                                    </div>
+                                    <span class="text-xs font-bold text-greenride-neon">+$120</span>
+                                </label>
+
+                                <label class="flex items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-slate-800 cursor-pointer hover:border-emerald-500/50">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="chk-basket" onchange="toggleAccessory('basket')" class="w-4 h-4 text-emerald-500 rounded focus:ring-0">
+                                        <span class="text-xs font-semibold text-slate-200">Front Utility Cargo Basket</span>
+                                    </div>
+                                    <span class="text-xs font-bold text-greenride-neon">+$85</span>
+                                </label>
+
+                                <label class="flex items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-slate-800 cursor-pointer hover:border-emerald-500/50">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="chk-pannier" onchange="toggleAccessory('pannier')" class="w-4 h-4 text-emerald-500 rounded focus:ring-0">
+                                        <span class="text-xs font-semibold text-slate-200">Solar Rear Pannier Bags</span>
+                                    </div>
+                                    <span class="text-xs font-bold text-greenride-neon">+$190</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button onclick="openBookingModal('Custom GreenRide Build')" class="w-full py-4 rounded-xl bg-emerald-500 hover:bg-greenride-neon hover:text-slate-950 font-black text-xs uppercase tracking-wider transition-all">
+                            Order Custom Build
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Eco Calculators Section -->
+        <section id="calculators" class="py-20 glass-panel border-y border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- 1. Range Estimator -->
+                    <div class="space-y-6">
+                        <div class="inline-flex items-center space-x-2 text-greenride-neon text-xs font-bold uppercase tracking-widest">
+                            <i class="fa-solid fa-gauge-high"></i>
+                            <span>Smart Range Estimator</span>
+                        </div>
+                        <h2 class="text-3xl font-extrabold">Calculate Your Distance</h2>
+                        <p class="text-slate-400 text-sm">Adjust rider weight, pedal assist level, and terrain to view realistic battery mileage.</p>
+
+                        <div class="space-y-5 bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+                            <!-- Weight Slider -->
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold mb-2">
+                                    <span class="text-slate-300">Rider Weight</span>
+                                    <span id="weight-val" class="text-greenride-neon font-bold">75 kg</span>
+                                </div>
+                                <input type="range" id="weight-input" min="50" max="130" value="75" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer custom-slider" oninput="calcRange()">
+                            </div>
+
+                            <!-- Assist Mode -->
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-2">Pedal Assist Level</label>
+                                <div class="grid grid-cols-4 gap-2">
+                                    <button onclick="setAssist('eco')" id="assist-eco" class="assist-btn py-2 rounded-xl border border-emerald-500 bg-emerald-500/20 text-greenride-neon font-bold text-xs">Eco</button>
+                                    <button onclick="setAssist('tour')" id="assist-tour" class="assist-btn py-2 rounded-xl border border-slate-700 bg-slate-800 text-slate-400 font-bold text-xs">Tour</button>
+                                    <button onclick="setAssist('boost')" id="assist-boost" class="assist-btn py-2 rounded-xl border border-slate-700 bg-slate-800 text-slate-400 font-bold text-xs">Boost</button>
+                                    <button onclick="setAssist('turbo')" id="assist-turbo" class="assist-btn py-2 rounded-xl border border-slate-700 bg-slate-800 text-slate-400 font-bold text-xs">Turbo</button>
+                                </div>
+                            </div>
+
+                            <!-- Terrain -->
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-2">Terrain Gradient</label>
+                                <select id="terrain-input" onchange="calcRange()" class="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-semibold text-white focus:outline-none focus:border-greenride-neon">
+                                    <option value="flat">Flat City Roads (Optimal)</option>
+                                    <option value="rolling">Rolling Hills (+15% Grade)</option>
+                                    <option value="steep">Steep Mountain Trail (+30% Grade)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Result Output Box -->
+                        <div class="p-6 rounded-2xl bg-slate-900 border border-greenride-neon/30 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] uppercase font-bold text-slate-400">Estimated Range Per Charge</span>
+                                <p id="range-output" class="text-4xl font-black text-white mt-1">88 <span class="text-base font-normal text-greenride-neon">KM</span></p>
+                            </div>
+                            <i class="fa-solid fa-battery-three-quarters text-4xl text-greenride-neon/40"></i>
+                        </div>
+                    </div>
+
+                    <!-- 2. Eco & Fuel Savings Calculator -->
+                    <div class="space-y-6">
+                        <div class="inline-flex items-center space-x-2 text-teal-400 text-xs font-bold uppercase tracking-widest">
+                            <i class="fa-solid fa-leaf"></i>
+                            <span>Environmental &amp; Financial ROI</span>
+                        </div>
+                        <h2 class="text-3xl font-extrabold">Fuel Savings &amp; CO2 Impact</h2>
+                        <p class="text-slate-400 text-sm">See how much gas money you save and carbon emissions you offset every year.</p>
+
+                        <div class="space-y-5 bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold mb-2">
+                                    <span class="text-slate-300">Monthly Commute Distance</span>
+                                    <span id="dist-val" class="text-teal-400 font-bold">450 km</span>
+                                </div>
+                                <input type="range" id="dist-input" min="100" max="2000" step="50" value="450" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer custom-slider" oninput="calcSavings()">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800">
+                                <span class="text-[10px] uppercase font-bold text-slate-400">Annual Gas Savings</span>
+                                <p id="savings-out" class="text-3xl font-black text-greenride-neon mt-1">$990</p>
+                            </div>
+                            <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800">
+                                <span class="text-[10px] uppercase font-bold text-slate-400">CO2 Emissions Reduced</span>
+                                <p id="co2-out" class="text-3xl font-black text-teal-400 mt-1">1.2 <span class="text-sm font-normal">Tons</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- E-Bikes Model Fleet Section -->
+        <section id="fleet" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold">EXPLORE GREENRIDE FLEET</h2>
+                    <p class="text-slate-400 mt-2 text-sm">Engineered for city streets, off-road trails, and heavy cargo transport.</p>
+
+                    <!-- Filter Tabs -->
+                    <div class="flex flex-wrap justify-center gap-2 mt-8 p-1.5 rounded-2xl glass-panel max-w-lg mx-auto border border-slate-800">
+                        <button onclick="filterFleet('all')" class="fleet-tab active px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-greenride-neon text-slate-950" data-cat="all">All Models</button>
+                        <button onclick="filterFleet('urban')" class="fleet-tab px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all text-slate-400 hover:text-white" data-cat="urban">Urban</button>
+                        <button onclick="filterFleet('offroad')" class="fleet-tab px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all text-slate-400 hover:text-white" data-cat="offroad">Off-Road</button>
+                        <button onclick="filterFleet('cargo')" class="fleet-tab px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all text-slate-400 hover:text-white" data-cat="cargo">Cargo</button>
+                    </div>
+                </div>
+
+                <!-- Models Grid -->
+                <div id="fleet-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"><div class="glass-panel rounded-3xl overflow-hidden border border-slate-800 hover:border-slate-700 transition-all hover:-translate-y-1 flex flex-col justify-between">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="GreenRide City Commuter" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x500/042f2e/00ff88?text=GreenRide%20City%20Commuter'">
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-xl font-bold">GreenRide City Commuter</h3>
+                        <div class="flex justify-between text-xs py-2 border-y border-slate-800 text-slate-300">
+                            <span>Range: <strong>85 km</strong></span>
+                            <span>Speed: <strong>38 km/h</strong></span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-black text-greenride-neon">$1,499</span>
+                            <button onclick="openBookingModal('GreenRide City Commuter')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-greenride-neon hover:text-black font-bold text-xs transition-all">Reserve</button>
+                        </div>
+                    </div>
+                </div><div class="glass-panel rounded-3xl overflow-hidden border border-slate-800 hover:border-slate-700 transition-all hover:-translate-y-1 flex flex-col justify-between">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="GreenRide Trail Hunter" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x500/042f2e/00ff88?text=GreenRide%20Trail%20Hunter'">
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-xl font-bold">GreenRide Trail Hunter</h3>
+                        <div class="flex justify-between text-xs py-2 border-y border-slate-800 text-slate-300">
+                            <span>Range: <strong>95 km</strong></span>
+                            <span>Speed: <strong>45 km/h</strong></span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-black text-greenride-neon">$2,199</span>
+                            <button onclick="openBookingModal('GreenRide Trail Hunter')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-greenride-neon hover:text-black font-bold text-xs transition-all">Reserve</button>
+                        </div>
+                    </div>
+                </div><div class="glass-panel rounded-3xl overflow-hidden border border-slate-800 hover:border-slate-700 transition-all hover:-translate-y-1 flex flex-col justify-between">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="GreenRide Cargo Utility" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x500/042f2e/00ff88?text=GreenRide%20Cargo%20Utility'">
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-xl font-bold">GreenRide Cargo Utility</h3>
+                        <div class="flex justify-between text-xs py-2 border-y border-slate-800 text-slate-300">
+                            <span>Range: <strong>70 km</strong></span>
+                            <span>Speed: <strong>32 km/h</strong></span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-black text-greenride-neon">$1,899</span>
+                            <button onclick="openBookingModal('GreenRide Cargo Utility')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-greenride-neon hover:text-black font-bold text-xs transition-all">Reserve</button>
+                        </div>
+                    </div>
+                </div><div class="glass-panel rounded-3xl overflow-hidden border border-slate-800 hover:border-slate-700 transition-all hover:-translate-y-1 flex flex-col justify-between">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="GreenRide Lite Folding" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x500/042f2e/00ff88?text=GreenRide%20Lite%20Folding'">
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-xl font-bold">GreenRide Lite Folding</h3>
+                        <div class="flex justify-between text-xs py-2 border-y border-slate-800 text-slate-300">
+                            <span>Range: <strong>55 km</strong></span>
+                            <span>Speed: <strong>28 km/h</strong></span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-black text-greenride-neon">$1,199</span>
+                            <button onclick="openBookingModal('GreenRide Lite Folding')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-greenride-neon hover:text-black font-bold text-xs transition-all">Reserve</button>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="border-t border-slate-800 bg-slate-950/90 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-lg bg-greenride-neon flex items-center justify-center text-slate-950 font-bold">
+                            <i class="fa-solid fa-bicycle"></i>
+                        </div>
+                        <span class="text-xl font-bold font-display">GREENRIDE.EV</span>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Leading the transition toward zero-emission urban micro-mobility solutions.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200 mb-3">Model Lineup</h4>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li><a href="#fleet" class="hover:text-greenride-neon">City Commuter Pro</a></li>
+                        <li><a href="#fleet" class="hover:text-greenride-neon">Trail Hunter MTB</a></li>
+                        <li><a href="#fleet" class="hover:text-greenride-neon">Cargo Utility Beast</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200 mb-3">Technology</h4>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li><a href="#tech" class="hover:text-greenride-neon">Smart Battery 48V</a></li>
+                        <li><a href="#customizer" class="hover:text-greenride-neon">Frame Customizer</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-200 mb-3">Export Website Code</h4>
+                    <p class="text-xs text-slate-400 mb-3">Download complete standalone source zip:</p>
+                    <button onclick="downloadWebsiteZip()" class="w-full py-2.5 rounded-xl border border-greenride-neon bg-greenride-neon/10 hover:bg-greenride-neon hover:text-slate-950 text-greenride-neon font-bold text-xs transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-file-zipper"></i>
+                        <span>Download ZIP File</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800/80 pt-6 text-center text-xs text-slate-500">
+                <p>© 2026 GreenRide EV Technologies Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-lg rounded-3xl p-6 sm:p-8 border border-slate-700 shadow-2xl relative">
+            <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="w-10 h-10 rounded-xl bg-greenride-neon/20 border border-greenride-neon flex items-center justify-center text-greenride-neon">
+                    <i class="fa-solid fa-calendar-check text-lg"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold">Book Test Drive / Order</h3>
+                    <p class="text-xs text-slate-400">Experience GreenRide electric power firsthand.</p>
+                </div>
+            </div>
+
+            <form onsubmit="handleBookingSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Model Selection</label>
+                    <select id="modal-model-select" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:border-greenride-neon focus:outline-none">
+                        <option value="GreenRide Pro Commuter">GreenRide Pro Commuter ($1,499)</option>
+                        <option value="GreenRide Trail Hunter MTB">GreenRide Trail Hunter MTB ($2,199)</option>
+                        <option value="GreenRide Cargo Utility">GreenRide Cargo Utility ($1,899)</option>
+                        <option value="GreenRide Lite Folding">GreenRide Lite Folding ($1,199)</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Full Name</label>
+                        <input type="text" required="" placeholder="Alex Mercer" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:border-greenride-neon focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Email</label>
+                        <input type="email" required="" placeholder="alex@example.com" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:border-greenride-neon focus:outline-none">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-greenride-neon text-slate-950 font-black text-xs uppercase tracking-wider hover:opacity-90 transition-all mt-2">
+                    Confirm Booking Request
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 glass-panel px-5 py-3.5 rounded-2xl border border-greenride-neon text-white text-xs font-semibold shadow-2xl flex items-center space-x-3">
+        <i class="fa-solid fa-circle-check text-greenride-neon text-base"></i>
+        <span id="toast-msg">Packaging website into ZIP file...</span>
+    </div>
+
+    <!-- JS Logic -->
+    <script>
+        // Fleet Data
+        const fleetModels = [
+            { name: 'GreenRide City Commuter', cat: 'urban', price: '$1,499', range: '85 km', speed: '38 km/h', img: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&fit=crop&w=800&q=80' },
+            { name: 'GreenRide Trail Hunter', cat: 'offroad', price: '$2,199', range: '95 km', speed: '45 km/h', img: 'https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?auto=format&fit=crop&w=800&q=80' },
+            { name: 'GreenRide Cargo Utility', cat: 'cargo', price: '$1,899', range: '70 km', speed: '32 km/h', img: 'https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?auto=format&fit=crop&w=800&q=80' },
+            { name: 'GreenRide Lite Folding', cat: 'urban', price: '$1,199', range: '55 km', speed: '28 km/h', img: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=800&q=80' }
+        ];
+
+        let currentAssist = 'eco';
+        let customAccessories = { tires: false, basket: false, pannier: false };
+
+        // Render Fleet Models
+        function renderFleet(cat = 'all') {
+            const grid = document.getElementById('fleet-grid');
+            grid.innerHTML = '';
+            const filtered = cat === 'all' ? fleetModels : fleetModels.filter(m => m.cat === cat);
+
+            filtered.forEach(m => {
+                const card = document.createElement('div');
+                card.className = 'glass-panel rounded-3xl overflow-hidden border border-slate-800 hover:border-slate-700 transition-all hover:-translate-y-1 flex flex-col justify-between';
+                card.innerHTML = `
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="${m.img}" alt="${m.name}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x500/042f2e/00ff88?text=${encodeURIComponent(m.name)}'">
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-xl font-bold">${m.name}</h3>
+                        <div class="flex justify-between text-xs py-2 border-y border-slate-800 text-slate-300">
+                            <span>Range: <strong>${m.range}</strong></span>
+                            <span>Speed: <strong>${m.speed}</strong></span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-black text-greenride-neon">${m.price}</span>
+                            <button onclick="openBookingModal('${m.name}')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-greenride-neon hover:text-black font-bold text-xs transition-all">Reserve</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterFleet(cat) {
+            document.querySelectorAll('.fleet-tab').forEach(btn => {
+                if(btn.getAttribute('data-cat') === cat) {
+                    btn.className = 'fleet-tab active px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-greenride-neon text-slate-950';
+                } else {
+                    btn.className = 'fleet-tab px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all text-slate-400 hover:text-white';
+                }
+            });
+            renderFleet(cat);
+        }
+
+        // Theme Switcher
+        function setBgTheme(theme) {
+            document.body.className = `theme-${theme} min-h-screen flex flex-col justify-between selection:bg-greenride-neon selection:text-black`;
+            toggleThemeMenu();
+            showToast(`Theme changed to ${theme.toUpperCase()}`);
+        }
+
+        function toggleThemeMenu() {
+            document.getElementById('theme-dropdown').classList.toggle('hidden');
+        }
+
+        // Customizer Controls
+        function setStudioColor(hex, name) {
+            document.getElementById('studio-frame-path').setAttribute('stroke', hex);
+            document.getElementById('hero-frame-path').setAttribute('stroke', hex);
+            document.getElementById('hero-color-label').textContent = `${name} Edition`;
+        }
+
+        function toggleAccessory(type) {
+            customAccessories[type] = !customAccessories[type];
+            document.getElementById(`opt-${type}`).setAttribute('opacity', customAccessories[type] ? '1' : '0');
+            if (type === 'tires') document.getElementById('opt-tires-r').setAttribute('opacity', customAccessories[type] ? '1' : '0');
+
+            let base = 1499;
+            if (customAccessories.tires) base += 120;
+            if (customAccessories.basket) base += 85;
+            if (customAccessories.pannier) base += 190;
+            document.getElementById('custom-price').textContent = `$${base.toLocaleString()}`;
+        }
+
+        // Range Calculation
+        function setAssist(mode) {
+            currentAssist = mode;
+            ['eco', 'tour', 'boost', 'turbo'].forEach(m => {
+                const btn = document.getElementById(`assist-${m}`);
+                if (m === mode) btn.className = 'assist-btn py-2 rounded-xl border border-emerald-500 bg-emerald-500/20 text-greenride-neon font-bold text-xs';
+                else btn.className = 'assist-btn py-2 rounded-xl border border-slate-700 bg-slate-800 text-slate-400 font-bold text-xs';
+            });
+            calcRange();
+        }
+
+        function calcRange() {
+            const w = parseInt(document.getElementById('weight-input').value);
+            document.getElementById('weight-val').textContent = `${w} kg`;
+
+            let base = 90 - (w - 70) * 0.4;
+            if (currentAssist === 'tour') base *= 0.82;
+            if (currentAssist === 'boost') base *= 0.68;
+            if (currentAssist === 'turbo') base *= 0.52;
+
+            const terrain = document.getElementById('terrain-input').value;
+            if (terrain === 'rolling') base *= 0.85;
+            if (terrain === 'steep') base *= 0.65;
+
+            document.getElementById('range-output').innerHTML = `${Math.max(25, Math.round(base))} <span class="text-base font-normal text-greenride-neon">KM</span>`;
+        }
+
+        // Savings Calculation
+        function calcSavings() {
+            const d = parseInt(document.getElementById('dist-input').value);
+            document.getElementById('dist-val').textContent = `${d} km`;
+
+            const gasCost = Math.round((d / 12) * 2.2 * 12); // Annual gas cost
+            const co2 = ((d * 12 * 0.22) / 1000).toFixed(1);
+
+            document.getElementById('savings-out').textContent = `$${gasCost.toLocaleString()}`;
+            document.getElementById('co2-out').innerHTML = `${co2} <span class="text-sm font-normal">Tons</span>`;
+        }
+
+        // Modals & Mobile Drawer
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function openBookingModal(model) {
+            document.getElementById('modal-model-select').value = model;
+            document.getElementById('booking-modal').classList.remove('hidden');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('booking-modal').classList.add('hidden');
+        }
+
+        function handleBookingSubmit(e) {
+            e.preventDefault();
+            closeBookingModal();
+            showToast('Test drive booked! Our team will reach out.');
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            t.classList.remove('hidden');
+            setTimeout(() => t.classList.add('hidden'), 3500);
+        }
+
+        // ZIP Exporter Script
+        async function downloadWebsiteZip() {
+            showToast('Packaging website into ZIP file...');
+            try {
+                const zip = new JSZip();
+                const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+                zip.file("index.html", htmlContent);
+                zip.file("README.md", "# GreenRide EV - Electric Cycle Showcase\n\nStandalone front-end website with dynamic color themes, customizer, and calculators.\nDouble click `index.html` to run in any browser.");
+
+                const content = await zip.generateAsync({ type: "blob" });
+                const a = document.createElement("a");
+                a.href = URL.createObjectURL(content);
+                a.download = "GreenRide_EV_Electric_Cycle_Website.zip";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(a.href);
+                showToast('Downloaded GreenRide_EV_Electric_Cycle_Website.zip!');
+            } catch (err) {
+                console.error(err);
+                showToast('Failed to create ZIP package.');
+            }
+        }
+
+        window.onload = function() {
+            renderFleet();
+            calcRange();
+            calcSavings();
+        };
+    </script>
+
+</body></html>

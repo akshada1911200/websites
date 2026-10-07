@@ -1,0 +1,1287 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+     <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+
+
+//    MOBILE NAVIGATION
+
+
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+
+menuToggle.addEventListener("click", function () {
+
+    navMenu.classList.toggle("active");
+
+});
+
+
+//    CLOSE MOBILE MENU AFTER CLICKING LINK
+
+
+const navLinks = document.querySelectorAll(".nav-menu a");
+
+navLinks.forEach(function (link) {
+
+    link.addEventListener("click", function () {
+
+        navMenu.classList.remove("active");
+
+    });
+
+});
+
+
+
+
+//    VIDEO MODAL
+
+
+const playButton = document.getElementById("playButton");
+const videoModal = document.getElementById("videoModal");
+const closeModal = document.getElementById("closeModal");
+
+
+playButton.addEventListener("click", function () {
+
+    videoModal.classList.add("active");
+
+});
+
+
+closeModal.addEventListener("click", function () {
+
+    videoModal.classList.remove("active");
+
+});
+
+
+/* Close modal when clicking outside */
+
+videoModal.addEventListener("click", function (event) {
+
+    if (event.target === videoModal) {
+
+        videoModal.classList.remove("active");
+
+    }
+
+});
+
+
+/* Close modal with Escape key */
+
+document.addEventListener("keydown", function (event) {
+
+    if (event.key === "Escape") {
+
+        videoModal.classList.remove("active");
+
+    }
+
+});
+
+
+
+
+//    LEARN MORE BUTTON
+
+
+const learnButton = document.getElementById("learnButton");
+
+learnButton.addEventListener("click", function () {
+
+    alert(
+        "Welcome to Spandan Misal! More information about our story will be available soon."
+    );
+
+});
+
+
+//    ORDER ONLINE BUTTON
+
+
+const orderButton = document.querySelector(".order-btn");
+
+orderButton.addEventListener("click", function () {
+
+    alert(
+        "Online ordering will be available soon!"
+    );
+
+});
+    </script>
+
+
+
+    <!-- Bootstrap 5 CSS -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+       
+
+        .main-navbar {
+
+            background-color: #f8c744;
+
+            padding: 10px 6%;
+
+        }
+
+
+        
+
+        .logo {
+
+            text-decoration: none;
+
+            line-height: 1;
+
+        }
+
+
+        .logo h2 {
+
+            color: #8c0032;
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+            margin: 0;
+
+        }
+
+
+        .logo span {
+
+            color: #333;
+
+            font-size: 12px;
+
+        }
+
+
+      
+
+        .main-navbar .nav-link {
+
+            color: #333;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            margin: 0 10px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .main-navbar .nav-link:hover {
+
+            color: #8c0032;
+
+        }
+
+
+        .main-navbar .nav-link.active {
+
+            color: #8c0032;
+
+        }
+
+
+       
+
+        .order-btn {
+
+            background-color: #8c0032;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 12px 25px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            display: inline-block;
+
+            transition: 0.3s;
+
+        }
+
+
+        .order-btn:hover {
+
+            background-color: #650025;
+
+            color: white;
+
+        }
+
+
+      
+
+        @media (max-width: 991px) {
+
+            .main-navbar {
+
+                padding: 10px 4%;
+
+            }
+
+
+            .main-navbar .nav-link {
+
+                margin: 5px 0;
+
+            }
+
+
+            .order-btn {
+
+                margin-top: 10px;
+
+            }
+
+        }
+
+
+     
+
+        @media (max-width: 576px) {
+
+            .logo h2 {
+
+                font-size: 24px;
+
+            }
+
+
+            .logo span {
+
+                font-size: 10px;
+
+            }
+
+
+            .main-navbar {
+
+                padding: 10px 5%;
+
+            }
+
+        }
+
+        .about-section {
+
+    width: 100%;
+
+    min-height: calc(100vh - 88px);
+
+    padding: 8px 10.8% 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 75px;
+
+    background: #faf8f2;
+}
+
+
+.image-section {
+
+    position: relative;
+
+    width: 52%;
+
+    height: 500px;
+
+    flex-shrink: 0;
+}
+
+
+.misal-image {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 15px;
+
+}
+
+
+
+.play-button {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 125px;
+
+    height: 125px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(120, 120, 120, 0.67);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+
+.play-button:hover {
+
+    background: rgba(100, 100, 100, 0.82);
+
+    transform: translate(-50%, -50%) scale(1.05);
+
+}
+
+
+.play-icon {
+
+    width: 0;
+
+    height: 0;
+
+    border-top: 24px solid transparent;
+
+    border-bottom: 24px solid transparent;
+
+    border-left: 35px solid white;
+
+    margin-left: 8px;
+
+}
+
+
+.about-content {
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+
+.about-label {
+
+    color: #a5003b;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    margin-bottom: 14px;
+}
+
+
+.about-content h1 {
+
+    font-family: "Noto Sans Devanagari", sans-serif;
+
+    font-size: clamp(30px, 3vw, 42px);
+
+    line-height: 1.35;
+
+    font-weight: 700;
+
+    color: #222;
+
+    margin-bottom: 16px;
+
+    white-space: nowrap;
+}
+
+
+.about-content h1 span {
+
+    color: #a5003b;
+
+}
+
+.description {
+
+    font-family: "Noto Sans Devanagari", sans-serif;
+
+    font-size: 13px;
+
+    line-height: 1.85;
+
+    color: #777;
+
+    max-width: 600px;
+
+    margin-bottom: 25px;
+
+}
+
+.stats-container {
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-bottom: 26px;
+}
+
+
+.stat-box {
+
+    width: 125px;
+
+    height: 88px;
+
+    background: #fff8dd;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    transition: all 0.25s ease;
+}
+
+
+.stat-box:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+
+}
+
+
+.stat-box h2 {
+
+    color: #a5003b;
+
+    font-size: 24px;
+
+    font-weight: 800;
+
+    margin-bottom: 6px;
+}
+
+
+.stat-box p {
+
+    color: #777;
+
+    font-size: 10px;
+
+    font-weight: 500;
+}
+
+.learn-btn {
+
+    border: none;
+
+    background: #a5003b;
+
+    color: white;
+
+    padding: 12px 22px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+
+.learn-btn:hover {
+
+    background: #85002f;
+
+    transform: translateY(-2px);
+
+}
+.video-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.72);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 2000;
+
+}
+
+
+.video-modal.active {
+
+    display: flex;
+
+}
+
+
+.modal-content {
+
+    position: relative;
+
+    width: min(700px, 90%);
+
+    background: #1b1b1b;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+}
+
+
+.close-modal {
+
+    position: absolute;
+
+    right: 15px;
+
+    top: 10px;
+
+    width: 35px;
+
+    height: 35px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.15);
+
+    color: white;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+    z-index: 2;
+}
+
+
+.video-placeholder {
+
+    height: 400px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: white;
+}
+
+
+.large-play {
+
+    font-size: 50px;
+
+    margin-bottom: 15px;
+
+}
+
+@media screen and (max-width: 1100px) {
+
+    .navbar {
+
+        padding: 0 30px;
+
+    }
+
+
+    .logo {
+
+        width: 190px;
+
+    }
+
+
+    .nav-menu {
+
+        gap: 20px;
+
+    }
+
+
+    .nav-menu a {
+
+        font-size: 12px;
+
+    }
+
+
+    .about-section {
+
+        padding: 30px 5%;
+
+        gap: 40px;
+
+    }
+
+
+    .image-section {
+
+        width: 50%;
+
+        height: 430px;
+
+    }
+
+
+    .about-content h1 {
+
+        white-space: normal;
+
+        font-size: 32px;
+
+    }
+
+
+    .description {
+
+        font-size: 12px;
+
+        line-height: 1.8;
+
+    }
+
+}
+
+@media screen and (max-width: 850px) {
+
+    .navbar {
+
+        height: 78px;
+
+    }
+
+
+    .logo {
+
+        width: auto;
+
+        flex: 1;
+
+    }
+
+
+    .nav-menu {
+
+        position: absolute;
+
+        top: 78px;
+
+        left: 0;
+
+        width: 100%;
+
+        background: #f8c83e;
+
+        display: none;
+
+        flex-direction: column;
+
+        gap: 0;
+
+        padding: 10px 0 20px;
+
+        box-shadow: 0 5px 10px rgba(0,0,0,0.08);
+
+    }
+
+
+    .nav-menu.active {
+
+        display: flex;
+
+    }
+
+
+    .nav-menu a {
+
+        width: 100%;
+
+        text-align: center;
+
+        padding: 12px;
+
+        font-size: 14px;
+
+    }
+
+
+    .menu-toggle {
+
+        display: block;
+
+        margin-left: 15px;
+
+    }
+
+
+    .order-btn {
+
+        padding: 11px 18px;
+
+    }
+
+
+    .about-section {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        padding: 30px 6% 50px;
+
+    }
+
+
+    .image-section {
+
+        width: 100%;
+
+        height: 450px;
+
+    }
+
+
+    .about-content {
+
+        width: 100%;
+
+    }
+
+
+    .about-content h1 {
+
+        font-size: 35px;
+
+    }
+
+
+    .description {
+
+        max-width: 100%;
+
+        font-size: 14px;
+
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .navbar {
+
+        height: 70px;
+
+        padding: 0 18px;
+
+    }
+
+
+    .logo-title {
+
+        font-size: 24px;
+
+    }
+
+
+    .logo-subtitle {
+
+        font-size: 9px;
+
+    }
+
+
+    .order-btn {
+
+        font-size: 11px;
+
+        padding: 10px 14px;
+
+    }
+
+
+    .menu-toggle {
+
+        margin-left: 5px;
+
+    }
+
+
+    .nav-menu {
+
+        top: 70px;
+
+    }
+
+
+    .about-section {
+
+        padding: 22px 18px 45px;
+
+        gap: 30px;
+
+    }
+
+
+    .image-section {
+
+        height: 330px;
+
+    }
+
+
+    .play-button {
+
+        width: 90px;
+
+        height: 90px;
+
+    }
+
+
+    .play-icon {
+
+        border-top-width: 18px;
+
+        border-bottom-width: 18px;
+
+        border-left-width: 27px;
+
+    }
+
+
+    .about-label {
+
+        font-size: 13px;
+
+        margin-bottom: 10px;
+
+    }
+
+
+    .about-content h1 {
+
+        font-size: 28px;
+
+        line-height: 1.45;
+
+        margin-bottom: 12px;
+
+    }
+
+
+    .description {
+
+        font-size: 13px;
+
+        line-height: 1.8;
+
+    }
+
+
+    .stats-container {
+
+        gap: 9px;
+
+        flex-wrap: wrap;
+
+    }
+
+
+    .stat-box {
+
+        width: calc(33.333% - 6px);
+
+        min-width: 95px;
+
+        height: 82px;
+
+    }
+
+
+    .stat-box h2 {
+
+        font-size: 20px;
+
+    }
+
+
+    .stat-box p {
+
+        font-size: 9px;
+
+    }
+
+
+    .learn-btn {
+
+        padding: 11px 20px;
+
+    }
+
+}
+
+@media screen and (max-width: 380px) {
+
+    .order-btn {
+
+        display: none;
+
+    }
+
+
+    .image-section {
+
+        height: 280px;
+
+    }
+
+
+    .about-content h1 {
+
+        font-size: 25px;
+
+    }
+
+
+    .description {
+
+        font-size: 12px;
+
+    }
+
+
+    .stat-box {
+
+        min-width: 85px;
+
+    }
+
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    
+
+    <nav class="navbar navbar-expand-lg main-navbar">
+
+        <div class="container-fluid">
+
+
+            <!-- LOGO -->
+
+            <a href="index.html" class="logo navbar-brand">
+
+                <h2>स्पंदन</h2>
+
+                <span>मिसळ</span>
+
+            </a>
+
+
+
+            <!-- MOBILE HAMBURGER -->
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu"
+                aria-controls="navbarMenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+
+            <!-- NAVIGATION -->
+
+            <div
+                class="collapse navbar-collapse"
+                id="navbarMenu"
+            >
+
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html"> About us</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu.html">  Menu</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                         <a class="nav-link" href="gallery.html">   Gallery</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="review.html">Reviews</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contact.html">Contact </a>                         
+                    </li>
+
+                </ul>
+
+
+
+                <!-- ORDER ONLINE -->
+
+                <a href="" class="order-btn"> Order Online</a>
+            </div>
+        </div>
+    </nav>
+
+     <!-- ================= ABOUT SECTION ================= -->
+
+    <main>
+
+        <section class="about-section" id="about">
+
+
+            <!-- LEFT IMAGE -->
+
+            <div class="image-section">
+
+                <img
+                    src="misal-food-1.jpg"
+                    alt="Authentic Misal Pav"
+                    class="misal-image"
+                >
+
+
+                <!-- Play Button -->
+
+                <!-- <button
+                    class="play-button"
+                    id="playButton"
+                    aria-label="Play video"
+                >
+
+                    <span class="play-icon"></span>
+
+                </button> -->
+
+            </div>
+
+
+
+            <!-- RIGHT CONTENT -->
+
+            <div class="about-content">
+
+
+                <!-- Small Heading -->
+
+                <div class="about-label">
+                    About Us
+                </div>
+
+
+                <!-- Main Heading -->
+
+                <h1>
+                    अस्सल मिसळीची
+                    <span>परंपरा</span>
+                </h1>
+
+
+                <!-- Description -->
+
+                <p class="description">
+
+                    स्पंदन मिसळमध्ये आम्ही पारंपरिक महाराष्ट्राच्या चवीचा
+                    वारसा जपत प्रत्येक ग्राहकाला अस्सल आणि आनंद देणारा अनुभव
+                    देतो. खास मसाल्यांचा संतुलित वापर, ताजे आणि नैसर्गिक
+                    साहित्य, उकळलेले रस्से, कुरकुरीत फरसाण आणि गरमागरम पाव
+                    यांचा अद्वितीय संगम प्रत्येक घासाला खास बनवतो. गुणवत्ता,
+                    स्वच्छता आणि अस्सल चव यांची हीच देणगी प्रत्येकाच्या मनात
+                    घर करणारी मिसळ सादर करते.
+
+                </p>
+
+
+
+                <!-- STATISTICS -->
+
+                <div class="stats-container">
+
+
+                    <div class="stat-box">
+
+                        <h2>10+</h2>
+
+                        <p>
+                            Years Experience
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="stat-box">
+
+                        <h2>50K+</h2>
+
+                        <p>
+                            Happy Customers
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="stat-box">
+
+                        <h2>15+</h2>
+
+                        <p>
+                            Branches
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- Learn More -->
+
+                <button
+                    class="learn-btn"
+                    id="learnButton"
+                >
+                    Learn More
+                </button>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ================= VIDEO MODAL ================= -->
+
+    <div class="video-modal" id="videoModal">
+
+        <div class="modal-content">
+
+            <button
+                class="close-modal"
+                id="closeModal"
+            >
+                ×
+            </button>
+
+            <div class="video-placeholder">
+
+                <div class="large-play">
+                    ▶
+                </div>
+
+                <p>
+                    Our Misal Story
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="script.js"></script>
+</body>

@@ -1,0 +1,2940 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+
+    <!-- Bootstrap 5 CSS -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+   <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+       
+
+        .main-navbar {
+
+            background-color: #f8c744;
+
+            padding: 10px 6%;
+
+        }
+
+
+        
+
+        .logo {
+
+            text-decoration: none;
+
+            line-height: 1;
+
+        }
+
+
+        .logo h2 {
+
+            color: #8c0032;
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+            margin: 0;
+
+        }
+
+
+        .logo span {
+
+            color: #333;
+
+            font-size: 12px;
+
+        }
+
+
+      
+
+        .main-navbar .nav-link {
+
+            color: #333;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            margin: 0 10px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .main-navbar .nav-link:hover {
+
+            color: #8c0032;
+
+        }
+
+
+        .main-navbar .nav-link.active {
+
+            color: #8c0032;
+
+        }
+
+
+       
+
+        .order-btn {
+
+            background-color: #8c0032;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 12px 25px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            display: inline-block;
+
+            transition: 0.3s;
+
+        }
+
+
+        .order-btn:hover {
+
+            background-color: #650025;
+
+            color: white;
+
+        }
+
+
+      
+
+        @media (max-width: 991px) {
+
+            .main-navbar {
+
+                padding: 10px 4%;
+
+            }
+
+
+            .main-navbar .nav-link {
+
+                margin: 5px 0;
+
+            }
+
+
+            .order-btn {
+
+                margin-top: 10px;
+
+            }
+
+        }
+
+
+     
+
+        @media (max-width: 576px) {
+
+            .logo h2 {
+
+                font-size: 24px;
+
+            }
+
+
+            .logo span {
+
+                font-size: 10px;
+
+            }
+
+
+            .main-navbar {
+
+                padding: 10px 5%;
+
+            }
+
+        }
+
+        /* ==============================
+   GLOBAL
+============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family:
+        "Poppins",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    background: #fff9ec;
+    color: #222;
+}
+
+
+/* ==============================
+   MENU SECTION
+============================== */
+
+.menu-section {
+    min-height: 100vh;
+
+    padding: 40px 20px 60px;
+
+    background:
+        radial-gradient(
+            circle at top center,
+            rgba(255, 214, 112, 0.16),
+            transparent 45%
+        ),
+        #fff9ec;
+}
+
+
+/* ==============================
+   TITLE
+============================== */
+
+.section-title {
+    text-align: center;
+
+    margin-bottom: 38px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: clamp(38px, 4vw, 48px);
+
+    font-weight: 700;
+
+    color: #242424;
+}
+
+.section-title span {
+    color: #a5003b;
+}
+
+
+/* ==============================
+   MENU GRID
+============================== */
+
+.menu-container {
+    width: 100%;
+
+    max-width: 1190px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 24px;
+}
+
+
+/* ==============================
+   MENU CARD
+============================== */
+
+.menu-card {
+    background: white;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 7px 18px
+        rgba(70, 48, 20, 0.10);
+
+    transition: 0.35s;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+.menu-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 15px 30px
+        rgba(70, 48, 20, 0.16);
+}
+
+
+/* ==============================
+   IMAGE
+============================== */
+
+.image-wrapper {
+    width: 100%;
+
+    height: 190px;
+
+    overflow: hidden;
+}
+
+.image-wrapper img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: 0.5s;
+}
+
+.menu-card:hover
+.image-wrapper img {
+    transform: scale(1.06);
+}
+
+
+/* ==============================
+   CARD CONTENT
+============================== */
+
+.card-content {
+    min-height: 205px;
+
+    padding: 16px 18px 18px;
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.card-title {
+    font-family:
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    color: #222;
+
+    margin-bottom: 8px;
+}
+
+.card-description {
+    font-family:
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    color: #a9a294;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    min-height: 48px;
+}
+
+
+/* ==============================
+   PRICE
+============================== */
+
+.price {
+    margin-top: auto;
+
+    margin-bottom: 14px;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    color: #a5003b;
+}
+
+
+/* ==============================
+   ORDER BUTTON
+============================== */
+
+.card-order-btn {
+    border: none;
+
+    background: #a5003b;
+
+    color: white;
+
+    border-radius: 7px;
+
+    padding: 10px 24px;
+
+    min-width: 96px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.card-order-btn:hover {
+    background: #82002f;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 12px
+        rgba(165, 0, 59, 0.2);
+}
+
+
+/* ==============================
+   TOAST
+============================== */
+
+.toast-message {
+    position: fixed;
+
+    right: 25px;
+
+    bottom: 25px;
+
+    background: #a5003b;
+
+    color: white;
+
+    padding: 14px 20px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.2);
+
+    transform: translateY(100px);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: 0.4s;
+
+    z-index: 2000;
+}
+
+.toast-message.show {
+    transform: translateY(0);
+
+    opacity: 1;
+}
+
+
+/* ==============================
+   TABLET
+============================== */
+
+@media (max-width: 1100px) {
+
+    .menu-container {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        max-width: 750px;
+
+        gap: 25px;
+    }
+
+    .image-wrapper {
+        height: 230px;
+    }
+}
+
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media (max-width: 767px) {
+
+    .menu-section {
+        padding:
+            30px 15px 45px;
+    }
+
+    .section-title {
+        font-size: 35px;
+
+        margin-bottom: 28px;
+    }
+
+    .menu-container {
+        grid-template-columns: 1fr;
+
+        width: 100%;
+
+        max-width: 450px;
+
+        gap: 22px;
+    }
+
+    .image-wrapper {
+        height: 230px;
+    }
+
+    .card-content {
+        min-height: 210px;
+    }
+
+    .card-title {
+        font-size: 19px;
+    }
+
+    .card-description {
+        font-size: 12px;
+    }
+}
+
+
+/* ==============================
+   SMALL MOBILE
+============================== */
+
+@media (max-width: 480px) {
+
+    .menu-section {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .section-title {
+        font-size: 31px;
+
+        line-height: 1.2;
+
+        margin-bottom: 25px;
+    }
+
+    .image-wrapper {
+        height: 205px;
+    }
+
+    .card-content {
+        min-height: 205px;
+
+        padding:
+            15px 14px 17px;
+    }
+
+    .card-title {
+        font-size: 18px;
+    }
+
+    .price {
+        font-size: 20px;
+    }
+
+    .toast-message {
+        left: 15px;
+
+        right: 15px;
+
+        bottom: 15px;
+
+        text-align: center;
+    }
+}
+
+
+
+```css
+/* =========================
+   GLOBAL
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family:
+        "Poppins",
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    background: #fff9ec;
+
+    color: #222;
+}
+
+
+/* =========================
+   GALLERY SECTION
+========================= */
+
+.gallery-section {
+    min-height: 100vh;
+
+    padding: 35px 20px 60px;
+
+    background:
+        radial-gradient(
+            circle at top center,
+            rgba(255, 214, 112, 0.16),
+            transparent 45%
+        ),
+        #fff9ec;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.gallery-title {
+    text-align: center;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: clamp(38px, 5vw, 50px);
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+    color: #242424;
+}
+
+.gallery-title span {
+    color: #a5003b;
+}
+
+
+/* =========================
+   SUBTITLE
+========================= */
+
+.gallery-subtitle {
+    text-align: center;
+
+    color: #a9a294;
+
+    font-size: 14px;
+
+    margin-bottom: 38px;
+}
+
+
+/* =========================
+   GALLERY GRID
+========================= */
+
+.gallery-grid {
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+/* =========================
+   GALLERY ITEM
+========================= */
+
+.gallery-item {
+    height: 235px;
+
+    overflow: hidden;
+
+    border-radius: 15px;
+
+    background: white;
+
+    box-shadow:
+        0 7px 18px
+        rgba(70, 48, 20, 0.10);
+
+    transition: 0.35s;
+}
+
+
+/* =========================
+   IMAGE
+========================= */
+
+.gallery-item img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: 0.5s;
+}
+
+
+/* =========================
+   HOVER
+========================= */
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(70, 48, 20, 0.16);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.07);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 992px) {
+
+    .gallery-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        max-width: 800px;
+    }
+
+    .gallery-item {
+        height: 230px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 576px) {
+
+    .gallery-section {
+        padding:
+            25px 12px 45px;
+    }
+
+    .gallery-title {
+        font-size: 34px;
+    }
+
+    .gallery-subtitle {
+        font-size: 12px;
+
+        margin-bottom: 25px;
+    }
+
+    .gallery-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+
+        max-width: 450px;
+    }
+
+    .gallery-item {
+        height: 220px;
+
+        border-radius: 12px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+    .gallery-title {
+        font-size: 30px;
+    }
+
+    .gallery-item {
+        height: 200px;
+    }
+}
+
+
+/* =========================
+   GALLERY SECTION
+========================= */
+
+.gallery-section {
+    min-height: 100vh;
+
+    padding: 35px 20px 60px;
+
+    background:
+        radial-gradient(
+            circle at top center,
+            rgba(255, 214, 112, 0.16),
+            transparent 45%
+        ),
+        #fff9ec;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.gallery-title {
+    text-align: center;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: clamp(38px, 5vw, 50px);
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+    color: #242424;
+}
+
+.gallery-title span {
+    color: #a5003b;
+}
+
+
+/* =========================
+   SUBTITLE
+========================= */
+
+.gallery-subtitle {
+    text-align: center;
+
+    color: #a9a294;
+
+    font-size: 14px;
+
+    margin-bottom: 38px;
+}
+
+
+/* =========================
+   GALLERY GRID
+========================= */
+
+.gallery-grid {
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+/* =========================
+   GALLERY ITEM
+========================= */
+
+.gallery-item {
+    height: 235px;
+
+    overflow: hidden;
+
+    border-radius: 15px;
+
+    background: white;
+
+    box-shadow:
+        0 7px 18px
+        rgba(70, 48, 20, 0.10);
+
+    transition: 0.35s;
+}
+
+
+/* =========================
+   IMAGE
+========================= */
+
+.gallery-item img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: 0.5s;
+}
+
+
+/* =========================
+   HOVER
+========================= */
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(70, 48, 20, 0.16);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.07);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 992px) {
+
+    .gallery-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        max-width: 800px;
+    }
+
+    .gallery-item {
+        height: 230px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 576px) {
+
+    .gallery-section {
+        padding:
+            25px 12px 45px;
+    }
+
+    .gallery-title {
+        font-size: 34px;
+    }
+
+    .gallery-subtitle {
+        font-size: 12px;
+
+        margin-bottom: 25px;
+    }
+
+    .gallery-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+
+        max-width: 450px;
+    }
+
+    .gallery-item {
+        height: 220px;
+
+        border-radius: 12px;
+    }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+    .gallery-title {
+        font-size: 30px;
+    }
+
+    .gallery-item {
+        height: 200px;
+    }
+}
+```
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    background: #faf8f2;
+}
+
+
+/* ================= ABOUT SECTION ================= */
+
+.about-section {
+    width: 100%;
+    min-height: 100vh;
+    padding: 30px 10.8%;
+    display: flex;
+    align-items: center;
+    gap: 75px;
+    background: #faf8f2;
+}
+
+
+/* ================= IMAGE SECTION ================= */
+
+.image-section {
+    position: relative;
+    width: 52%;
+    height: 500px;
+    flex-shrink: 0;
+}
+
+
+.misal-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+
+/* ================= CONTENT ================= */
+
+.about-content {
+    flex: 1;
+    min-width: 0;
+}
+
+
+.about-label {
+    color: #a5003b;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+
+.about-content h1 {
+    font-family: "Noto Sans Devanagari", sans-serif;
+    font-size: clamp(30px, 3vw, 42px);
+    line-height: 1.35;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 16px;
+    white-space: nowrap;
+}
+
+
+.about-content h1 span {
+    color: #a5003b;
+}
+
+
+.description {
+    font-family: "Noto Sans Devanagari", sans-serif;
+    font-size: 13px;
+    line-height: 1.85;
+    color: #777;
+    max-width: 600px;
+    margin-bottom: 25px;
+}
+
+
+/* ================= STATISTICS ================= */
+
+.stats-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 26px;
+}
+
+
+.stat-box {
+    width: 125px;
+    height: 88px;
+    background: #fff8dd;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    transition: all 0.25s ease;
+}
+
+
+.stat-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+}
+
+
+.stat-box h2 {
+    color: #a5003b;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+
+.stat-box p {
+    color: #777;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+
+/* ================= LEARN BUTTON ================= */
+
+.learn-btn {
+    border: none;
+    background: #a5003b;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+
+.learn-btn:hover {
+    background: #85002f;
+    transform: translateY(-2px);
+}
+
+
+/* ================= TABLET VIEW ================= */
+
+@media screen and (max-width: 1100px) {
+
+    .about-section {
+        padding: 30px 5%;
+        gap: 40px;
+    }
+
+
+    .image-section {
+        width: 50%;
+        height: 430px;
+    }
+
+
+    .about-content h1 {
+        white-space: normal;
+        font-size: 32px;
+    }
+
+
+    .description {
+        font-size: 12px;
+        line-height: 1.8;
+    }
+}
+
+
+/* ================= MOBILE / TABLET VIEW ================= */
+
+@media screen and (max-width: 850px) {
+
+    .about-section {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 30px 6% 50px;
+    }
+
+
+    .image-section {
+        width: 100%;
+        height: 450px;
+    }
+
+
+    .about-content {
+        width: 100%;
+    }
+
+
+    .about-content h1 {
+        font-size: 35px;
+    }
+
+
+    .description {
+        max-width: 100%;
+        font-size: 14px;
+    }
+}
+
+
+/* ================= MOBILE VIEW ================= */
+
+@media screen and (max-width: 600px) {
+
+    .about-section {
+        padding: 22px 18px 45px;
+        gap: 30px;
+    }
+
+
+    .image-section {
+        height: 330px;
+    }
+
+
+    .about-label {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+
+    .about-content h1 {
+        font-size: 28px;
+        line-height: 1.45;
+        margin-bottom: 12px;
+    }
+
+
+    .description {
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+
+    .stats-container {
+        gap: 9px;
+        flex-wrap: wrap;
+    }
+
+
+    .stat-box {
+        width: calc(33.333% - 6px);
+        min-width: 95px;
+        height: 82px;
+    }
+
+
+    .stat-box h2 {
+        font-size: 20px;
+    }
+
+
+    .stat-box p {
+        font-size: 9px;
+    }
+
+
+    .learn-btn {
+        padding: 11px 20px;
+    }
+}
+
+
+/* ================= SMALL MOBILE ================= */
+
+@media screen and (max-width: 380px) {
+
+    .image-section {
+        height: 280px;
+    }
+
+
+    .about-content h1 {
+        font-size: 25px;
+    }
+
+
+    .description {
+        font-size: 12px;
+    }
+
+
+    .stat-box {
+        min-width: 85px;
+    }
+}
+
+/* ================= CONTACT SECTION ================= */
+
+.contact-section {
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 20px 4% 35px;
+
+    background: #faf8df;
+}
+
+
+/* ================= MAIN HEADING ================= */
+
+.contact-section > h1 {
+    text-align: center;
+
+    font-family: "Noto Sans Devanagari", sans-serif;
+
+    font-size: 36px;
+
+    color: #111;
+
+    margin-bottom: 20px;
+}
+
+
+/* ================= CONTAINER ================= */
+
+.contact-container {
+    width: 100%;
+
+    display: flex;
+
+    gap: 50px;
+
+    justify-content: center;
+}
+
+
+/* ================= LEFT CARD ================= */
+
+.contact-info {
+    width: 48%;
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 0 12px rgba(0, 0, 0, 0.35);
+}
+
+
+/* Left Heading */
+
+.contact-info h2 {
+    font-family: "Noto Sans Devanagari", sans-serif;
+
+    font-size: 28px;
+
+    color: #a52b2b;
+
+    margin-bottom: 20px;
+}
+
+
+/* Intro */
+
+.intro {
+    font-family: "Noto Sans Devanagari", sans-serif;
+
+    font-size: 18px;
+
+    color: #333;
+
+    margin-bottom: 20px;
+
+    line-height: 1.7;
+}
+
+
+/* Information Items */
+
+.info-item {
+    margin-bottom: 20px;
+}
+
+
+.info-item h3 {
+    font-family: "Noto Sans Devanagari", sans-serif;
+
+    color: #a52b2b;
+
+    font-size: 23px;
+
+    margin-bottom: 10px;
+}
+
+
+.info-item p {
+    font-family: "Noto Sans Devanagari", sans-serif;
+
+    font-size: 17px;
+
+    color: #222;
+
+    line-height: 1.6;
+}
+
+
+/* ================= RIGHT FORM CARD ================= */
+
+.contact-form {
+    width: 48%;
+
+    background: white;
+
+    padding: 35px 8%;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 0 12px rgba(0, 0, 0, 0.35);
+}
+
+
+/* Form */
+
+#contactForm {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 30px;
+}
+
+
+/* Inputs */
+
+#contactForm input,
+#contactForm textarea {
+
+    width: 100%;
+
+    border: 1.5px solid #555;
+
+    border-radius: 12px;
+
+    padding: 15px;
+
+    font-family: "Noto Sans Devanagari", sans-serif;
+
+    font-size: 15px;
+
+    outline: none;
+
+    background: white;
+}
+
+
+#contactForm input {
+    height: 53px;
+}
+
+
+#contactForm textarea {
+    height: 105px;
+
+    resize: vertical;
+}
+
+
+/* Input Focus */
+
+#contactForm input:focus,
+#contactForm textarea:focus {
+
+    border-color: #a52b2b;
+
+    box-shadow:
+        0 0 4px rgba(165, 43, 43, 0.3);
+}
+
+
+/* Submit Button */
+
+#contactForm button {
+
+    width: 100%;
+
+    height: 53px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #ad2929;
+
+    color: white;
+
+    font-family: "Noto Sans Devanagari", sans-serif;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+#contactForm button:hover {
+
+    background: #8f2020;
+
+    transform: translateY(-2px);
+}
+
+
+/* ================= TABLET ================= */
+
+@media screen and (max-width: 900px) {
+
+    .contact-section {
+        padding: 25px 5%;
+    }
+
+    .contact-container {
+        gap: 25px;
+    }
+
+    .contact-info,
+    .contact-form {
+        width: 50%;
+    }
+
+    .contact-form {
+        padding: 30px 5%;
+    }
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media screen and (max-width: 700px) {
+
+    .contact-section {
+        padding: 25px 18px 40px;
+    }
+
+    .contact-section > h1 {
+        font-size: 28px;
+
+        margin-bottom: 25px;
+    }
+
+    .contact-container {
+        flex-direction: column;
+
+        gap: 25px;
+    }
+
+    .contact-info,
+    .contact-form {
+        width: 100%;
+    }
+
+    .contact-info {
+        padding: 22px;
+    }
+
+    .contact-form {
+        padding: 25px 22px;
+    }
+
+    .contact-info h2 {
+        font-size: 25px;
+    }
+
+    .intro {
+        font-size: 16px;
+    }
+
+    .info-item h3 {
+        font-size: 21px;
+    }
+
+    .info-item p {
+        font-size: 15px;
+    }
+
+    #contactForm {
+        gap: 20px;
+    }
+
+}
+
+
+/* ================= SMALL MOBILE ================= */
+
+@media screen and (max-width: 400px) {
+
+    .contact-section > h1 {
+        font-size: 24px;
+    }
+
+    .contact-info h2 {
+        font-size: 23px;
+    }
+
+    .contact-form {
+        padding: 20px 15px;
+    }
+
+    #contactForm input {
+        height: 48px;
+    }
+
+    #contactForm textarea {
+        height: 100px;
+    }
+
+}
+
+
+/* ================= HERO ================= */
+
+.hero {
+    width: 100%;
+    height: 315px;
+
+    display: flex;
+
+    background: #fff8e8;
+}
+
+.hero-left {
+    width: 52.5%;
+
+    padding-left: 5.5%;
+    padding-top: 7px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+
+    margin-bottom: 38px;
+}
+
+.order-btn,
+.view-btn {
+    height: 46px;
+
+    padding: 0 25px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.order-btn {
+    background: #8d0031;
+    color: white;
+
+    border: 2px solid #8d0031;
+}
+
+.order-btn:hover {
+    background: #690025;
+}
+
+.view-btn {
+    background: transparent;
+    color: #7b2440;
+
+    border: 2px solid #986174;
+}
+
+.view-btn:hover {
+    background: #8d0031;
+    color: white;
+}
+
+
+/* ================= FEATURE BOX ================= */
+
+.feature-box {
+    width: 510px;
+    height: 90px;
+
+    background: #fff4cf;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    box-shadow: 0 8px 25px rgba(70, 45, 10, 0.06);
+}
+
+.feature {
+    width: 33.33%;
+    text-align: center;
+}
+
+.feature h3 {
+    color: #8d0031;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    margin-bottom: 6px;
+}
+
+.feature p {
+    color: #786c58;
+
+    font-size: 10px;
+}
+
+
+/* ================= HERO IMAGE ================= */
+
+.hero-right {
+    width: 47.5%;
+
+    position: relative;
+
+    height: 300px;
+
+    overflow: visible;
+}
+
+.hero-right img {
+    width: 100%;
+
+    height: 300px;
+
+    display: block;
+
+    object-position: left;
+
+    border-radius: 0 0 15px 15px;
+}
+
+
+/* ================= SPECIAL SECTION ================= */
+
+.special-section {
+    width: 100%;
+
+    background: #fff8e8;
+
+    padding: 47px 5.5% 70px;
+}
+
+.special-section h1 {
+    text-align: center;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: 40px;
+    font-weight: 400;
+
+    margin-bottom: 42px;
+}
+
+.special-section h1 span {
+    color: #8d0031;
+}
+
+
+/* ================= FOOD CARDS ================= */
+
+.food-container {
+    height: 600px;
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+}
+
+.food-card {
+    background: white;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    text-align: center;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+
+    transition: 0.3s;
+}
+
+.food-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.14);
+}
+
+
+/* ================= CARD IMAGE ================= */
+
+.food-image {
+    width: 100%;
+    height: 350px;
+
+    overflow: hidden;
+}
+
+.food-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: 0.4s;
+}
+
+.food-card:hover .food-image img {
+    transform: scale(1.05);
+}
+
+
+/* ================= CARD CONTENT ================= */
+
+.food-content {
+    min-height: 150px;
+
+    padding: 12px 15px 14px;
+}
+
+.food-content h2 {
+    color: #25201c;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    margin-bottom: 6px;
+}
+
+.food-content p {
+    color: #9a9a9a;
+
+    font-size: 15px;
+    line-height: 1.5;
+
+    min-height: 30px;
+
+    margin-bottom: 9px;
+}
+
+.price {
+    color: #8d0031;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    margin-bottom: 10px;
+}
+
+.card-btn {
+    border: none;
+
+    background: #8d0031;
+    color: white;
+
+    border-radius: 4px;
+
+    padding: 7px 18px;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.card-btn:hover {
+    background: #690025;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1050px) {
+
+    .hero-left {
+        padding-left: 3%;
+    }
+
+    .feature-box {
+        width: 92%;
+    }
+
+    .special-section {
+        padding-left: 3%;
+        padding-right: 3%;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .hero {
+        height: auto;
+
+        flex-direction: column;
+    }
+
+    .hero-left {
+        width: 100%;
+
+        padding: 20px;
+    }
+
+    .feature-box {
+        width: 100%;
+    }
+
+    .hero-right {
+        width: 100%;
+    }
+
+    .hero-right img {
+        height: 250px;
+    }
+
+    .food-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 520px) {
+
+    .hero-buttons {
+        flex-wrap: wrap;
+    }
+
+    .feature-box {
+        height: auto;
+
+        padding: 15px 5px;
+    }
+
+    .feature h3 {
+        font-size: 11px;
+    }
+
+    .feature p {
+        font-size: 8px;
+    }
+
+    .special-section h1 {
+        font-size: 32px;
+    }
+
+    .food-container {
+        grid-template-columns: 1fr;
+    }
+}
+```
+
+
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    
+
+    <nav class="navbar navbar-expand-lg main-navbar">
+
+        <div class="container-fluid">
+
+
+            <!-- LOGO -->
+
+            <a href="index.html" class="logo navbar-brand">
+
+                <h2>स्पंदन</h2>
+
+                <span>मिसळ</span>
+
+            </a>
+
+
+
+            <!-- MOBILE HAMBURGER -->
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu"
+                aria-controls="navbarMenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+
+            <!-- NAVIGATION -->
+
+            <div
+                class="collapse navbar-collapse"
+                id="navbarMenu"
+            >
+
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html"> About us</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu.html">  Menu</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                         <a class="nav-link" href="gallery.html">   Gallery</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="review.html">Reviews</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contact.html">Contact </a>                         
+                    </li>
+
+                </ul>
+
+
+
+                <!-- ORDER ONLINE -->
+
+                <a href="" class="order-btn"> Order Online</a>
+            </div>
+        </div>
+    </nav>
+
+
+ <!-- ================= HERO ================= -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-left">
+
+            <div class="hero-buttons">
+                <button class="order-btn">Order Now</button>
+                <button class="view-btn">View Menu</button>
+            </div>
+
+            <div class="feature-box">
+
+                <div class="feature">
+                    <h3>खास मसाले</h3>
+                    <p>घरगुती चवीचा अनुभव</p>
+                </div>
+
+                <div class="feature">
+                    <h3>झटपट सेवा</h3>
+                    <p>गरमागरम मिळेल तत्काळ</p>
+                </div>
+
+                <div class="feature">
+                    <h3>ग्राहक प्रथम</h3>
+                    <p>समाधान हाच आमचा अभिमान</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="hero-right">
+
+            <img src="hero.png" alt="Special Misal">
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SPECIAL MISAL ================= -->
+
+    <section class="special-section" id="menu">
+
+        <h1>
+            Our <span>Special</span> Misal
+        </h1>
+
+        <div class="food-container">
+
+            <!-- CARD 1 -->
+
+            <article class="food-card">
+
+                <div class="food-image">
+                    <img src="image1.png" alt="Kolhapuri Misal">
+                </div>
+
+                <div class="food-content">
+
+                    <h2>कोल्हापुरी मिसळ</h2>
+
+                    <p>
+                        झणझणीत आणि मसालेदार कोल्हापुरी चवीची खास मिसळ
+                    </p>
+
+                    <div class="price">₹120</div>
+
+                    <button class="card-btn">
+                        Order Now
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 2 -->
+
+            <article class="food-card">
+
+                <div class="food-image">
+                    <img src="image2.png" alt="Pune Misal">
+                </div>
+
+                <div class="food-content">
+
+                    <h2>पुणेरी मिसळ</h2>
+
+                    <p>
+                        पुण्याच्या पारंपरिक चवीची स्वादिष्ट आणि गरम मिसळ
+                    </p>
+
+                    <div class="price">₹110</div>
+
+                    <button class="card-btn">
+                        Order Now
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 3 -->
+
+            <article class="food-card">
+
+                <div class="food-image">
+                    <img src="image3.png" alt="Special Misal">
+                </div>
+
+                <div class="food-content">
+
+                    <h2>स्पेशल मिसळ</h2>
+
+                    <p>
+                        खास मसाल्यांसोबत तयार केलेली स्पेशल मिसळ
+                    </p>
+
+                    <div class="price">₹140</div>
+
+                    <button class="card-btn">
+                        Order Now
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 4 -->
+
+            <article class="food-card">
+
+                <div class="food-image">
+                    <img src="img 5.jpg" alt="Misal Pav">
+                </div>
+
+                <div class="food-content">
+
+                    <h2>मिसळ पाव</h2>
+
+                    <p>
+                        ताजी मिसळ आणि मऊ पाव यांचा स्वादिष्ट संगम
+                    </p>
+
+                    <div class="price">₹90</div>
+
+                    <button class="card-btn">
+                        Order Now
+                    </button>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+ <!-- ================= ABOUT SECTION ================= -->
+
+    <main>
+
+        <section class="about-section" id="about">
+
+            <!-- LEFT IMAGE -->
+
+            <div class="image-section">
+
+                <img
+                    src="misal-food-1.jpg"
+                    alt="Authentic Misal Pav"
+                    class="misal-image"
+                >
+
+            </div>
+
+
+            <!-- RIGHT CONTENT -->
+
+            <div class="about-content">
+
+                <!-- Small Heading -->
+
+                <div class="about-label">
+                    About Us
+                </div>
+
+
+                <!-- Main Heading -->
+
+                <h1>
+                    अस्सल मिसळीची
+                    <span>परंपरा</span>
+                </h1>
+
+
+                <!-- Description -->
+
+                <p class="description">
+
+                    स्पंदन मिसळमध्ये आम्ही पारंपरिक महाराष्ट्राच्या चवीचा
+                    वारसा जपत प्रत्येक ग्राहकाला अस्सल आणि आनंद देणारा अनुभव
+                    देतो. खास मसाल्यांचा संतुलित वापर, ताजे आणि नैसर्गिक
+                    साहित्य, उकळलेले रस्से, कुरकुरीत फरसाण आणि गरमागरम पाव
+                    यांचा अद्वितीय संगम प्रत्येक घासाला खास बनवतो. गुणवत्ता,
+                    स्वच्छता आणि अस्सल चव यांची हीच देणगी प्रत्येकाच्या मनात
+                    घर करणारी मिसळ सादर करते.
+
+                </p>
+
+
+                <!-- STATISTICS -->
+
+                <div class="stats-container">
+
+                    <div class="stat-box">
+                        <h2>10+</h2>
+                        <p>Years Experience</p>
+                    </div>
+
+
+                    <div class="stat-box">
+                        <h2>50K+</h2>
+                        <p>Happy Customers</p>
+                    </div>
+
+
+                    <div class="stat-box">
+                        <h2>15+</h2>
+                        <p>Branches</p>
+                    </div>
+
+                </div>
+
+
+                <!-- Learn More Button -->
+
+                <button class="learn-btn" id="learnButton">
+                    Learn More
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+    <script>
+        const learnButton = document.getElementById("learnButton");
+
+        learnButton.addEventListener("click", function () {
+            alert(
+                "Welcome to Spandan Misal! More information about our story will be available soon."
+            );
+        });
+    </script>
+    
+
+
+    <!-- ==============================
+         MENU SECTION
+    =============================== -->
+
+    <main id="menu" class="menu-section">
+
+        <h1 class="section-title">
+            Our <span>Special</span> Misal
+        </h1>
+
+        <div class="menu-container">
+
+            <!-- CARD 1 -->
+            <article class="menu-card">
+
+                <div class="image-wrapper">
+                    <img src="misal2.jpg" alt="Kolhapuri Misal">
+                </div>
+
+                <div class="card-content">
+
+                    <h2 class="card-title">
+                        कोल्हापुरी मिसळ
+                    </h2>
+
+                    <p class="card-description">
+                        झणझणीत आणि मसालेदार
+                        कोल्हापुरी स्पेशल मिसळ
+                    </p>
+
+                    <div class="price">
+                        ₹120
+                    </div>
+
+                    <button
+                        class="card-order-btn"
+                        onclick="showOrderMessage('कोल्हापुरी मिसळ')">
+                        Order Now
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 2 -->
+            <article class="menu-card">
+
+                <div class="image-wrapper">
+                    <img src="misal1.jpg" alt="Puneri Misal">
+                </div>
+
+                <div class="card-content">
+
+                    <h2 class="card-title">
+                        पुणेरी मिसळ
+                    </h2>
+
+                    <p class="card-description">
+                        पारंपरिक पुणेरी चवीची
+                        स्वादिष्ट मिसळ
+                    </p>
+
+                    <div class="price">
+                        ₹110
+                    </div>
+
+                    <button
+                        class="card-order-btn"
+                        onclick="showOrderMessage('पुणेरी मिसळ')">
+                        Order Now
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 3 -->
+            <article class="menu-card">
+
+                <div class="image-wrapper">
+                    <img src="misal4.jpg" alt="Special Misal">
+                </div>
+
+                <div class="card-content">
+
+                    <h2 class="card-title">
+                        स्पेशल मिसळ
+                    </h2>
+
+                    <p class="card-description">
+                        आमची खास स्पेशल
+                        मिसळ थाळी
+                    </p>
+
+                    <div class="price">
+                        ₹140
+                    </div>
+
+                    <button
+                        class="card-order-btn"
+                        onclick="showOrderMessage('स्पेशल मिसळ')">
+                        Order Now
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 4 -->
+            <article class="menu-card">
+
+                <div class="image-wrapper">
+                    <img src="misal3.jpg" alt="Misal Pav">
+                </div>
+
+                <div class="card-content">
+
+                    <h2 class="card-title">
+                        मिसळ पाव
+                    </h2>
+
+                    <p class="card-description">
+                        गावरान पावासोबत
+                        स्वादिष्ट मिसळ
+                    </p>
+
+                    <div class="price">
+                        ₹90
+                    </div>
+
+                    <button
+                        class="card-order-btn"
+                        onclick="showOrderMessage('मिसळ पाव')">
+                        Order Now
+                    </button>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </main>
+
+
+    <!-- Toast -->
+    <div class="toast-message" id="toast">
+        Order added successfully!
+    </div>
+
+
+    <!-- Custom JS -->
+    <script src="menu.js"></script>
+
+
+
+   
+
+
+   
+
+
+          
+    <!-- =========================
+         GALLERY SECTION
+    ========================== -->
+
+    <section class="gallery-section">
+
+        <div class="container">
+
+            <!-- TITLE -->
+            <h1 class="gallery-title">
+                आमची <span>गॅलरी</span>
+            </h1>
+
+            <!-- SUBTITLE -->
+            <p class="gallery-subtitle">
+                स्पंदन मिसळमधील खास क्षण आणि आमचे स्वादिष्ट पदार्थ
+            </p>
+
+
+            <!-- =========================
+                 GALLERY
+            ========================== -->
+
+            <div class="gallery-grid">
+
+                <!-- IMAGE 1 -->
+                <div class="gallery-item">
+                    <img
+                        src="hero.png"
+                        alt="Spandan Misal">
+                </div>
+
+
+                <!-- IMAGE 2 -->
+                <div class="gallery-item">
+                    <img
+                        src="image1.png"
+                        alt="Spandan Misal Restaurant">
+                </div>
+
+
+                <!-- IMAGE 3 -->
+                <div class="gallery-item">
+                    <img
+                        src="image2.png"
+                        alt="Misal">
+                </div>
+
+
+                <!-- IMAGE 4 -->
+                <div class="gallery-item">
+                    <img
+                        src="misal4.jpg"
+                        alt="Restaurant Interior">
+                </div>
+
+
+                <!-- IMAGE 5 -->
+                <div class="gallery-item">
+                    <img
+                        src="image3.png"
+                        alt="Misal Food">
+                </div>
+
+
+                <!-- IMAGE 6 -->
+                <div class="gallery-item">
+                    <img
+                        src="misal-food-1.jpg"
+                        alt="Restaurant">
+                </div>
+
+
+                <!-- IMAGE 7 -->
+                <div class="gallery-item">
+                    <img
+                        src="misal-pav.jpg"
+                        alt="Spandan Misal">
+                </div>
+
+
+                <!-- IMAGE 8 -->
+                <div class="gallery-item">
+                    <img
+                        src="misal-food.jpg"
+                        alt="Misal Food">
+                </div>
+
+
+                <!-- IMAGE 9 -->
+                <div class="gallery-item">
+                    <img
+                        src="img 5.jpg"
+                        alt="Restaurant">
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- JavaScript -->
+    <script src="gallery.js"></script>
+
+    <section >
+        <div style="background-color:#fff8e8;height:600px;width:100%;">
+             <h1 style="text-align:center;font-weight: bolder;">
+
+            ग्राहकांचे <span style="color:brown;">अभिप्राय</span>
+
+        </h1>
+      
+        <div class="container">
+
+    <div class="row g-4">
+
+        <!-- Card 1 -->
+        <div class="col-lg-4 col-md-6 col-12">
+
+            <div class="card h-100 p-4 text-center shadow-sm border-0 rounded-4">
+
+                <div style="color:gold;font-size:25px">
+                    ★★★★★
+                </div>
+
+                <p class="text-secondary">
+                    "अतिशय चविष्ट आणि झणझणीत मिसळ,
+                    सेवा उत्कृष्ट आणि वातावरण स्वच्छ."
+                </p>
+
+                <h5 class="fw-bold text-danger">
+                    राहुल पाटील
+                </h5>
+
+            </div>
+
+        </div>
+
+
+        <!-- Card 2 -->
+        <div class="col-lg-4 col-md-6 col-12">
+
+            <div class="card h-100 p-4 text-center shadow-sm border-0 rounded-4">
+
+                <div style="color:gold;font-size:25px">
+                    ★★★★★
+                </div>
+
+                <p class="text-secondary">
+                    "नाशिकमधील सर्वोत्तम मिसळ,
+                    चव एकदम अप्रतिम आणि अप्रतिम."
+                </p>
+
+                <h5 class="fw-bold text-danger">
+                    पूजा शिंदे
+                </h5>
+
+            </div>
+
+        </div>
+
+
+        <!-- Card 3 -->
+        <div class="col-lg-4 col-md-6 col-12">
+
+            <div class="card h-100 p-4 text-center shadow-sm border-0 rounded-4">
+
+                <div style="color:gold;font-size:25px">
+                    ★★★★☆
+                </div>
+
+                <p class="text-secondary">
+                    "गटागटात पाव आणि छान टेस्ट.
+                    पुन्हा नक्की भेट देऊ."
+                </p>
+
+                <h5 class="fw-bold text-danger">
+                    अमोल देशमुख
+                </h5>
+
+            </div>
+
+        </div>
+
+
+        <!-- Card 4 -->
+        <div class="col-lg-4 col-md-6 col-12">
+
+            <div class="card h-100 p-4 text-center shadow-sm border-0 rounded-4">
+
+                <div style="color:gold;font-size:25px">
+                    ★★★★★
+                </div>
+
+                <p class="text-secondary">
+                    "अतिशय चविष्ट आणि झणझणीत मिसळ,
+                    सेवा उत्कृष्ट आणि वातावरण स्वच्छ."
+                </p>
+
+                <h5 class="fw-bold text-danger">
+                    राहुल पाटील
+                </h5>
+
+            </div>
+
+        </div>
+
+
+        <!-- Card 5 -->
+        <div class="col-lg-4 col-md-6 col-12">
+
+            <div class="card h-100 p-4 text-center shadow-sm border-0 rounded-4">
+
+                <div style="color:gold;font-size:25px">
+                    ★★★★★
+                </div>
+
+                <p class="text-secondary">
+                    "नाशिकमधील सर्वोत्तम मिसळ,
+                    चव एकदम अप्रतिम आणि अप्रतिम."
+                </p>
+
+                <h5 class="fw-bold text-danger">
+                    पूजा शिंदे
+                </h5>
+
+            </div>
+
+        </div>
+
+
+        <!-- Card 6 -->
+        <div class="col-lg-4 col-md-6 col-12">
+
+            <div class="card h-100 p-4 text-center shadow-sm border-0 rounded-4">
+
+                <div class="text-warning fs-5 mb-3">
+                    ★★★★☆
+                </div>
+
+                <p class="text-secondary">
+                    "गटागटात पाव आणि छान टेस्ट.
+                    पुन्हा नक्की भेट देऊ."
+                </p>
+
+                <h5 class="fw-bold text-danger">
+                    अमोल देशमुख
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+    </section>
+
+
+     <!-- ================= CONTACT SECTION ================= -->
+
+    <section class="contact-section">
+
+        <h1>आमच्याशी संपर्क साधा</h1>
+
+        <div class="contact-container">
+
+            <!-- LEFT CARD -->
+
+            <div class="contact-info">
+
+                <h2>स्पंदन मिसळ</h2>
+
+                <p class="intro">
+                    अहमदनगरमधील चव अनुभवण्यासाठी आजच भेट द्या किंवा संपर्क साधा.
+                </p>
+
+
+                <!-- Address -->
+
+                <div class="info-item">
+
+                    <h3>📍 पत्ता</h3>
+
+                    <p>
+                        गंजपेठ रोड, नाशिक, महाराष्ट्र
+                    </p>
+
+                </div>
+
+
+                <!-- Phone -->
+
+                <div class="info-item">
+
+                    <h3>📞 फोन</h3>
+
+                    <p>
+                        +91 9876543210
+                    </p>
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="info-item">
+
+                    <h3>📧 ईमेल</h3>
+
+                    <p>
+                        info@spandanmisal.com
+                    </p>
+
+                </div>
+
+
+                <!-- Time -->
+
+                <div class="info-item">
+
+                    <h3>🕐 वेळ</h3>
+
+                    <p>
+                        सकाळी 8 ते रात्री 10
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT FORM -->
+
+            <div class="contact-form">
+
+                <form id="contactForm">
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="आपले नाव"
+                        required
+                    >
+
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="ईमेल"
+                        required
+                    >
+
+
+                    <input
+                        type="tel"
+                        id="mobile"
+                        placeholder="मोबाईल नंबर"
+                        required
+                    >
+
+
+                    <textarea
+                        id="message"
+                        placeholder="आपला संदेश"
+                        required
+                    ></textarea>
+
+
+                    <button type="submit">
+                        संदेश पाठवा
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- JavaScript -->
+
+    <script src="contact.js"></script>
+
+
+```
+
+
+</body>
+
+</html>
+    

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+<defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#dcecff"/><stop offset="1" stop-color="#f9e5c8"/></linearGradient></defs>
+<rect width="1200" height="800" rx="45" fill="url(#g)"/><rect x="80" y="95" width="1040" height="560" rx="35" fill="#fff" opacity=".8"/>
+<rect x="150" y="170" width="330" height="210" rx="18" fill="#14213d"/><rect x="180" y="200" width="270" height="150" rx="10" fill="#87b8df"/>
+<circle cx="650" cy="275" r="75" fill="#e6b78d"/><path d="M570 265q80-120 160 0v100H570z" fill="#243b63"/><circle cx="625" cy="275" r="8" fill="#14213d"/><circle cx="675" cy="275" r="8" fill="#14213d"/>
+<circle cx="900" cy="300" r="70" fill="#b9825d"/><path d="M825 285q75-110 150 0v110H825z" fill="#d0802d"/><circle cx="875" cy="300" r="8" fill="#14213d"/><circle cx="925" cy="300" r="8" fill="#14213d"/>
+<rect x="510" y="420" width="250" height="30" rx="15" fill="#d0802d"/><rect x="390" y="490" width="500" height="28" rx="14" fill="#14213d"/><text x="600" y="610" text-anchor="middle" font-family="Arial" font-size="42" font-weight="700" fill="#14213d">LEARN • GROW • SUCCEED</text></svg>

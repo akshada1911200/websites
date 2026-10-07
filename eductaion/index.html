@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduNova Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="navbar">
+  <a class="logo" href="#"><span>Edu</span>Nova</a>
+  <button class="menu" id="menuBtn">☰</button>
+  <nav id="nav">
+    <a href="#home">Home</a><a href="#about">About</a><a href="#courses">Courses</a>
+    <a href="#facilities">Facilities</a><a href="#events">Events</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a>
+    <a class="nav-btn" href="#contact">Apply Now</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="hero-content">
+    <p class="eyebrow">WELCOME TO EDUNOVA INSTITUTE</p>
+    <h1>Shape Your <em>Future</em> With Quality Education.</h1>
+    <p class="hero-text">Learn from experienced mentors, build practical skills, and prepare yourself for a successful career.</p>
+    <div class="hero-buttons"><a class="btn primary" href="#courses">Explore Courses →</a><a class="btn light" href="#about">Discover More</a></div>
+    <div class="stats"><div><b>10K+</b><span>Students</span></div><div><b>50+</b><span>Courses</span></div><div><b>95%</b><span>Success Rate</span></div></div>
+  </div>
+  <div class="hero-art"><div class="circle"></div><div class="image-card"><img src="images/hero-students.svg" alt="Students"></div><div class="float-card">🎓 <b>Learn.</b><br><small>Grow & Succeed</small></div></div>
+</section>
+
+<section class="about section" id="about">
+ <div class="section-img"><img src="images/campus.svg" alt="Campus"></div>
+ <div><p class="eyebrow">ABOUT OUR INSTITUTE</p><h2>Education that creates <em>opportunities.</em></h2><p>EduNova Institute is a modern learning community focused on practical education, innovation and career development.</p><p>Our students learn through projects, workshops, expert guidance and real-world activities.</p><a class="btn primary" href="#contact">Learn More →</a></div>
+</section>
+
+<section class="section courses" id="courses">
+ <div class="section-head"><div><p class="eyebrow">OUR PROGRAMS</p><h2>Explore Popular <em>Courses</em></h2></div><p>Choose a learning path designed for your future career.</p></div>
+ <div class="cards">
+  <article class="card"><span>01</span><div class="icon">💻</div><h3>Computer Science</h3><p>Programming, software development and modern computing concepts.</p><a href="#contact">View Course →</a></article>
+  <article class="card featured"><span>02</span><div class="icon">🤖</div><h3>AI & Machine Learning</h3><p>Explore artificial intelligence, data and intelligent applications.</p><a href="#contact">View Course →</a></article>
+  <article class="card"><span>03</span><div class="icon">🌐</div><h3>Web Development</h3><p>Build responsive and interactive websites with modern technologies.</p><a href="#contact">View Course →</a></article>
+  <article class="card"><span>04</span><div class="icon">📊</div><h3>Data Science</h3><p>Learn data analysis, visualization and practical data skills.</p><a href="#contact">View Course →</a></article>
+ </div>
+</section>
+
+<section class="why section" id="facilities">
+ <div><p class="eyebrow">WHY CHOOSE US</p><h2>More than education.<br><em>A complete experience.</em></h2></div>
+ <div class="features">
+  <div><b>01</b><h3>Expert Faculty</h3><p>Learn from knowledgeable and supportive mentors.</p></div>
+  <div><b>02</b><h3>Modern Labs</h3><p>Practice using modern equipment and technology.</p></div>
+  <div><b>03</b><h3>Career Support</h3><p>Get guidance for internships, projects and placements.</p></div>
+  <div><b>04</b><h3>Practical Learning</h3><p>Build skills through projects and hands-on activities.</p></div>
+ </div>
+</section>
+
+<section class="events section" id="events">
+ <div class="section-head"><div><p class="eyebrow">CAMPUS LIFE</p><h2>Events & <em>Activities</em></h2></div></div>
+ <div class="event-grid">
+  <article><img src="images/techfest.svg"><div><small>15 OCT 2026</small><h3>Annual Tech Fest</h3><p>Innovation, projects and exciting competitions.</p></div></article>
+  <article><img src="images/workshop.svg"><div><small>22 OCT 2026</small><h3>Career Workshop</h3><p>Industry experts share practical career guidance.</p></div></article>
+ </div>
+</section>
+
+<section class="gallery section" id="gallery">
+ <div class="section-head"><div><p class="eyebrow">OUR CAMPUS</p><h2>Life at <em>EduNova</em></h2></div></div>
+ <div class="gallery-grid">
+  <img src="images/hero-students.svg">
+  <img src="images/campus.svg">
+  <img src="images/lab.svg">
+  <img src="images/library.svg">
+ </div>
+</section>
+
+<section class="testimonial section">
+ <p class="eyebrow">STUDENT VOICES</p><h2>What our students <em>say.</em></h2>
+ <div class="quote"><div class="avatar">AS</div><p>“The practical learning and supportive faculty helped me become more confident about my career.”</p><b>— Aditi Sharma</b></div>
+</section>
+
+<section class="contact section" id="contact">
+ <div><p class="eyebrow">GET IN TOUCH</p><h2>Start your journey <em>today.</em></h2><p>Have questions about admissions or courses? Send us a message.</p>
+ <div class="contact-info"><p>📍 Nepti, Ahilyanagar, Maharashtra</p><p>☎ +91 98765 43210</p><p>✉ info@edunova.in</p></div></div>
+ <form id="contactForm"><input type="text" placeholder="Your Name" required><input type="email" placeholder="Email Address" required><select required><option value="">Select Course</option><option>Computer Science</option><option>AI & Machine Learning</option><option>Web Development</option><option>Data Science</option></select><textarea placeholder="Your Message" rows="5" required></textarea><button class="btn primary" type="submit">Send Enquiry →</button><p id="formMsg"></p></form>
+</section>
+</main>
+
+<footer><div><a class="logo" href="#"><span>Edu</span>Nova</a><p>Learn today. Lead tomorrow.</p></div><p>© 2026 EduNova Institute. Front-end demo website.</p></footer>
+<script src="script.js"></script>
+</body>
+</html>

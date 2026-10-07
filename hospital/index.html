@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarePlus Hospital & Specialty Care Center</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; }
+    
+    /* Dynamic Theme System */
+    .theme-blue { --bg-main: #0f172a; --bg-card: rgba(15, 23, 42, 0.75); --text-primary: #f8fafc; --accent: #38bdf8; --accent-glow: rgba(56, 189, 248, 0.25); }
+    .theme-emerald { --bg-main: #064e3b; --bg-card: rgba(6, 78, 59, 0.75); --text-primary: #f0fdf4; --accent: #34d399; --accent-glow: rgba(52, 211, 153, 0.25); }
+    .theme-purple { --bg-main: #31104b; --bg-card: rgba(49, 16, 75, 0.75); --text-primary: #faf5ff; --accent: #c084fc; --accent-glow: rgba(192, 132, 252, 0.25); }
+    .theme-crimson { --bg-main: #4c0519; --bg-card: rgba(76, 5, 25, 0.75); --text-primary: #fff1f2; --accent: #fb7185; --accent-glow: rgba(251, 113, 133, 0.25); }
+    .theme-teal { --bg-main: #042f2e; --bg-card: rgba(4, 47, 46, 0.75); --text-primary: #f0fdfa; --accent: #2dd4bf; --accent-glow: rgba(45, 212, 191, 0.25); }
+    .theme-light { --bg-main: #f1f5f9; --bg-card: rgba(255, 255, 255, 0.9); --text-primary: #0f172a; --accent: #0284c7; --accent-glow: rgba(2, 132, 199, 0.15); }
+
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .img-zoom {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .img-card:hover .img-zoom {
+      transform: scale(1.08);
+    }
+  </style>
+</head>
+<body class="theme-blue min-h-screen text-slate-100 bg-[var(--bg-main)]">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 glass-card border-b border-white/10 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/30">
+          <i class="fa-solid fa-hospital"></i>
+        </div>
+        <div>
+          <span class="text-2xl font-black tracking-tight text-white">CarePlus<span class="text-sky-400">+</span></span>
+          <span class="block text-[10px] uppercase tracking-widest text-sky-300 font-semibold">Hospital & Specialty Center</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold">
+        <a href="#hero" class="hover:text-sky-400 transition">Home</a>
+        <a href="#departments" class="hover:text-sky-400 transition">Departments</a>
+        <a href="#doctors" class="hover:text-sky-400 transition">Specialists</a>
+        <a href="#facilities" class="hover:text-sky-400 transition">Facilities</a>
+      </nav>
+
+      <div class="flex items-center space-x-4">
+        <!-- Theme Selector -->
+        <div class="flex items-center bg-black/30 border border-white/20 rounded-xl px-3 py-1.5 space-x-2">
+          <i class="fa-solid fa-palette text-sky-400 text-xs"></i>
+          <select id="themeSelector" class="bg-transparent text-xs text-white focus:outline-none cursor-pointer">
+            <option value="theme-blue" selected class="text-slate-900">🌌 Midnight Sapphire</option>
+            <option value="theme-emerald" class="text-slate-900">🌲 Emerald Eco Care</option>
+            <option value="theme-purple" class="text-slate-900">🍇 Royal Amethyst</option>
+            <option value="theme-crimson" class="text-slate-900">🌹 Crimson Health</option>
+            <option value="theme-teal" class="text-slate-900">🌊 Ocean Teal</option>
+            <option value="theme-light" class="text-slate-900">☀️ Pristine Light</option>
+          </select>
+        </div>
+
+        <button onclick="openBookingModal()" class="bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-sky-500/30 text-xs uppercase tracking-wider transition transform hover:-translate-y-0.5">
+          <i class="fa-solid fa-calendar-check mr-2"></i>Book Visit
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with High-Res Image Overlay -->
+  <section id="hero" class="relative py-24 px-6 overflow-hidden min-h-[85vh] flex items-center">
+    <div class="absolute inset-0 z-0">
+      <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=2000&q=80" alt="CarePlus Modern Hospital" class="w-full h-full object-cover object-center opacity-25">
+      <div class="absolute inset-0 bg-gradient-to-r from-[var(--bg-main)] via-[var(--bg-main)]/80 to-transparent"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-sky-500/20 border border-sky-400/30 text-sky-300 text-xs font-bold uppercase tracking-wider mb-6">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>JCI & NABH Accredited Super-Specialty Hospital</span>
+        </div>
+        <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-tight mb-6">
+          World-Class Care, <br>
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-teal-300 to-blue-500">Human Touch.</span>
+        </h1>
+        <p class="text-lg text-slate-300 mb-8 max-w-xl leading-relaxed">
+          Combining ultra-modern robotic surgery, multi-specialty ICU centers, and compassionate expert care. Experience healthcare redesigned around your complete recovery.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <button onclick="openBookingModal()" class="bg-sky-500 hover:bg-sky-400 text-slate-900 font-extrabold px-8 py-4 rounded-2xl shadow-xl shadow-sky-500/30 text-sm tracking-wide transition transform hover:-translate-y-1">
+            <i class="fa-solid fa-stethoscope mr-2"></i>Book Consultation
+          </button>
+          <a href="#emergency" class="glass-card hover:bg-white/20 text-white font-bold px-8 py-4 rounded-2xl text-sm transition flex items-center border border-white/20">
+            <i class="fa-solid fa-truck-medical text-rose-400 mr-3 text-lg"></i>24/7 Emergency
+          </a>
+        </div>
+
+        <!-- Quick Metrics -->
+        <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/10">
+          <div>
+            <div class="text-3xl font-black text-sky-400">250+</div>
+            <div class="text-xs text-slate-400 font-medium mt-1">Specialist Doctors</div>
+          </div>
+          <div>
+            <div class="text-3xl font-black text-teal-300">500+</div>
+            <div class="text-xs text-slate-400 font-medium mt-1">High-Tech ICU Beds</div>
+          </div>
+          <div>
+            <div class="text-3xl font-black text-purple-400">99.8%</div>
+            <div class="text-xs text-slate-400 font-medium mt-1">Patient Satisfaction</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Card Showcase -->
+      <div class="relative">
+        <div class="glass-card p-4 rounded-3xl overflow-hidden shadow-2xl img-card border border-white/20">
+          <div class="relative h-96 rounded-2xl overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80" alt="Robotic Surgery Suite" class="w-full h-full object-cover img-zoom">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6">
+              <span class="px-3 py-1 rounded-md bg-sky-500 text-slate-950 font-bold text-xs uppercase tracking-wider">Advanced Technology</span>
+              <h3 class="text-2xl font-bold text-white mt-2">Next-Gen Da Vinci Robotic Surgery</h3>
+              <p class="text-xs text-slate-300 mt-1">Ultra-precise minimally invasive procedures with zero recovery delay.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Emergency 24/7 Call Banner -->
+  <section id="emergency" class="max-w-7xl mx-auto px-6 mb-16">
+    <div class="bg-gradient-to-r from-rose-600 via-rose-700 to-red-800 rounded-3xl p-8 shadow-2xl flex flex-col md:flex-row items-center justify-between border border-rose-400/30">
+      <div class="flex items-center space-x-6 mb-6 md:mb-0">
+        <div class="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-white text-3xl animate-bounce border border-white/20">
+          <i class="fa-solid fa-heart-pulse"></i>
+        </div>
+        <div>
+          <span class="text-xs uppercase font-extrabold tracking-widest text-rose-200">24/7 Trauma & Emergency Center</span>
+          <h2 class="text-2xl md:text-3xl font-black text-white">Need Urgent Medical Assistance?</h2>
+          <p class="text-rose-100 text-sm mt-1">Instant dispatch trauma ambulance with advanced life support equipment.</p>
+        </div>
+      </div>
+      <a href="tel:1800999000" class="bg-white text-rose-700 font-extrabold px-8 py-4 rounded-2xl text-lg shadow-xl hover:bg-rose-50 transition transform hover:scale-105 flex items-center whitespace-nowrap">
+        <i class="fa-solid fa-phone-volume mr-3 animate-pulse"></i>Call 1800-CARE-PLUS
+      </a>
+    </div>
+  </section>
+
+  <!-- Departments Section with High-Res Visual Cards -->
+  <section id="departments" class="max-w-7xl mx-auto px-6 py-12">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-sky-400 text-xs font-bold uppercase tracking-widest">Medical Excellence</span>
+      <h2 class="text-4xl font-black mt-2">Specialty Clinical Departments</h2>
+      <p class="text-slate-400 text-sm mt-3">Comprehensive diagnosis and treatment powered by multi-disciplinary medical boards.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Dept 1: Cardiology -->
+      <div class="glass-card rounded-3xl overflow-hidden img-card border border-white/15">
+        <div class="h-48 relative overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?auto=format&fit=crop&w=800&q=80" alt="Cardiology" class="w-full h-full object-cover img-zoom">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+          <div class="absolute top-4 left-4 bg-sky-500/90 text-slate-950 font-bold text-xs px-3 py-1 rounded-full uppercase">Cardiology</div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Cardiovascular & Cath Lab</h3>
+          <p class="text-slate-300 text-xs leading-relaxed mb-4">Complete heart care featuring advanced electrophysiology, angioplasty, and bypass surgery.</p>
+          <a href="#" onclick="openBookingModal('Cardiology')" class="text-sky-400 text-xs font-bold hover:underline inline-flex items-center">Book Cardiology Specialist <i class="fa-solid fa-arrow-right ml-2 text-[10px]"></i></a>
+        </div>
+      </div>
+
+      <!-- Dept 2: Neurology -->
+      <div class="glass-card rounded-3xl overflow-hidden img-card border border-white/15">
+        <div class="h-48 relative overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=800&q=80" alt="Neurology" class="w-full h-full object-cover img-zoom">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+          <div class="absolute top-4 left-4 bg-purple-500/90 text-white font-bold text-xs px-3 py-1 rounded-full uppercase">Neurology</div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Neuroscience & Spine Center</h3>
+          <p class="text-slate-300 text-xs leading-relaxed mb-4">Pioneering stroke management, brain tumor resections, and complex spinal reconstruction.</p>
+          <a href="#" onclick="openBookingModal('Neurology')" class="text-purple-300 text-xs font-bold hover:underline inline-flex items-center">Book Neurology Specialist <i class="fa-solid fa-arrow-right ml-2 text-[10px]"></i></a>
+        </div>
+      </div>
+
+      <!-- Dept 3: Orthopedics -->
+      <div class="glass-card rounded-3xl overflow-hidden img-card border border-white/15">
+        <div class="h-48 relative overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80" alt="Orthopedics" class="w-full h-full object-cover img-zoom">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+          <div class="absolute top-4 left-4 bg-emerald-500/90 text-slate-950 font-bold text-xs px-3 py-1 rounded-full uppercase">Orthopedics</div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">Orthopedics & Joint Replacement</h3>
+          <p class="text-slate-300 text-xs leading-relaxed mb-4">Robotic knee & hip replacement, sports trauma recovery, and arthroscopic procedures.</p>
+          <a href="#" onclick="openBookingModal('Orthopedics')" class="text-emerald-300 text-xs font-bold hover:underline inline-flex items-center">Book Orthopedic Specialist <i class="fa-solid fa-arrow-right ml-2 text-[10px]"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specialist Doctors Gallery -->
+  <section id="doctors" class="max-w-7xl mx-auto px-6 py-12">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-sky-400 text-xs font-bold uppercase tracking-widest">Renowned Faculty</span>
+      <h2 class="text-4xl font-black mt-2">Meet Our Lead Specialists</h2>
+      <p class="text-slate-400 text-sm mt-3">Internationally recognized medical practitioners committed to individual patient care.</p>
+    </div>
+
+    <div class="grid md:grid-cols-4 gap-6">
+      <!-- Doctor 1 -->
+      <div class="glass-card rounded-3xl overflow-hidden text-center p-6 border border-white/10 img-card">
+        <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 border-2 border-sky-400 shadow-xl">
+          <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=400&q=80" alt="Dr. Sarah Jenkins" class="w-full h-full object-cover img-zoom">
+        </div>
+        <h3 class="text-lg font-bold text-white">Dr. Sarah Jenkins</h3>
+        <p class="text-xs text-sky-400 font-semibold mb-2">Chief Cardiologist</p>
+        <p class="text-slate-400 text-xs mb-4">MD, FACC • 18+ Yrs Exp.</p>
+        <button onclick="openBookingModal('Cardiology')" class="w-full bg-sky-500/20 hover:bg-sky-500 text-sky-300 hover:text-slate-900 border border-sky-500/40 text-xs font-bold py-2.5 rounded-xl transition">
+          Schedule Visit
+        </button>
+      </div>
+
+      <!-- Doctor 2 -->
+      <div class="glass-card rounded-3xl overflow-hidden text-center p-6 border border-white/10 img-card">
+        <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 border-2 border-purple-400 shadow-xl">
+          <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80" alt="Dr. Marcus Vance" class="w-full h-full object-cover img-zoom">
+        </div>
+        <h3 class="text-lg font-bold text-white">Dr. Marcus Vance</h3>
+        <p class="text-xs text-purple-300 font-semibold mb-2">Head Neurosurgeon</p>
+        <p class="text-slate-400 text-xs mb-4">MS, FRCS • 22+ Yrs Exp.</p>
+        <button onclick="openBookingModal('Neurology')" class="w-full bg-purple-500/20 hover:bg-purple-500 text-purple-200 hover:text-slate-900 border border-purple-500/40 text-xs font-bold py-2.5 rounded-xl transition">
+          Schedule Visit
+        </button>
+      </div>
+
+      <!-- Doctor 3 -->
+      <div class="glass-card rounded-3xl overflow-hidden text-center p-6 border border-white/10 img-card">
+        <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 border-2 border-emerald-400 shadow-xl">
+          <img src="https://images.unsplash.com/photo-1594824813566-88855ce78961?auto=format&fit=crop&w=400&q=80" alt="Dr. Elena Rostova" class="w-full h-full object-cover img-zoom">
+        </div>
+        <h3 class="text-lg font-bold text-white">Dr. Elena Rostova</h3>
+        <p class="text-xs text-emerald-300 font-semibold mb-2">Pediatrics Director</p>
+        <p class="text-slate-400 text-xs mb-4">MD, DCH • 15+ Yrs Exp.</p>
+        <button onclick="openBookingModal('Pediatrics')" class="w-full bg-emerald-500/20 hover:bg-emerald-500 text-emerald-200 hover:text-slate-900 border border-emerald-500/40 text-xs font-bold py-2.5 rounded-xl transition">
+          Schedule Visit
+        </button>
+      </div>
+
+      <!-- Doctor 4 -->
+      <div class="glass-card rounded-3xl overflow-hidden text-center p-6 border border-white/10 img-card">
+        <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 border-2 border-teal-400 shadow-xl">
+          <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=400&q=80" alt="Dr. David Chen" class="w-full h-full object-cover img-zoom">
+        </div>
+        <h3 class="text-lg font-bold text-white">Dr. David Chen</h3>
+        <p class="text-xs text-teal-300 font-semibold mb-2">Robotic Orthopedics</p>
+        <p class="text-slate-400 text-xs mb-4">MS (Ortho) • 16+ Yrs Exp.</p>
+        <button onclick="openBookingModal('Orthopedics')" class="w-full bg-teal-500/20 hover:bg-teal-500 text-teal-200 hover:text-slate-900 border border-teal-500/40 text-xs font-bold py-2.5 rounded-xl transition">
+          Schedule Visit
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Facilities Gallery -->
+  <section id="facilities" class="max-w-7xl mx-auto px-6 py-12">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-sky-400 text-xs font-bold uppercase tracking-widest">State-Of-The-Art</span>
+      <h2 class="text-4xl font-black mt-2">Hospital Infrastructure</h2>
+      <p class="text-slate-400 text-sm mt-3">Designed for sterile efficiency, patient comfort, and zero infection rates.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass-card rounded-3xl overflow-hidden img-card border border-white/10">
+        <div class="h-60 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80" alt="ICU Unit" class="w-full h-full object-cover img-zoom">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <h4 class="text-lg font-bold text-white">Advanced Modular ICU</h4>
+            <p class="text-xs text-slate-300">HEPA filtered isolation suites with continuous hemodynamic monitoring.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-3xl overflow-hidden img-card border border-white/10">
+        <div class="h-60 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80" alt="3T MRI" class="w-full h-full object-cover img-zoom">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <h4 class="text-lg font-bold text-white">3T Silent MRI & 256-Slice CT</h4>
+            <p class="text-xs text-slate-300">Ultra-fast diagnostic imaging with sub-millimeter precision.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-3xl overflow-hidden img-card border border-white/10">
+        <div class="h-60 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=800&q=80" alt="Executive Patient Suite" class="w-full h-full object-cover img-zoom">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <h4 class="text-lg font-bold text-white">Luxury Executive Recovery Suites</h4>
+            <p class="text-xs text-slate-300">Private healing spaces with 24/7 dedicated nursing care.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Appointment Modal -->
+  <div id="bookingModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-6">
+    <div class="glass-card rounded-3xl p-8 max-w-lg w-full border border-white/20 relative animate-fadeIn">
+      <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white text-xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center space-x-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center text-xl font-bold border border-sky-400/30">
+          <i class="fa-solid fa-calendar-check"></i>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-white">Schedule Appointment</h3>
+          <p class="text-xs text-slate-300">CarePlus Hospital & Consultation Center</p>
+        </div>
+      </div>
+
+      <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Full Name</label>
+          <input type="text" required placeholder="e.g. John Doe" class="w-full bg-black/40 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-sky-400">
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Department</label>
+            <select id="modalDeptSelect" class="w-full bg-black/40 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-sky-400">
+              <option value="Cardiology">Cardiology</option>
+              <option value="Neurology">Neurology</option>
+              <option value="Orthopedics">Orthopedics</option>
+              <option value="Pediatrics">Pediatrics</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Preferred Date</label>
+            <input type="date" required class="w-full bg-black/40 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-sky-400">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">Contact Phone</label>
+          <input type="tel" required placeholder="+1 (555) 000-0000" class="w-full bg-black/40 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-sky-400">
+        </div>
+
+        <button type="submit" class="w-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-extrabold py-4 rounded-xl shadow-lg shadow-sky-500/30 text-sm tracking-wider uppercase mt-4 transition">
+          Confirm Appointment
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 glass-card py-12 px-6 mt-20">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-xs text-slate-400">
+      <div class="flex items-center space-x-3 mb-4 md:mb-0">
+        <div class="w-8 h-8 rounded-lg bg-sky-500 flex items-center justify-center text-white text-sm font-bold">
+          <i class="fa-solid fa-hospital"></i>
+        </div>
+        <span class="text-sm font-bold text-white">CarePlus Hospital &copy; 2026</span>
+      </div>
+      <p>JCI Accredited • 24/7 Multi-Specialty Care • 100% Patient Privacy Guaranteed</p>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Switcher Logic
+    document.getElementById('themeSelector').addEventListener('change', (e) => {
+      document.body.className = e.target.value + ' min-h-screen text-slate-100 bg-[var(--bg-main)]';
+    });
+
+    // Modal Control Logic
+    function openBookingModal(dept) {
+      if (dept) {
+        document.getElementById('modalDeptSelect').value = dept;
+      }
+      document.getElementById('bookingModal').classList.remove('hidden');
+    }
+
+    function closeBookingModal() {
+      document.getElementById('bookingModal').classList.add('hidden');
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      alert('Your appointment request has been submitted successfully! Our care coordinator will call you shortly.');
+      closeBookingModal();
+    }
+  </script>
+</body>
+</html>

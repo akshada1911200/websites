@@ -1,0 +1,441 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+     <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+
+    <!-- Bootstrap 5 CSS -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+       
+
+        .main-navbar {
+
+            background-color: #f8c744;
+
+            padding: 10px 6%;
+
+        }
+
+
+        
+
+        .logo {
+
+            text-decoration: none;
+
+            line-height: 1;
+
+        }
+
+
+        .logo h2 {
+
+            color: #8c0032;
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+            margin: 0;
+
+        }
+
+
+        .logo span {
+
+            color: #333;
+
+            font-size: 12px;
+
+        }
+
+
+      
+
+        .main-navbar .nav-link {
+
+            color: #333;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            margin: 0 10px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .main-navbar .nav-link:hover {
+
+            color: #8c0032;
+
+        }
+
+
+        .main-navbar .nav-link.active {
+
+            color: #8c0032;
+
+        }
+
+
+       
+
+        .order-btn {
+
+            background-color: #8c0032;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 12px 25px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            display: inline-block;
+
+            transition: 0.3s;
+
+        }
+
+
+        .order-btn:hover {
+
+            background-color: #650025;
+
+            color: white;
+
+        }
+
+
+      
+
+        @media (max-width: 991px) {
+
+            .main-navbar {
+
+                padding: 10px 4%;
+
+            }
+
+
+            .main-navbar .nav-link {
+
+                margin: 5px 0;
+
+            }
+
+
+            .order-btn {
+
+                margin-top: 10px;
+
+            }
+
+        }
+
+
+     
+
+        @media (max-width: 576px) {
+
+            .logo h2 {
+
+                font-size: 24px;
+
+            }
+
+
+            .logo span {
+
+                font-size: 10px;
+
+            }
+
+
+            .main-navbar {
+
+                padding: 10px 5%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    
+
+    <nav class="navbar navbar-expand-lg main-navbar">
+
+        <div class="container-fluid">
+
+
+            <!-- LOGO -->
+
+            <a href="index.html" class="logo navbar-brand">
+
+                <h2>स्पंदन</h2>
+
+                <span>मिसळ</span>
+
+            </a>
+
+
+
+            <!-- MOBILE HAMBURGER -->
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu"
+                aria-controls="navbarMenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+
+            <!-- NAVIGATION -->
+
+            <div
+                class="collapse navbar-collapse"
+                id="navbarMenu"
+            >
+
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html"> About us</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu.html">  Menu</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                         <a class="nav-link" href="gallery.html">   Gallery</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="review.html">Reviews</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contact.html">Contact </a>                         
+                    </li>
+
+                </ul>
+
+
+
+                <!-- ORDER ONLINE -->
+
+                <a href="" class="order-btn"> Order Online</a>
+            </div>
+        </div>
+    </nav>
+
+    <section >
+        <div style="background-color:#fff8e8;height:600px;width:100%;">
+             <h1 style="text-align:center;font-weight: bolder;">
+
+            ग्राहकांचे <span style="color:brown;">अभिप्राय</span>
+
+        </h1>
+      
+        <div class="container">
+
+    <div class="row g-4">
+
+        <!-- Card 1 -->
+        <div class="col-lg-4 col-md-6 col-12">
+
+            <div class="card h-100 p-4 text-center shadow-sm border-0 rounded-4">
+
+                <div style="color:gold;font-size:25px">
+                    ★★★★★
+                </div>
+
+                <p class="text-secondary">
+                    "अतिशय चविष्ट आणि झणझणीत मिसळ,
+                    सेवा उत्कृष्ट आणि वातावरण स्वच्छ."
+                </p>
+
+                <h5 class="fw-bold text-danger">
+                    राहुल पाटील
+                </h5>
+
+            </div>
+
+        </div>
+
+
+        <!-- Card 2 -->
+        <div class="col-lg-4 col-md-6 col-12">
+
+            <div class="card h-100 p-4 text-center shadow-sm border-0 rounded-4">
+
+                <div style="color:gold;font-size:25px">
+                    ★★★★★
+                </div>
+
+                <p class="text-secondary">
+                    "नाशिकमधील सर्वोत्तम मिसळ,
+                    चव एकदम अप्रतिम आणि अप्रतिम."
+                </p>
+
+                <h5 class="fw-bold text-danger">
+                    पूजा शिंदे
+                </h5>
+
+            </div>
+
+        </div>
+
+
+        <!-- Card 3 -->
+        <div class="col-lg-4 col-md-6 col-12">
+
+            <div class="card h-100 p-4 text-center shadow-sm border-0 rounded-4">
+
+                <div style="color:gold;font-size:25px">
+                    ★★★★☆
+                </div>
+
+                <p class="text-secondary">
+                    "गटागटात पाव आणि छान टेस्ट.
+                    पुन्हा नक्की भेट देऊ."
+                </p>
+
+                <h5 class="fw-bold text-danger">
+                    अमोल देशमुख
+                </h5>
+
+            </div>
+
+        </div>
+
+
+        <!-- Card 4 -->
+        <div class="col-lg-4 col-md-6 col-12">
+
+            <div class="card h-100 p-4 text-center shadow-sm border-0 rounded-4">
+
+                <div style="color:gold;font-size:25px">
+                    ★★★★★
+                </div>
+
+                <p class="text-secondary">
+                    "अतिशय चविष्ट आणि झणझणीत मिसळ,
+                    सेवा उत्कृष्ट आणि वातावरण स्वच्छ."
+                </p>
+
+                <h5 class="fw-bold text-danger">
+                    राहुल पाटील
+                </h5>
+
+            </div>
+
+        </div>
+
+
+        <!-- Card 5 -->
+        <div class="col-lg-4 col-md-6 col-12">
+
+            <div class="card h-100 p-4 text-center shadow-sm border-0 rounded-4">
+
+                <div style="color:gold;font-size:25px">
+                    ★★★★★
+                </div>
+
+                <p class="text-secondary">
+                    "नाशिकमधील सर्वोत्तम मिसळ,
+                    चव एकदम अप्रतिम आणि अप्रतिम."
+                </p>
+
+                <h5 class="fw-bold text-danger">
+                    पूजा शिंदे
+                </h5>
+
+            </div>
+
+        </div>
+
+
+        <!-- Card 6 -->
+        <div class="col-lg-4 col-md-6 col-12">
+
+            <div class="card h-100 p-4 text-center shadow-sm border-0 rounded-4">
+
+                <div class="text-warning fs-5 mb-3">
+                    ★★★★☆
+                </div>
+
+                <p class="text-secondary">
+                    "गटागटात पाव आणि छान टेस्ट.
+                    पुन्हा नक्की भेट देऊ."
+                </p>
+
+                <h5 class="fw-bold text-danger">
+                    अमोल देशमुख
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+    </section>
+
+
+
+ 
+
+
+</body>
+
+</html>

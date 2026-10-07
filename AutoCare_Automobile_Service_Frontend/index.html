@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AutoCare - modern automobile servicing and maintenance website frontend.">
+  <title>AutoCare | Automobile Service Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span><i class="fa">✦</i> Trusted automobile service since 2014</span>
+      <span>Mon–Sat: 8:00 AM – 8:00 PM</span>
+    </div>
+  </div>
+
+  <header class="header" id="header">
+    <div class="container nav">
+      <a class="logo" href="#home"><span class="logo-mark">A</span><span>Auto<span>Care</span></span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+      <nav id="navMenu">
+        <a href="#home" class="active">Home</a>
+        <a href="#services">Services</a>
+        <a href="#vehicles">Vehicles</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+        <a href="#booking" class="nav-cta">Book Service <span>↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-bg"></div>
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="eyebrow"><span class="pulse"></span> Your car deserves better care</div>
+          <h1>Drive with <span>confidence.</span><br>We handle the rest.</h1>
+          <p class="hero-text">Professional car servicing, repairs and maintenance by certified technicians — transparent pricing and quality parts.</p>
+          <div class="hero-actions">
+            <a href="#booking" class="btn btn-primary">Book a Service <span>→</span></a>
+            <a href="#services" class="btn btn-ghost">Explore Services</a>
+          </div>
+          <div class="hero-stats">
+            <div><strong>10K+</strong><span>Cars Serviced</span></div>
+            <div><strong>4.9/5</strong><span>Customer Rating</span></div>
+            <div><strong>10+</strong><span>Years Experience</span></div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="car-image-wrap">
+            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=85" alt="Modern car">
+            <div class="floating-badge badge-one"><span class="badge-icon">✓</span><div><b>Certified</b><small>Technicians</small></div></div>
+            <div class="floating-badge badge-two"><span class="badge-icon">⚡</span><div><b>Quick</b><small>Service</small></div></div>
+          </div>
+          <div class="hero-card-bottom">
+            <div><small>Starting service</small><strong>₹499</strong></div>
+            <a href="#booking">Get Quote →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-strip">
+      <div class="container trust-inner">
+        <span>WE SERVICE</span>
+        <b>MARUTI</b><b>HYUNDAI</b><b>HONDA</b><b>TATA</b><b>TOYOTA</b><b>KIA</b>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="section-label">WHAT WE DO</span>
+            <h2>Complete care for<br><span>your vehicle.</span></h2>
+          </div>
+          <p>From routine maintenance to complex repairs, our workshop is equipped to keep your car safe, smooth and road-ready.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card featured">
+            <div class="service-icon">⚙</div>
+            <h3>Periodic Service</h3>
+            <p>Complete scheduled maintenance to improve performance and extend your car's life.</p>
+            <a href="#booking">Book now <span>→</span></a>
+          </article>
+          <article class="service-card">
+            <div class="service-icon">❄</div>
+            <h3>AC Service</h3>
+            <p>Cooling check, gas refill, filter replacement and AC diagnostics.</p>
+            <a href="#booking">Book now <span>→</span></a>
+          </article>
+          <article class="service-card">
+            <div class="service-icon">◉</div>
+            <h3>Brake & Suspension</h3>
+            <p>Inspection and replacement of brake, shock and suspension components.</p>
+            <a href="#booking">Book now <span>→</span></a>
+          </article>
+          <article class="service-card">
+            <div class="service-icon">▣</div>
+            <h3>Engine Diagnostics</h3>
+            <p>Computer diagnostics and expert inspection to identify engine issues.</p>
+            <a href="#booking">Book now <span>→</span></a>
+          </article>
+          <article class="service-card">
+            <div class="service-icon">✦</div>
+            <h3>Car Detailing</h3>
+            <p>Interior deep cleaning, exterior polish and premium protection packages.</p>
+            <a href="#booking">Book now <span>→</span></a>
+          </article>
+          <article class="service-card">
+            <div class="service-icon">⌁</div>
+            <h3>Tyre & Wheel Care</h3>
+            <p>Wheel alignment, balancing, puncture repair and tyre health checks.</p>
+            <a href="#booking">Book now <span>→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="booking-section" id="booking">
+      <div class="container booking-grid">
+        <div class="booking-copy">
+          <span class="section-label">EASY BOOKING</span>
+          <h2>Get your car back<br><span>on the road.</span></h2>
+          <p>Tell us a little about your vehicle and preferred time. Our service advisor will confirm your appointment.</p>
+          <div class="booking-points">
+            <div><span>✓</span> Free vehicle health check</div>
+            <div><span>✓</span> Transparent service estimates</div>
+            <div><span>✓</span> Pickup & drop available</div>
+          </div>
+        </div>
+
+        <form class="booking-form" id="bookingForm">
+          <div class="form-head">
+            <div><span class="mini-label">SERVICE APPOINTMENT</span><h3>Book a service</h3></div>
+            <span class="step">01 / 01</span>
+          </div>
+          <div class="form-row">
+            <label>Full Name<input type="text" name="name" placeholder="Your name" required></label>
+            <label>Phone Number<input type="tel" name="phone" placeholder="+91 98765 43210" required></label>
+          </div>
+          <div class="form-row">
+            <label>Vehicle Brand
+              <select name="brand" required>
+                <option value="">Select brand</option><option>Maruti Suzuki</option><option>Hyundai</option><option>Tata</option><option>Honda</option><option>Toyota</option><option>Kia</option><option>Other</option>
+              </select>
+            </label>
+            <label>Service Type
+              <select name="service" required>
+                <option value="">Select service</option><option>Periodic Service</option><option>AC Service</option><option>Brake & Suspension</option><option>Engine Diagnostics</option><option>Car Detailing</option><option>Tyre & Wheel Care</option>
+              </select>
+            </label>
+          </div>
+          <div class="form-row">
+            <label>Preferred Date<input type="date" name="date" required></label>
+            <label>Preferred Time
+              <select name="time" required><option value="">Select time</option><option>9:00 AM</option><option>11:00 AM</option><option>1:00 PM</option><option>3:00 PM</option><option>5:00 PM</option><option>7:00 PM</option></select>
+            </label>
+          </div>
+          <label>Additional Message<textarea name="message" rows="3" placeholder="Tell us about any issue with your vehicle..."></textarea></label>
+          <button class="btn btn-primary full" type="submit">Confirm Service Request <span>→</span></button>
+          <p class="form-note">By submitting, you agree to be contacted regarding your appointment.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section vehicles" id="vehicles">
+      <div class="container">
+        <div class="section-heading center">
+          <div><span class="section-label">ALL VEHICLES WELCOME</span><h2>One workshop.<br><span>Every drive.</span></h2></div>
+          <p>Our technicians are trained to service hatchbacks, sedans, SUVs and premium vehicles with the same attention to detail.</p>
+        </div>
+        <div class="vehicle-grid">
+          <article class="vehicle-card"><img src="https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=800&q=80" alt="Hatchback"><div><span>01</span><h3>Hatchbacks</h3><p>City cars & compact vehicles</p></div></article>
+          <article class="vehicle-card"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" alt="Sedan"><div><span>02</span><h3>Sedans</h3><p>Comfort & performance</p></div></article>
+          <article class="vehicle-card"><img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=800&q=80" alt="SUV"><div><span>03</span><h3>SUVs</h3><p>Family & adventure vehicles</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-section" id="why-us">
+      <div class="container why-grid">
+        <div class="why-image"><img src="https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&w=1100&q=85" alt="Mechanic servicing a vehicle"><div class="experience"><strong>10+</strong><span>Years of<br>experience</span></div></div>
+        <div class="why-content">
+          <span class="section-label">WHY AUTOCARE</span>
+          <h2>Service that puts<br><span>you first.</span></h2>
+          <p>We combine skilled technicians, modern equipment and honest communication to make car servicing simple.</p>
+          <div class="why-list">
+            <div><b>01</b><div><h3>Certified Technicians</h3><p>Experienced professionals trained to diagnose and repair modern vehicles.</p></div></div>
+            <div><b>02</b><div><h3>Transparent Pricing</h3><p>No surprise charges. You know what your service costs before work begins.</p></div></div>
+            <div><b>03</b><div><h3>Quality Parts</h3><p>Reliable parts and consumables selected for safety, durability and performance.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reviews" id="reviews">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="section-label">CUSTOMER STORIES</span><h2>Loved by drivers<br><span>across the city.</span></h2></div>
+          <div class="rating"><strong>4.9</strong><span>★★★★★<small>Based on 2,000+ reviews</small></span></div>
+        </div>
+        <div class="review-grid">
+          <article class="review-card"><div class="stars">★★★★★</div><p>“Very professional service. They explained every issue clearly and completed the work exactly when promised.”</p><div class="reviewer"><div class="avatar">RS</div><div><b>Rahul S.</b><small>Hyundai Creta Owner</small></div></div></article>
+          <article class="review-card"><div class="stars">★★★★★</div><p>“The booking process was simple and the pricing was transparent. My car feels great after the service.”</p><div class="reviewer"><div class="avatar">AP</div><div><b>Ananya P.</b><small>Tata Nexon Owner</small></div></div></article>
+          <article class="review-card"><div class="stars">★★★★★</div><p>“Excellent staff and quick turnaround. I especially liked the detailed health report after the inspection.”</p><div class="reviewer"><div class="avatar">VK</div><div><b>Vikas K.</b><small>Maruti Baleno Owner</small></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container faq-grid">
+        <div><span class="section-label">FAQ</span><h2>Got questions?<br><span>We have answers.</span></h2><p>Everything you need to know before booking your next service.</p></div>
+        <div class="faqs">
+          <div class="faq active"><button>How long does a regular service take? <span>−</span></button><p>Most periodic services take around 2–4 hours, depending on the vehicle and required work.</p></div>
+          <div class="faq"><button>Do you provide pickup and drop? <span>+</span></button><p>Yes. Pickup and drop can be requested during appointment confirmation, subject to availability.</p></div>
+          <div class="faq"><button>Can I get an estimate before service? <span>+</span></button><p>Yes. Our service advisor can provide an estimated cost after understanding your vehicle and service requirements.</p></div>
+          <div class="faq"><button>Do you service all car brands? <span>+</span></button><p>We service most major passenger vehicle brands. Contact us if you have a specific model.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container cta-inner">
+        <div><span class="section-label">READY WHEN YOU ARE</span><h2>Give your car the care<br>it <span>deserves.</span></h2></div>
+        <a href="#booking" class="btn btn-light">Book Your Service <span>→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container footer-grid">
+      <div class="footer-brand"><a class="logo" href="#home"><span class="logo-mark">A</span><span>Auto<span>Care</span></span></a><p>Professional automobile service and maintenance built around trust, quality and convenience.</p><div class="socials"><a href="#">in</a><a href="#">f</a><a href="#">◎</a><a href="#">▶</a></div></div>
+      <div><h4>Services</h4><a href="#services">Periodic Service</a><a href="#services">AC Service</a><a href="#services">Engine Diagnostics</a><a href="#services">Brake & Suspension</a><a href="#services">Car Detailing</a></div>
+      <div><h4>Company</h4><a href="#why-us">About Us</a><a href="#reviews">Reviews</a><a href="#booking">Book Service</a><a href="#contact">Contact</a><a href="#">Privacy Policy</a></div>
+      <div><h4>Visit Us</h4><p>MG Road, Near City Center<br>Ahmednagar, Maharashtra</p><p><b>+91 98765 43210</b><br>hello@autocare.in</p><p>Mon–Sat: 8 AM – 8 PM</p></div>
+    </div>
+    <div class="container copyright"><span>© 2026 AutoCare. All rights reserved.</span><span>Made for better drives.</span></div>
+  </footer>
+
+  <div class="toast" id="toast"><span>✓</span><div><b>Request received!</b><small>We'll contact you shortly to confirm.</small></div></div>
+  <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
